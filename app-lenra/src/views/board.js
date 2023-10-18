@@ -16,7 +16,7 @@ export default function ([game], _props) {
       .props({
         game: game._id
       }),
-    onToggleCellFlag: Listener("toggleCellFlag")
+    onIncrementCellFlag: Listener("incrementCellFlag")
       .props({
         game: game._id
       })

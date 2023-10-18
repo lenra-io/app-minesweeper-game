@@ -49,6 +49,6 @@ export async function revealCell(props, event, api) {
  * @param {{position: CellPosition}} event
  * @param {Api} api
  */
-export async function toggleCellFlag(props, event, api) {
+export async function incrementCellFlag(props, event, api) {
 	
 }
