@@ -1,24 +1,30 @@
 import React, { useEffect, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { GAME } from '../../constants';
-import { showSettings, restartGame, updateElapsedTime } from '../../store/modules/control';
 import { Status } from '../../components';
 
+const showSettings = () => { throw new Error("Not implemented"); };
+const restartGame = () => { throw new Error("Not implemented"); };
+const updateElapsedTime = () => { throw new Error("Not implemented"); };
+
 const StatusContainer = () => {
-	const dispatch = useDispatch();
-	const enableSettings = useSelector(rootState => rootState.control.enableSettings);
-	const gameState = useSelector(rootState => rootState.control.gameState);
-	const enableTimer = useSelector(rootState => rootState.control.enableTimer);
-	const elapsedTime = useSelector(rootState => rootState.control.elapsedTime);
-	const mineCount = useSelector(rootState => rootState.control.mineCount);
-	const flagCount = useSelector(rootState => rootState.control.flagCount);
+	const enableSettings = false;
+	// const gameState = useSelector(rootState => rootState.control.gameState);
+	// const enableTimer = useSelector(rootState => rootState.control.enableTimer);
+	// const elapsedTime = useSelector(rootState => rootState.control.elapsedTime);
+	// const mineCount = useSelector(rootState => rootState.control.mineCount);
+	// const flagCount = useSelector(rootState => rootState.control.flagCount);
+	const gameState = GAME.READY;
+	const enableTimer = false;
+	const elapsedTime = 0;
+	const mineCount = 0;
+	const flagCount = 0;
 
 	useEffect(() => {
 		let gameTimer;
 
 		if (enableTimer) {
 			gameTimer = setInterval(() => {
-				dispatch(updateElapsedTime());
+				updateElapsedTime();
 			}, 1000);
 		}
 
@@ -39,11 +45,11 @@ const StatusContainer = () => {
 	}, [gameState]);
 
 	const onClickRestart = useCallback(() => {
-		dispatch(restartGame());
+		restartGame();
 	}, []);
 
 	const onClickSettings = useCallback(() => {
-		dispatch(showSettings());
+		showSettings();
 	}, []);
 
 	return (

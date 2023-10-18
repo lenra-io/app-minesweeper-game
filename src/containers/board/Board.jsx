@@ -1,11 +1,11 @@
-import React, { useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useCallback, useState } from 'react';
 import { Board } from '../../components';
+import { MIN_HEIGHT, MIN_WIDTH } from '../../constants.js';
 
 const BoardContainer = () => {
-	const enableSettings = useSelector(rootState => rootState.control.enableSettings);
-	const width = useSelector(rootState => rootState.control.width);
-	const height = useSelector(rootState => rootState.control.height);
+	const enableSettings = false;
+	const width = MIN_WIDTH;
+	const height = MIN_HEIGHT;
 
 	const onRightClickBoard = useCallback((e) => {
 		e.preventDefault();

@@ -1,16 +1,21 @@
 import React, { memo, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { GAME, CODES } from '../../constants';
-import { openCell, rotateCellState } from '../../store/modules/control';
 import { Cell } from '../../components';
+
+const openCell = () => { throw new Error("Not implemented"); };
+const rotateCellState = () => { throw new Error("Not implemented"); };
 
 const CellContainer = ({
 	x,
 	y
 }) => {
-	const dispatch = useDispatch();
-	const gameState = useSelector(rootState => rootState.control.gameState);
-	const cellCode = useSelector(rootState => rootState.control.boardData[y][x]);
+	const dispatch = () => {
+		throw new Error("Not implemented");
+	};
+	// const gameState = useSelector(rootState => rootState.control.gameState);
+	// const cellCode = useSelector(rootState => rootState.control.boardData[y][x]);
+	const gameState = GAME.READY;
+	const cellCode = CODES.NOTHING;
 
 	const getCellText = useCallback((code) => {
 		switch (code) {

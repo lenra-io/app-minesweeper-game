@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { MIN_WIDTH, MIN_HEIGHT, MIN_MINES } from '../../constants';
-import { hideSettings, setGame, restartGame } from '../../store/modules/control';
 import { Settings } from '../../components';
 
+
+const hideSettings = () => { throw new Error("Not implemented"); };
+const setGame = () => { throw new Error("Not implemented"); };
+const restartGame = () => { throw new Error("Not implemented"); };
+
 const SettingsContainer = () => {
-	const dispatch = useDispatch();
-	const enableSettings = useSelector(rootState => rootState.control.enableSettings);
+	const enableSettings = false;
 
 	const [width, setWidth] = useState(MIN_WIDTH);
 	const [height, setHeight] = useState(MIN_HEIGHT);
@@ -33,9 +35,9 @@ const SettingsContainer = () => {
 	}, []);
 
 	const onClickSet = useCallback(() => {
-		dispatch(setGame(width, height, mineCount));
-		dispatch(restartGame());
-		dispatch(hideSettings());
+		setGame(width, height, mineCount);
+		restartGame();
+		hideSettings();
 	}, [width, height, mineCount]);
 
 	return (
