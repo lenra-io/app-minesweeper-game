@@ -15,6 +15,15 @@ var __toESM = (mod, isNodeMode, target) => {
   return to;
 };
 var __commonJS = (cb, mod) => () => (mod || cb((mod = { exports: {} }).exports, mod), mod.exports);
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, {
+      get: all[name],
+      enumerable: true,
+      configurable: true,
+      set: (newValue) => all[name] = () => newValue
+    });
+};
 
 // node_modules/object-assign/index.js
 var require_object_assign = __commonJS((exports, module) => {
@@ -96,28 +105,28 @@ var require_has = __commonJS((exports, module) => {
 
 // node_modules/prop-types/checkPropTypes.js
 var require_checkPropTypes = __commonJS((exports, module) => {
-  var checkPropTypes = function(typeSpecs, values, location, componentName, getStack) {
+  var checkPropTypes = function(typeSpecs, values, location2, componentName, getStack) {
     if (true) {
       for (var typeSpecName in typeSpecs) {
         if (has(typeSpecs, typeSpecName)) {
           var error;
           try {
             if (typeof typeSpecs[typeSpecName] !== "function") {
-              var err = Error((componentName || "React class") + ": " + location + " type `" + typeSpecName + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof typeSpecs[typeSpecName] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.");
+              var err = Error((componentName || "React class") + ": " + location2 + " type `" + typeSpecName + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof typeSpecs[typeSpecName] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.");
               err.name = "Invariant Violation";
               throw err;
             }
-            error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
+            error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location2, null, ReactPropTypesSecret);
           } catch (ex) {
             error = ex;
           }
           if (error && !(error instanceof Error)) {
-            printWarning((componentName || "React class") + ": type specification of " + location + " `" + typeSpecName + "` is invalid; the type checker function must return `null` or an `Error` but returned a " + typeof error + ". You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).");
+            printWarning((componentName || "React class") + ": type specification of " + location2 + " `" + typeSpecName + "` is invalid; the type checker function must return `null` or an `Error` but returned a " + typeof error + ". You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).");
           }
           if (error instanceof Error && !(error.message in loggedTypeFailures)) {
             loggedTypeFailures[error.message] = true;
             var stack = getStack ? getStack() : "";
-            printWarning("Failed " + location + " type: " + error.message + (stack != null ? stack : ""));
+            printWarning("Failed " + location2 + " type: " + error.message + (stack != null ? stack : ""));
           }
         }
       }
@@ -527,7 +536,7 @@ var require_react_development = __commonJS((exports) => {
           }
         }
       }
-      var ReactElement = function(type, key, ref, self, source, owner, props) {
+      var ReactElement = function(type, key, ref, self2, source, owner, props) {
         var element = {
           $$typeof: REACT_ELEMENT_TYPE,
           type,
@@ -548,7 +557,7 @@ var require_react_development = __commonJS((exports) => {
             configurable: false,
             enumerable: false,
             writable: false,
-            value: self
+            value: self2
           });
           Object.defineProperty(element, "_source", {
             configurable: false,
@@ -568,7 +577,7 @@ var require_react_development = __commonJS((exports) => {
         var props = {};
         var key = null;
         var ref = null;
-        var self = null;
+        var self2 = null;
         var source = null;
         if (config != null) {
           if (hasValidRef(config)) {
@@ -580,7 +589,7 @@ var require_react_development = __commonJS((exports) => {
           if (hasValidKey(config)) {
             key = "" + config.key;
           }
-          self = config.__self === undefined ? null : config.__self;
+          self2 = config.__self === undefined ? null : config.__self;
           source = config.__source === undefined ? null : config.__source;
           for (propName in config) {
             if (hasOwnProperty.call(config, propName) && !RESERVED_PROPS.hasOwnProperty(propName)) {
@@ -622,7 +631,7 @@ var require_react_development = __commonJS((exports) => {
             }
           }
         }
-        return ReactElement(type, key, ref, self, source, ReactCurrentOwner.current, props);
+        return ReactElement(type, key, ref, self2, source, ReactCurrentOwner.current, props);
       }
       function cloneAndReplaceKey(oldElement, newKey) {
         var newElement = ReactElement(oldElement.type, newKey, oldElement.ref, oldElement._self, oldElement._source, oldElement._owner, oldElement.props);
@@ -638,7 +647,7 @@ var require_react_development = __commonJS((exports) => {
         var props = _assign({}, element.props);
         var key = element.key;
         var ref = element.ref;
-        var self = element._self;
+        var self2 = element._self;
         var source = element._source;
         var owner = element._owner;
         if (config != null) {
@@ -673,7 +682,7 @@ var require_react_development = __commonJS((exports) => {
           }
           props.children = childArray;
         }
-        return ReactElement(element.type, key, ref, self, source, owner, props);
+        return ReactElement(element.type, key, ref, self2, source, owner, props);
       }
       function isValidElement(object) {
         return typeof object === "object" && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
@@ -19304,6 +19313,314 @@ var require_react_dom = __commonJS((exports, module) => {
   }
 });
 
+// node_modules/@badgateway/oauth2-client/browser/oauth2-client.min.js
+var require_oauth2_client_min = __commonJS((exports, module) => {
+  (function(e, t) {
+    typeof exports == "object" && typeof module == "object" ? module.exports = t() : typeof define == "function" && define.amd ? define([], t) : typeof exports == "object" ? exports.OAuth2Client = t() : e.OAuth2Client = t();
+  })(self, () => (() => {
+    var e = { 934: (e2, t2, r2) => {
+      Object.defineProperty(t2, "__esModule", { value: true }), t2.generateQueryString = t2.OAuth2Client = undefined;
+      const n2 = r2(443), i = r2(618);
+      function o(e3, t3) {
+        return new URL(e3, t3).toString();
+      }
+      function s(e3) {
+        return new URLSearchParams(Object.fromEntries(Object.entries(e3).filter(([e4, t3]) => t3 !== undefined))).toString();
+      }
+      t2.OAuth2Client = class {
+        constructor(e3) {
+          this.discoveryDone = false, this.serverMetadata = null, (e3 == null ? undefined : e3.fetch) || (e3.fetch = fetch.bind(globalThis)), this.settings = e3;
+        }
+        async refreshToken(e3) {
+          if (!e3.refreshToken)
+            throw new Error("This token didn't have a refreshToken. It's not possible to refresh this");
+          const t3 = { grant_type: "refresh_token", refresh_token: e3.refreshToken };
+          return this.settings.clientSecret || (t3.client_id = this.settings.clientId), this.tokenResponseToOAuth2Token(this.request("tokenEndpoint", t3));
+        }
+        async clientCredentials(e3) {
+          var t3;
+          const r3 = ["client_id", "client_secret", "grant_type", "scope"];
+          if ((e3 == null ? undefined : e3.extraParams) && Object.keys(e3.extraParams).filter((e4) => r3.includes(e4)).length > 0)
+            throw new Error(`The following extraParams are disallowed: '${r3.join("', '")}'`);
+          const n3 = { grant_type: "client_credentials", scope: (t3 = e3 == null ? undefined : e3.scope) === null || t3 === undefined ? undefined : t3.join(" "), ...e3 == null ? undefined : e3.extraParams };
+          if (!this.settings.clientSecret)
+            throw new Error("A clientSecret must be provided to use client_credentials");
+          return this.tokenResponseToOAuth2Token(this.request("tokenEndpoint", n3));
+        }
+        async password(e3) {
+          var t3;
+          const r3 = { grant_type: "password", ...e3, scope: (t3 = e3.scope) === null || t3 === undefined ? undefined : t3.join(" ") };
+          return this.tokenResponseToOAuth2Token(this.request("tokenEndpoint", r3));
+        }
+        get authorizationCode() {
+          return new i.OAuth2AuthorizationCodeClient(this);
+        }
+        async introspect(e3) {
+          const t3 = { token: e3.accessToken, token_type_hint: "access_token" };
+          return this.request("introspectionEndpoint", t3);
+        }
+        async getEndpoint(e3) {
+          if (this.settings[e3] !== undefined)
+            return o(this.settings[e3], this.settings.server);
+          if (e3 !== "discoveryEndpoint" && (await this.discover(), this.settings[e3] !== undefined))
+            return o(this.settings[e3], this.settings.server);
+          if (!this.settings.server)
+            throw new Error(`Could not determine the location of ${e3}. Either specify ${e3} in the settings, or the "server" endpoint to let the client discover it.`);
+          switch (e3) {
+            case "authorizationEndpoint":
+              return o("/authorize", this.settings.server);
+            case "tokenEndpoint":
+              return o("/token", this.settings.server);
+            case "discoveryEndpoint":
+              return o("/.well-known/oauth-authorization-server", this.settings.server);
+            case "introspectionEndpoint":
+              return o("/introspect", this.settings.server);
+          }
+        }
+        async discover() {
+          var e3;
+          if (this.discoveryDone)
+            return;
+          let t3;
+          this.discoveryDone = true;
+          try {
+            t3 = await this.getEndpoint("discoveryEndpoint");
+          } catch (e4) {
+            return void console.warn('[oauth2] OAuth2 discovery endpoint could not be determined. Either specify the "server" or "discoveryEndpoint');
+          }
+          const r3 = await this.settings.fetch(t3, { headers: { Accept: "application/json" } });
+          if (!r3.ok)
+            return;
+          if (!((e3 = r3.headers.get("Content-Type")) === null || e3 === undefined ? undefined : e3.startsWith("application/json")))
+            return void console.warn("[oauth2] OAuth2 discovery endpoint was not a JSON response. Response is ignored");
+          this.serverMetadata = await r3.json();
+          const n3 = [["authorization_endpoint", "authorizationEndpoint"], ["token_endpoint", "tokenEndpoint"], ["introspection_endpoint", "introspectionEndpoint"]];
+          if (this.serverMetadata !== null) {
+            for (const [e4, r4] of n3)
+              this.serverMetadata[e4] && (this.settings[r4] = o(this.serverMetadata[e4], t3));
+            this.serverMetadata.token_endpoint_auth_methods_supported && !this.settings.authenticationMethod && (this.settings.authenticationMethod = this.serverMetadata.token_endpoint_auth_methods_supported[0]);
+          }
+        }
+        async request(e3, t3) {
+          const r3 = await this.getEndpoint(e3), i2 = { "Content-Type": "application/x-www-form-urlencoded" };
+          let o2 = this.settings.authenticationMethod;
+          switch (o2 || (o2 = this.settings.clientSecret ? "client_secret_basic" : "client_secret_post"), o2) {
+            case "client_secret_basic":
+              i2.Authorization = "Basic " + btoa(this.settings.clientId + ":" + this.settings.clientSecret);
+              break;
+            case "client_secret_post":
+              t3.client_id = this.settings.clientId, this.settings.clientSecret && (t3.client_secret = this.settings.clientSecret);
+              break;
+            default:
+              throw new Error("Authentication method not yet supported:" + o2 + ". Open a feature request if you want this!");
+          }
+          const a = await this.settings.fetch(r3, { method: "POST", body: s(t3), headers: i2 });
+          if (a.ok)
+            return await a.json();
+          let c, h, u;
+          throw a.headers.has("Content-Type") && a.headers.get("Content-Type").startsWith("application/json") && (c = await a.json()), (c == null ? undefined : c.error) ? (h = "OAuth2 error " + c.error + ".", c.error_description && (h += " " + c.error_description), u = c.error) : (h = "HTTP Error " + a.status + " " + a.statusText, a.status === 401 && this.settings.clientSecret && (h += ". It's likely that the clientId and/or clientSecret was incorrect"), u = null), new n2.OAuth2Error(h, u, a.status);
+        }
+        tokenResponseToOAuth2Token(e3) {
+          return e3.then((e4) => {
+            var t3;
+            return { accessToken: e4.access_token, expiresAt: e4.expires_in ? Date.now() + 1000 * e4.expires_in : null, refreshToken: (t3 = e4.refresh_token) !== null && t3 !== undefined ? t3 : null };
+          });
+        }
+      }, t2.generateQueryString = s;
+    }, 618: (e2, t2, r2) => {
+      Object.defineProperty(t2, "__esModule", { value: true }), t2.getCodeChallenge = t2.generateCodeVerifier = t2.OAuth2AuthorizationCodeClient = undefined;
+      const n2 = r2(934), i = r2(443);
+      async function o(e3) {
+        const t3 = s();
+        if (t3 == null ? undefined : t3.subtle)
+          return ["S256", c(await t3.subtle.digest("SHA-256", a(e3)))];
+        {
+          const t4 = r2(212).createHash("sha256");
+          return t4.update(a(e3)), ["S256", t4.digest("base64url")];
+        }
+      }
+      function s() {
+        if (typeof window != "undefined" && window.crypto)
+          return window.crypto;
+        if (typeof self != "undefined" && self.crypto)
+          return self.crypto;
+        const e3 = r2(212);
+        return e3.webcrypto ? e3.webcrypto : null;
+      }
+      function a(e3) {
+        const t3 = new Uint8Array(e3.length);
+        for (let r3 = 0;r3 < e3.length; r3++)
+          t3[r3] = 255 & e3.charCodeAt(r3);
+        return t3;
+      }
+      function c(e3) {
+        return btoa(String.fromCharCode(...new Uint8Array(e3))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+      }
+      t2.OAuth2AuthorizationCodeClient = class {
+        constructor(e3) {
+          this.client = e3;
+        }
+        async getAuthorizeUri(e3) {
+          const [t3, r3] = await Promise.all([e3.codeVerifier ? o(e3.codeVerifier) : undefined, this.client.getEndpoint("authorizationEndpoint")]);
+          let i2 = { client_id: this.client.settings.clientId, response_type: "code", redirect_uri: e3.redirectUri, code_challenge_method: t3 == null ? undefined : t3[0], code_challenge: t3 == null ? undefined : t3[1] };
+          e3.state && (i2.state = e3.state), e3.scope && (i2.scope = e3.scope.join(" "));
+          const s2 = Object.keys(i2);
+          if ((e3 == null ? undefined : e3.extraParams) && Object.keys(e3.extraParams).filter((e4) => s2.includes(e4)).length > 0)
+            throw new Error(`The following extraParams are disallowed: '${s2.join("', '")}'`);
+          return i2 = { ...i2, ...e3 == null ? undefined : e3.extraParams }, r3 + "?" + (0, n2.generateQueryString)(i2);
+        }
+        async getTokenFromCodeRedirect(e3, t3) {
+          const { code: r3 } = await this.validateResponse(e3, { state: t3.state });
+          return this.getToken({ code: r3, redirectUri: t3.redirectUri, codeVerifier: t3.codeVerifier });
+        }
+        async validateResponse(e3, t3) {
+          var r3;
+          const n3 = new URL(e3).searchParams;
+          if (n3.has("error"))
+            throw new i.OAuth2Error((r3 = n3.get("error_description")) !== null && r3 !== undefined ? r3 : "OAuth2 error", n3.get("error"), 0);
+          if (!n3.has("code"))
+            throw new Error(`The url did not contain a code parameter ${e3}`);
+          if (t3.state && t3.state !== n3.get("state"))
+            throw new Error(`The "state" parameter in the url did not match the expected value of ${t3.state}`);
+          return { code: n3.get("code"), scope: n3.has("scope") ? n3.get("scope").split(" ") : undefined };
+        }
+        async getToken(e3) {
+          const t3 = { grant_type: "authorization_code", code: e3.code, redirect_uri: e3.redirectUri, code_verifier: e3.codeVerifier };
+          return this.client.tokenResponseToOAuth2Token(this.client.request("tokenEndpoint", t3));
+        }
+      }, t2.generateCodeVerifier = async function() {
+        const e3 = s();
+        if (e3) {
+          const t3 = new Uint8Array(32);
+          return e3.getRandomValues(t3), c(t3);
+        }
+        {
+          const e4 = r2(212);
+          return new Promise((t3, r3) => {
+            e4.randomBytes(32, (e5, n3) => {
+              e5 && r3(e5), t3(n3.toString("base64url"));
+            });
+          });
+        }
+      }, t2.getCodeChallenge = o;
+    }, 443: (e2, t2) => {
+      Object.defineProperty(t2, "__esModule", { value: true }), t2.OAuth2Error = undefined;
+
+      class r2 extends Error {
+        constructor(e3, t3, r3) {
+          super(e3), this.oauth2Code = t3, this.httpCode = r3;
+        }
+      }
+      t2.OAuth2Error = r2;
+    }, 13: (e2, t2) => {
+      Object.defineProperty(t2, "__esModule", { value: true }), t2.OAuth2Fetch = undefined, t2.OAuth2Fetch = class {
+        constructor(e3) {
+          this.token = null, this.activeGetStoredToken = null, this.activeRefresh = null, this.refreshTimer = null, (e3 == null ? undefined : e3.scheduleRefresh) === undefined && (e3.scheduleRefresh = true), this.options = e3, e3.getStoredToken && (this.activeGetStoredToken = (async () => {
+            this.token = await e3.getStoredToken(), this.activeGetStoredToken = null;
+          })()), this.scheduleRefresh();
+        }
+        async fetch(e3, t3) {
+          const r2 = new Request(e3, t3);
+          return this.mw()(r2, (e4) => fetch(e4));
+        }
+        mw() {
+          return async (e3, t3) => {
+            const r2 = await this.getAccessToken();
+            let n2 = e3.clone();
+            n2.headers.set("Authorization", "Bearer " + r2);
+            let i = await t3(n2);
+            if (!i.ok && i.status === 401) {
+              const r3 = await this.refreshToken();
+              n2 = e3.clone(), n2.headers.set("Authorization", "Bearer " + r3.accessToken), i = await t3(n2);
+            }
+            return i;
+          };
+        }
+        async getToken() {
+          return this.token && (this.token.expiresAt === null || this.token.expiresAt > Date.now()) ? this.token : this.refreshToken();
+        }
+        async getAccessToken() {
+          return await this.activeGetStoredToken, (await this.getToken()).accessToken;
+        }
+        async refreshToken() {
+          var e3, t3;
+          if (this.activeRefresh)
+            return this.activeRefresh;
+          const r2 = this.token;
+          this.activeRefresh = (async () => {
+            var e4, t4;
+            let n2 = null;
+            try {
+              (r2 == null ? undefined : r2.refreshToken) && (n2 = await this.options.client.refreshToken(r2));
+            } catch (e5) {
+              console.warn("[oauth2] refresh token not accepted, we'll try reauthenticating");
+            }
+            if (n2 || (n2 = await this.options.getNewToken()), !n2) {
+              const r3 = new Error("Unable to obtain OAuth2 tokens, a full reauth may be needed");
+              throw (t4 = (e4 = this.options).onError) === null || t4 === undefined || t4.call(e4, r3), r3;
+            }
+            return n2;
+          })();
+          try {
+            const r3 = await this.activeRefresh;
+            return this.token = r3, (t3 = (e3 = this.options).storeToken) === null || t3 === undefined || t3.call(e3, r3), this.scheduleRefresh(), r3;
+          } catch (e4) {
+            throw this.options.onError && this.options.onError(e4), e4;
+          } finally {
+            this.activeRefresh = null;
+          }
+        }
+        scheduleRefresh() {
+          var e3;
+          if (!this.options.scheduleRefresh)
+            return;
+          if (this.refreshTimer && (clearTimeout(this.refreshTimer), this.refreshTimer = null), !((e3 = this.token) === null || e3 === undefined ? undefined : e3.expiresAt) || !this.token.refreshToken)
+            return;
+          const t3 = this.token.expiresAt - Date.now();
+          t3 < 120000 || (this.refreshTimer = setTimeout(async () => {
+            try {
+              await this.refreshToken();
+            } catch (e4) {
+              console.error("[fetch-mw-oauth2] error while doing a background OAuth2 auto-refresh", e4);
+            }
+          }, t3 - 60000));
+        }
+      };
+    }, 212: () => {
+    } }, t = {};
+    function r(n2) {
+      var i = t[n2];
+      if (i !== undefined)
+        return i.exports;
+      var o = t[n2] = { exports: {} };
+      return e[n2](o, o.exports, r), o.exports;
+    }
+    var n = {};
+    return (() => {
+      var e2 = n;
+      Object.defineProperty(e2, "__esModule", { value: true }), e2.OAuth2Error = e2.OAuth2Fetch = e2.generateCodeVerifier = e2.OAuth2AuthorizationCodeClient = e2.OAuth2Client = undefined;
+      var t2 = r(934);
+      Object.defineProperty(e2, "OAuth2Client", { enumerable: true, get: function() {
+        return t2.OAuth2Client;
+      } });
+      var i = r(618);
+      Object.defineProperty(e2, "OAuth2AuthorizationCodeClient", { enumerable: true, get: function() {
+        return i.OAuth2AuthorizationCodeClient;
+      } }), Object.defineProperty(e2, "generateCodeVerifier", { enumerable: true, get: function() {
+        return i.generateCodeVerifier;
+      } });
+      var o = r(13);
+      Object.defineProperty(e2, "OAuth2Fetch", { enumerable: true, get: function() {
+        return o.OAuth2Fetch;
+      } });
+      var s = r(443);
+      Object.defineProperty(e2, "OAuth2Error", { enumerable: true, get: function() {
+        return s.OAuth2Error;
+      } });
+    })(), n;
+  })());
+});
+
 // node_modules/react-is/cjs/react-is.development.js
 var require_react_is_development = __commonJS((exports) => {
   if (true) {
@@ -19465,8 +19782,8 @@ var require_react_is = __commonJS((exports, module) => {
 
 // node_modules/shallowequal/index.js
 var require_shallowequal = __commonJS((exports, module) => {
-  module.exports = function shallowEqual(objA, objB, compare, compareContext) {
-    var ret = compare ? compare.call(compareContext, objA, objB) : undefined;
+  module.exports = function shallowEqual(objA, objB, compare2, compareContext) {
+    var ret = compare2 ? compare2.call(compareContext, objA, objB) : undefined;
     if (ret !== undefined) {
       return !!ret;
     }
@@ -19489,7 +19806,7 @@ var require_shallowequal = __commonJS((exports, module) => {
       }
       var valueA = objA[key];
       var valueB = objB[key];
-      ret = compare ? compare.call(compareContext, valueA, valueB, key) : undefined;
+      ret = compare2 ? compare2.call(compareContext, valueA, valueB, key) : undefined;
       if (ret === false || ret === undefined && valueA !== valueB) {
         return false;
       }
@@ -19779,7 +20096,7 @@ var require_react_jsx_dev_runtime_development = __commonJS((exports) => {
       function setCurrentlyValidatingElement(element) {
         currentlyValidatingElement = element;
       }
-      function checkPropTypes(typeSpecs, values, location, componentName, element) {
+      function checkPropTypes(typeSpecs, values, location2, componentName, element) {
         {
           var has = Function.call.bind(Object.prototype.hasOwnProperty);
           for (var typeSpecName in typeSpecs) {
@@ -19787,23 +20104,23 @@ var require_react_jsx_dev_runtime_development = __commonJS((exports) => {
               var error$1 = undefined;
               try {
                 if (typeof typeSpecs[typeSpecName] !== "function") {
-                  var err = Error((componentName || "React class") + ": " + location + " type `" + typeSpecName + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof typeSpecs[typeSpecName] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.");
+                  var err = Error((componentName || "React class") + ": " + location2 + " type `" + typeSpecName + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof typeSpecs[typeSpecName] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.");
                   err.name = "Invariant Violation";
                   throw err;
                 }
-                error$1 = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED");
+                error$1 = typeSpecs[typeSpecName](values, typeSpecName, componentName, location2, null, "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED");
               } catch (ex) {
                 error$1 = ex;
               }
               if (error$1 && !(error$1 instanceof Error)) {
                 setCurrentlyValidatingElement(element);
-                error("%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).", componentName || "React class", location, typeSpecName, typeof error$1);
+                error("%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).", componentName || "React class", location2, typeSpecName, typeof error$1);
                 setCurrentlyValidatingElement(null);
               }
               if (error$1 instanceof Error && !(error$1.message in loggedTypeFailures)) {
                 loggedTypeFailures[error$1.message] = true;
                 setCurrentlyValidatingElement(element);
-                error("Failed %s type: %s", location, error$1.message);
+                error("Failed %s type: %s", location2, error$1.message);
                 setCurrentlyValidatingElement(null);
               }
             }
@@ -19811,7 +20128,7 @@ var require_react_jsx_dev_runtime_development = __commonJS((exports) => {
         }
       }
       var ReactCurrentOwner = ReactSharedInternals.ReactCurrentOwner;
-      var hasOwnProperty = Object.prototype.hasOwnProperty;
+      var hasOwnProperty2 = Object.prototype.hasOwnProperty;
       var RESERVED_PROPS = {
         key: true,
         ref: true,
@@ -19826,7 +20143,7 @@ var require_react_jsx_dev_runtime_development = __commonJS((exports) => {
       }
       function hasValidRef(config) {
         {
-          if (hasOwnProperty.call(config, "ref")) {
+          if (hasOwnProperty2.call(config, "ref")) {
             var getter = Object.getOwnPropertyDescriptor(config, "ref").get;
             if (getter && getter.isReactWarning) {
               return false;
@@ -19837,7 +20154,7 @@ var require_react_jsx_dev_runtime_development = __commonJS((exports) => {
       }
       function hasValidKey(config) {
         {
-          if (hasOwnProperty.call(config, "key")) {
+          if (hasOwnProperty2.call(config, "key")) {
             var getter = Object.getOwnPropertyDescriptor(config, "key").get;
             if (getter && getter.isReactWarning) {
               return false;
@@ -19846,9 +20163,9 @@ var require_react_jsx_dev_runtime_development = __commonJS((exports) => {
         }
         return config.key !== undefined;
       }
-      function warnIfStringRefCannotBeAutoConverted(config, self) {
+      function warnIfStringRefCannotBeAutoConverted(config, self2) {
         {
-          if (typeof config.ref === "string" && ReactCurrentOwner.current && self && ReactCurrentOwner.current.stateNode !== self) {
+          if (typeof config.ref === "string" && ReactCurrentOwner.current && self2 && ReactCurrentOwner.current.stateNode !== self2) {
             var componentName = getComponentName(ReactCurrentOwner.current.type);
             if (!didWarnAboutStringRefs[componentName]) {
               error('Component "%s" contains the string ref "%s". Support for string refs will be removed in a future major release. This case cannot be automatically converted to an arrow function. We ask you to manually fix this case by using useRef() or createRef() instead. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-string-ref', getComponentName(ReactCurrentOwner.current.type), config.ref);
@@ -19887,7 +20204,7 @@ var require_react_jsx_dev_runtime_development = __commonJS((exports) => {
           });
         }
       }
-      var ReactElement = function(type, key, ref, self, source, owner, props) {
+      var ReactElement = function(type, key, ref, self2, source, owner, props) {
         var element = {
           $$typeof: REACT_ELEMENT_TYPE,
           type,
@@ -19908,7 +20225,7 @@ var require_react_jsx_dev_runtime_development = __commonJS((exports) => {
             configurable: false,
             enumerable: false,
             writable: false,
-            value: self
+            value: self2
           });
           Object.defineProperty(element, "_source", {
             configurable: false,
@@ -19923,7 +20240,7 @@ var require_react_jsx_dev_runtime_development = __commonJS((exports) => {
         }
         return element;
       };
-      function jsxDEV(type, config, maybeKey, source, self) {
+      function jsxDEV(type, config, maybeKey, source, self2) {
         {
           var propName;
           var props = {};
@@ -19937,10 +20254,10 @@ var require_react_jsx_dev_runtime_development = __commonJS((exports) => {
           }
           if (hasValidRef(config)) {
             ref = config.ref;
-            warnIfStringRefCannotBeAutoConverted(config, self);
+            warnIfStringRefCannotBeAutoConverted(config, self2);
           }
           for (propName in config) {
-            if (hasOwnProperty.call(config, propName) && !RESERVED_PROPS.hasOwnProperty(propName)) {
+            if (hasOwnProperty2.call(config, propName) && !RESERVED_PROPS.hasOwnProperty(propName)) {
               props[propName] = config[propName];
             }
           }
@@ -19961,7 +20278,7 @@ var require_react_jsx_dev_runtime_development = __commonJS((exports) => {
               defineRefPropWarningGetter(props, displayName);
             }
           }
-          return ReactElement(type, key, ref, self, source, ReactCurrentOwner.current, props);
+          return ReactElement(type, key, ref, self2, source, ReactCurrentOwner.current, props);
         }
       }
       var ReactCurrentOwner$1 = ReactSharedInternals.ReactCurrentOwner;
@@ -20110,7 +20427,7 @@ var require_react_jsx_dev_runtime_development = __commonJS((exports) => {
           }
         }
       }
-      function jsxWithValidation(type, props, key, isStaticChildren, source, self) {
+      function jsxWithValidation(type, props, key, isStaticChildren, source, self2) {
         {
           var validType = isValidElementType(type);
           if (!validType) {
@@ -20137,7 +20454,7 @@ var require_react_jsx_dev_runtime_development = __commonJS((exports) => {
             }
             error("React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", typeString, info);
           }
-          var element = jsxDEV(type, props, key, source, self);
+          var element = jsxDEV(type, props, key, source, self2);
           if (element == null) {
             return element;
           }
@@ -20183,11 +20500,1900 @@ var require_jsx_dev_runtime = __commonJS((exports, module) => {
 });
 
 // src/index.jsx
-var import_react11 = __toESM(require_react(), 1);
+var import_react12 = __toESM(require_react(), 1);
 var import_react_dom = __toESM(require_react_dom(), 1);
 
 // src/App.jsx
-var import_react10 = __toESM(require_react(), 1);
+var import_react11 = __toESM(require_react(), 1);
+
+// node_modules/phoenix/priv/static/phoenix.mjs
+var closure = (value) => {
+  if (typeof value === "function") {
+    return value;
+  } else {
+    let closure2 = function() {
+      return value;
+    };
+    return closure2;
+  }
+};
+var globalSelf = typeof self !== "undefined" ? self : null;
+var phxWindow = typeof window !== "undefined" ? window : null;
+var global = globalSelf || phxWindow || global;
+var DEFAULT_VSN = "2.0.0";
+var SOCKET_STATES = { connecting: 0, open: 1, closing: 2, closed: 3 };
+var DEFAULT_TIMEOUT = 1e4;
+var WS_CLOSE_NORMAL = 1000;
+var CHANNEL_STATES = {
+  closed: "closed",
+  errored: "errored",
+  joined: "joined",
+  joining: "joining",
+  leaving: "leaving"
+};
+var CHANNEL_EVENTS = {
+  close: "phx_close",
+  error: "phx_error",
+  join: "phx_join",
+  reply: "phx_reply",
+  leave: "phx_leave"
+};
+var TRANSPORTS = {
+  longpoll: "longpoll",
+  websocket: "websocket"
+};
+var XHR_STATES = {
+  complete: 4
+};
+var Push = class {
+  constructor(channel, event, payload, timeout) {
+    this.channel = channel;
+    this.event = event;
+    this.payload = payload || function() {
+      return {};
+    };
+    this.receivedResp = null;
+    this.timeout = timeout;
+    this.timeoutTimer = null;
+    this.recHooks = [];
+    this.sent = false;
+  }
+  resend(timeout) {
+    this.timeout = timeout;
+    this.reset();
+    this.send();
+  }
+  send() {
+    if (this.hasReceived("timeout")) {
+      return;
+    }
+    this.startTimeout();
+    this.sent = true;
+    this.channel.socket.push({
+      topic: this.channel.topic,
+      event: this.event,
+      payload: this.payload(),
+      ref: this.ref,
+      join_ref: this.channel.joinRef()
+    });
+  }
+  receive(status, callback) {
+    if (this.hasReceived(status)) {
+      callback(this.receivedResp.response);
+    }
+    this.recHooks.push({ status, callback });
+    return this;
+  }
+  reset() {
+    this.cancelRefEvent();
+    this.ref = null;
+    this.refEvent = null;
+    this.receivedResp = null;
+    this.sent = false;
+  }
+  matchReceive({ status, response, _ref }) {
+    this.recHooks.filter((h) => h.status === status).forEach((h) => h.callback(response));
+  }
+  cancelRefEvent() {
+    if (!this.refEvent) {
+      return;
+    }
+    this.channel.off(this.refEvent);
+  }
+  cancelTimeout() {
+    clearTimeout(this.timeoutTimer);
+    this.timeoutTimer = null;
+  }
+  startTimeout() {
+    if (this.timeoutTimer) {
+      this.cancelTimeout();
+    }
+    this.ref = this.channel.socket.makeRef();
+    this.refEvent = this.channel.replyEventName(this.ref);
+    this.channel.on(this.refEvent, (payload) => {
+      this.cancelRefEvent();
+      this.cancelTimeout();
+      this.receivedResp = payload;
+      this.matchReceive(payload);
+    });
+    this.timeoutTimer = setTimeout(() => {
+      this.trigger("timeout", {});
+    }, this.timeout);
+  }
+  hasReceived(status) {
+    return this.receivedResp && this.receivedResp.status === status;
+  }
+  trigger(status, response) {
+    this.channel.trigger(this.refEvent, { status, response });
+  }
+};
+var Timer = class {
+  constructor(callback, timerCalc) {
+    this.callback = callback;
+    this.timerCalc = timerCalc;
+    this.timer = null;
+    this.tries = 0;
+  }
+  reset() {
+    this.tries = 0;
+    clearTimeout(this.timer);
+  }
+  scheduleTimeout() {
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => {
+      this.tries = this.tries + 1;
+      this.callback();
+    }, this.timerCalc(this.tries + 1));
+  }
+};
+var Channel = class {
+  constructor(topic, params, socket) {
+    this.state = CHANNEL_STATES.closed;
+    this.topic = topic;
+    this.params = closure(params || {});
+    this.socket = socket;
+    this.bindings = [];
+    this.bindingRef = 0;
+    this.timeout = this.socket.timeout;
+    this.joinedOnce = false;
+    this.joinPush = new Push(this, CHANNEL_EVENTS.join, this.params, this.timeout);
+    this.pushBuffer = [];
+    this.stateChangeRefs = [];
+    this.rejoinTimer = new Timer(() => {
+      if (this.socket.isConnected()) {
+        this.rejoin();
+      }
+    }, this.socket.rejoinAfterMs);
+    this.stateChangeRefs.push(this.socket.onError(() => this.rejoinTimer.reset()));
+    this.stateChangeRefs.push(this.socket.onOpen(() => {
+      this.rejoinTimer.reset();
+      if (this.isErrored()) {
+        this.rejoin();
+      }
+    }));
+    this.joinPush.receive("ok", () => {
+      this.state = CHANNEL_STATES.joined;
+      this.rejoinTimer.reset();
+      this.pushBuffer.forEach((pushEvent) => pushEvent.send());
+      this.pushBuffer = [];
+    });
+    this.joinPush.receive("error", () => {
+      this.state = CHANNEL_STATES.errored;
+      if (this.socket.isConnected()) {
+        this.rejoinTimer.scheduleTimeout();
+      }
+    });
+    this.onClose(() => {
+      this.rejoinTimer.reset();
+      if (this.socket.hasLogger())
+        this.socket.log("channel", `close ${this.topic} ${this.joinRef()}`);
+      this.state = CHANNEL_STATES.closed;
+      this.socket.remove(this);
+    });
+    this.onError((reason) => {
+      if (this.socket.hasLogger())
+        this.socket.log("channel", `error ${this.topic}`, reason);
+      if (this.isJoining()) {
+        this.joinPush.reset();
+      }
+      this.state = CHANNEL_STATES.errored;
+      if (this.socket.isConnected()) {
+        this.rejoinTimer.scheduleTimeout();
+      }
+    });
+    this.joinPush.receive("timeout", () => {
+      if (this.socket.hasLogger())
+        this.socket.log("channel", `timeout ${this.topic} (${this.joinRef()})`, this.joinPush.timeout);
+      let leavePush = new Push(this, CHANNEL_EVENTS.leave, closure({}), this.timeout);
+      leavePush.send();
+      this.state = CHANNEL_STATES.errored;
+      this.joinPush.reset();
+      if (this.socket.isConnected()) {
+        this.rejoinTimer.scheduleTimeout();
+      }
+    });
+    this.on(CHANNEL_EVENTS.reply, (payload, ref) => {
+      this.trigger(this.replyEventName(ref), payload);
+    });
+  }
+  join(timeout = this.timeout) {
+    if (this.joinedOnce) {
+      throw new Error("tried to join multiple times. 'join' can only be called a single time per channel instance");
+    } else {
+      this.timeout = timeout;
+      this.joinedOnce = true;
+      this.rejoin();
+      return this.joinPush;
+    }
+  }
+  onClose(callback) {
+    this.on(CHANNEL_EVENTS.close, callback);
+  }
+  onError(callback) {
+    return this.on(CHANNEL_EVENTS.error, (reason) => callback(reason));
+  }
+  on(event, callback) {
+    let ref = this.bindingRef++;
+    this.bindings.push({ event, ref, callback });
+    return ref;
+  }
+  off(event, ref) {
+    this.bindings = this.bindings.filter((bind) => {
+      return !(bind.event === event && (typeof ref === "undefined" || ref === bind.ref));
+    });
+  }
+  canPush() {
+    return this.socket.isConnected() && this.isJoined();
+  }
+  push(event, payload, timeout = this.timeout) {
+    payload = payload || {};
+    if (!this.joinedOnce) {
+      throw new Error(`tried to push '${event}' to '${this.topic}' before joining. Use channel.join() before pushing events`);
+    }
+    let pushEvent = new Push(this, event, function() {
+      return payload;
+    }, timeout);
+    if (this.canPush()) {
+      pushEvent.send();
+    } else {
+      pushEvent.startTimeout();
+      this.pushBuffer.push(pushEvent);
+    }
+    return pushEvent;
+  }
+  leave(timeout = this.timeout) {
+    this.rejoinTimer.reset();
+    this.joinPush.cancelTimeout();
+    this.state = CHANNEL_STATES.leaving;
+    let onClose = () => {
+      if (this.socket.hasLogger())
+        this.socket.log("channel", `leave ${this.topic}`);
+      this.trigger(CHANNEL_EVENTS.close, "leave");
+    };
+    let leavePush = new Push(this, CHANNEL_EVENTS.leave, closure({}), timeout);
+    leavePush.receive("ok", () => onClose()).receive("timeout", () => onClose());
+    leavePush.send();
+    if (!this.canPush()) {
+      leavePush.trigger("ok", {});
+    }
+    return leavePush;
+  }
+  onMessage(_event, payload, _ref) {
+    return payload;
+  }
+  isMember(topic, event, payload, joinRef) {
+    if (this.topic !== topic) {
+      return false;
+    }
+    if (joinRef && joinRef !== this.joinRef()) {
+      if (this.socket.hasLogger())
+        this.socket.log("channel", "dropping outdated message", { topic, event, payload, joinRef });
+      return false;
+    } else {
+      return true;
+    }
+  }
+  joinRef() {
+    return this.joinPush.ref;
+  }
+  rejoin(timeout = this.timeout) {
+    if (this.isLeaving()) {
+      return;
+    }
+    this.socket.leaveOpenTopic(this.topic);
+    this.state = CHANNEL_STATES.joining;
+    this.joinPush.resend(timeout);
+  }
+  trigger(event, payload, ref, joinRef) {
+    let handledPayload = this.onMessage(event, payload, ref, joinRef);
+    if (payload && !handledPayload) {
+      throw new Error("channel onMessage callbacks must return the payload, modified or unmodified");
+    }
+    let eventBindings = this.bindings.filter((bind) => bind.event === event);
+    for (let i = 0;i < eventBindings.length; i++) {
+      let bind = eventBindings[i];
+      bind.callback(handledPayload, ref, joinRef || this.joinRef());
+    }
+  }
+  replyEventName(ref) {
+    return `chan_reply_${ref}`;
+  }
+  isClosed() {
+    return this.state === CHANNEL_STATES.closed;
+  }
+  isErrored() {
+    return this.state === CHANNEL_STATES.errored;
+  }
+  isJoined() {
+    return this.state === CHANNEL_STATES.joined;
+  }
+  isJoining() {
+    return this.state === CHANNEL_STATES.joining;
+  }
+  isLeaving() {
+    return this.state === CHANNEL_STATES.leaving;
+  }
+};
+var Ajax = class {
+  static request(method, endPoint, accept, body, timeout, ontimeout, callback) {
+    if (global.XDomainRequest) {
+      let req = new global.XDomainRequest;
+      return this.xdomainRequest(req, method, endPoint, body, timeout, ontimeout, callback);
+    } else {
+      let req = new global.XMLHttpRequest;
+      return this.xhrRequest(req, method, endPoint, accept, body, timeout, ontimeout, callback);
+    }
+  }
+  static xdomainRequest(req, method, endPoint, body, timeout, ontimeout, callback) {
+    req.timeout = timeout;
+    req.open(method, endPoint);
+    req.onload = () => {
+      let response = this.parseJSON(req.responseText);
+      callback && callback(response);
+    };
+    if (ontimeout) {
+      req.ontimeout = ontimeout;
+    }
+    req.onprogress = () => {
+    };
+    req.send(body);
+    return req;
+  }
+  static xhrRequest(req, method, endPoint, accept, body, timeout, ontimeout, callback) {
+    req.open(method, endPoint, true);
+    req.timeout = timeout;
+    req.setRequestHeader("Content-Type", accept);
+    req.onerror = () => callback && callback(null);
+    req.onreadystatechange = () => {
+      if (req.readyState === XHR_STATES.complete && callback) {
+        let response = this.parseJSON(req.responseText);
+        callback(response);
+      }
+    };
+    if (ontimeout) {
+      req.ontimeout = ontimeout;
+    }
+    req.send(body);
+    return req;
+  }
+  static parseJSON(resp) {
+    if (!resp || resp === "") {
+      return null;
+    }
+    try {
+      return JSON.parse(resp);
+    } catch (e) {
+      console && console.log("failed to parse JSON response", resp);
+      return null;
+    }
+  }
+  static serialize(obj, parentKey) {
+    let queryStr = [];
+    for (var key in obj) {
+      if (!Object.prototype.hasOwnProperty.call(obj, key)) {
+        continue;
+      }
+      let paramKey = parentKey ? `${parentKey}[${key}]` : key;
+      let paramVal = obj[key];
+      if (typeof paramVal === "object") {
+        queryStr.push(this.serialize(paramVal, paramKey));
+      } else {
+        queryStr.push(encodeURIComponent(paramKey) + "=" + encodeURIComponent(paramVal));
+      }
+    }
+    return queryStr.join("&");
+  }
+  static appendParams(url, params) {
+    if (Object.keys(params).length === 0) {
+      return url;
+    }
+    let prefix = url.match(/\?/) ? "&" : "?";
+    return `${url}${prefix}${this.serialize(params)}`;
+  }
+};
+var arrayBufferToBase64 = (buffer) => {
+  let binary = "";
+  let bytes = new Uint8Array(buffer);
+  let len = bytes.byteLength;
+  for (let i = 0;i < len; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return btoa(binary);
+};
+var LongPoll = class {
+  constructor(endPoint) {
+    this.endPoint = null;
+    this.token = null;
+    this.skipHeartbeat = true;
+    this.reqs = new Set;
+    this.awaitingBatchAck = false;
+    this.currentBatch = null;
+    this.currentBatchTimer = null;
+    this.batchBuffer = [];
+    this.onopen = function() {
+    };
+    this.onerror = function() {
+    };
+    this.onmessage = function() {
+    };
+    this.onclose = function() {
+    };
+    this.pollEndpoint = this.normalizeEndpoint(endPoint);
+    this.readyState = SOCKET_STATES.connecting;
+    this.poll();
+  }
+  normalizeEndpoint(endPoint) {
+    return endPoint.replace("ws://", "http://").replace("wss://", "https://").replace(new RegExp("(.*)/" + TRANSPORTS.websocket), "$1/" + TRANSPORTS.longpoll);
+  }
+  endpointURL() {
+    return Ajax.appendParams(this.pollEndpoint, { token: this.token });
+  }
+  closeAndRetry(code, reason, wasClean) {
+    this.close(code, reason, wasClean);
+    this.readyState = SOCKET_STATES.connecting;
+  }
+  ontimeout() {
+    this.onerror("timeout");
+    this.closeAndRetry(1005, "timeout", false);
+  }
+  isActive() {
+    return this.readyState === SOCKET_STATES.open || this.readyState === SOCKET_STATES.connecting;
+  }
+  poll() {
+    this.ajax("GET", "application/json", null, () => this.ontimeout(), (resp) => {
+      if (resp) {
+        var { status, token, messages } = resp;
+        this.token = token;
+      } else {
+        status = 0;
+      }
+      switch (status) {
+        case 200:
+          messages.forEach((msg) => {
+            setTimeout(() => this.onmessage({ data: msg }), 0);
+          });
+          this.poll();
+          break;
+        case 204:
+          this.poll();
+          break;
+        case 410:
+          this.readyState = SOCKET_STATES.open;
+          this.onopen({});
+          this.poll();
+          break;
+        case 403:
+          this.onerror(403);
+          this.close(1008, "forbidden", false);
+          break;
+        case 0:
+        case 500:
+          this.onerror(500);
+          this.closeAndRetry(1011, "internal server error", 500);
+          break;
+        default:
+          throw new Error(`unhandled poll status ${status}`);
+      }
+    });
+  }
+  send(body) {
+    if (typeof body !== "string") {
+      body = arrayBufferToBase64(body);
+    }
+    if (this.currentBatch) {
+      this.currentBatch.push(body);
+    } else if (this.awaitingBatchAck) {
+      this.batchBuffer.push(body);
+    } else {
+      this.currentBatch = [body];
+      this.currentBatchTimer = setTimeout(() => {
+        this.batchSend(this.currentBatch);
+        this.currentBatch = null;
+      }, 0);
+    }
+  }
+  batchSend(messages) {
+    this.awaitingBatchAck = true;
+    this.ajax("POST", "application/x-ndjson", messages.join("\n"), () => this.onerror("timeout"), (resp) => {
+      this.awaitingBatchAck = false;
+      if (!resp || resp.status !== 200) {
+        this.onerror(resp && resp.status);
+        this.closeAndRetry(1011, "internal server error", false);
+      } else if (this.batchBuffer.length > 0) {
+        this.batchSend(this.batchBuffer);
+        this.batchBuffer = [];
+      }
+    });
+  }
+  close(code, reason, wasClean) {
+    for (let req of this.reqs) {
+      req.abort();
+    }
+    this.readyState = SOCKET_STATES.closed;
+    let opts = Object.assign({ code: 1000, reason: undefined, wasClean: true }, { code, reason, wasClean });
+    this.batchBuffer = [];
+    clearTimeout(this.currentBatchTimer);
+    this.currentBatchTimer = null;
+    if (typeof CloseEvent !== "undefined") {
+      this.onclose(new CloseEvent("close", opts));
+    } else {
+      this.onclose(opts);
+    }
+  }
+  ajax(method, contentType, body, onCallerTimeout, callback) {
+    let req;
+    let ontimeout = () => {
+      this.reqs.delete(req);
+      onCallerTimeout();
+    };
+    req = Ajax.request(method, this.endpointURL(), contentType, body, this.timeout, ontimeout, (resp) => {
+      this.reqs.delete(req);
+      if (this.isActive()) {
+        callback(resp);
+      }
+    });
+    this.reqs.add(req);
+  }
+};
+var serializer_default = {
+  HEADER_LENGTH: 1,
+  META_LENGTH: 4,
+  KINDS: { push: 0, reply: 1, broadcast: 2 },
+  encode(msg, callback) {
+    if (msg.payload.constructor === ArrayBuffer) {
+      return callback(this.binaryEncode(msg));
+    } else {
+      let payload = [msg.join_ref, msg.ref, msg.topic, msg.event, msg.payload];
+      return callback(JSON.stringify(payload));
+    }
+  },
+  decode(rawPayload, callback) {
+    if (rawPayload.constructor === ArrayBuffer) {
+      return callback(this.binaryDecode(rawPayload));
+    } else {
+      let [join_ref, ref, topic, event, payload] = JSON.parse(rawPayload);
+      return callback({ join_ref, ref, topic, event, payload });
+    }
+  },
+  binaryEncode(message) {
+    let { join_ref, ref, event, topic, payload } = message;
+    let metaLength = this.META_LENGTH + join_ref.length + ref.length + topic.length + event.length;
+    let header = new ArrayBuffer(this.HEADER_LENGTH + metaLength);
+    let view = new DataView(header);
+    let offset = 0;
+    view.setUint8(offset++, this.KINDS.push);
+    view.setUint8(offset++, join_ref.length);
+    view.setUint8(offset++, ref.length);
+    view.setUint8(offset++, topic.length);
+    view.setUint8(offset++, event.length);
+    Array.from(join_ref, (char) => view.setUint8(offset++, char.charCodeAt(0)));
+    Array.from(ref, (char) => view.setUint8(offset++, char.charCodeAt(0)));
+    Array.from(topic, (char) => view.setUint8(offset++, char.charCodeAt(0)));
+    Array.from(event, (char) => view.setUint8(offset++, char.charCodeAt(0)));
+    var combined = new Uint8Array(header.byteLength + payload.byteLength);
+    combined.set(new Uint8Array(header), 0);
+    combined.set(new Uint8Array(payload), header.byteLength);
+    return combined.buffer;
+  },
+  binaryDecode(buffer) {
+    let view = new DataView(buffer);
+    let kind = view.getUint8(0);
+    let decoder = new TextDecoder;
+    switch (kind) {
+      case this.KINDS.push:
+        return this.decodePush(buffer, view, decoder);
+      case this.KINDS.reply:
+        return this.decodeReply(buffer, view, decoder);
+      case this.KINDS.broadcast:
+        return this.decodeBroadcast(buffer, view, decoder);
+    }
+  },
+  decodePush(buffer, view, decoder) {
+    let joinRefSize = view.getUint8(1);
+    let topicSize = view.getUint8(2);
+    let eventSize = view.getUint8(3);
+    let offset = this.HEADER_LENGTH + this.META_LENGTH - 1;
+    let joinRef = decoder.decode(buffer.slice(offset, offset + joinRefSize));
+    offset = offset + joinRefSize;
+    let topic = decoder.decode(buffer.slice(offset, offset + topicSize));
+    offset = offset + topicSize;
+    let event = decoder.decode(buffer.slice(offset, offset + eventSize));
+    offset = offset + eventSize;
+    let data = buffer.slice(offset, buffer.byteLength);
+    return { join_ref: joinRef, ref: null, topic, event, payload: data };
+  },
+  decodeReply(buffer, view, decoder) {
+    let joinRefSize = view.getUint8(1);
+    let refSize = view.getUint8(2);
+    let topicSize = view.getUint8(3);
+    let eventSize = view.getUint8(4);
+    let offset = this.HEADER_LENGTH + this.META_LENGTH;
+    let joinRef = decoder.decode(buffer.slice(offset, offset + joinRefSize));
+    offset = offset + joinRefSize;
+    let ref = decoder.decode(buffer.slice(offset, offset + refSize));
+    offset = offset + refSize;
+    let topic = decoder.decode(buffer.slice(offset, offset + topicSize));
+    offset = offset + topicSize;
+    let event = decoder.decode(buffer.slice(offset, offset + eventSize));
+    offset = offset + eventSize;
+    let data = buffer.slice(offset, buffer.byteLength);
+    let payload = { status: event, response: data };
+    return { join_ref: joinRef, ref, topic, event: CHANNEL_EVENTS.reply, payload };
+  },
+  decodeBroadcast(buffer, view, decoder) {
+    let topicSize = view.getUint8(1);
+    let eventSize = view.getUint8(2);
+    let offset = this.HEADER_LENGTH + 2;
+    let topic = decoder.decode(buffer.slice(offset, offset + topicSize));
+    offset = offset + topicSize;
+    let event = decoder.decode(buffer.slice(offset, offset + eventSize));
+    offset = offset + eventSize;
+    let data = buffer.slice(offset, buffer.byteLength);
+    return { join_ref: null, ref: null, topic, event, payload: data };
+  }
+};
+var Socket = class {
+  constructor(endPoint, opts = {}) {
+    this.stateChangeCallbacks = { open: [], close: [], error: [], message: [] };
+    this.channels = [];
+    this.sendBuffer = [];
+    this.ref = 0;
+    this.timeout = opts.timeout || DEFAULT_TIMEOUT;
+    this.transport = opts.transport || global.WebSocket || LongPoll;
+    this.establishedConnections = 0;
+    this.defaultEncoder = serializer_default.encode.bind(serializer_default);
+    this.defaultDecoder = serializer_default.decode.bind(serializer_default);
+    this.closeWasClean = false;
+    this.binaryType = opts.binaryType || "arraybuffer";
+    this.connectClock = 1;
+    if (this.transport !== LongPoll) {
+      this.encode = opts.encode || this.defaultEncoder;
+      this.decode = opts.decode || this.defaultDecoder;
+    } else {
+      this.encode = this.defaultEncoder;
+      this.decode = this.defaultDecoder;
+    }
+    let awaitingConnectionOnPageShow = null;
+    if (phxWindow && phxWindow.addEventListener) {
+      phxWindow.addEventListener("pagehide", (_e) => {
+        if (this.conn) {
+          this.disconnect();
+          awaitingConnectionOnPageShow = this.connectClock;
+        }
+      });
+      phxWindow.addEventListener("pageshow", (_e) => {
+        if (awaitingConnectionOnPageShow === this.connectClock) {
+          awaitingConnectionOnPageShow = null;
+          this.connect();
+        }
+      });
+    }
+    this.heartbeatIntervalMs = opts.heartbeatIntervalMs || 30000;
+    this.rejoinAfterMs = (tries) => {
+      if (opts.rejoinAfterMs) {
+        return opts.rejoinAfterMs(tries);
+      } else {
+        return [1000, 2000, 5000][tries - 1] || 1e4;
+      }
+    };
+    this.reconnectAfterMs = (tries) => {
+      if (opts.reconnectAfterMs) {
+        return opts.reconnectAfterMs(tries);
+      } else {
+        return [10, 50, 100, 150, 200, 250, 500, 1000, 2000][tries - 1] || 5000;
+      }
+    };
+    this.logger = opts.logger || null;
+    this.longpollerTimeout = opts.longpollerTimeout || 20000;
+    this.params = closure(opts.params || {});
+    this.endPoint = `${endPoint}/${TRANSPORTS.websocket}`;
+    this.vsn = opts.vsn || DEFAULT_VSN;
+    this.heartbeatTimeoutTimer = null;
+    this.heartbeatTimer = null;
+    this.pendingHeartbeatRef = null;
+    this.reconnectTimer = new Timer(() => {
+      this.teardown(() => this.connect());
+    }, this.reconnectAfterMs);
+  }
+  getLongPollTransport() {
+    return LongPoll;
+  }
+  replaceTransport(newTransport) {
+    this.connectClock++;
+    this.closeWasClean = true;
+    this.reconnectTimer.reset();
+    this.sendBuffer = [];
+    if (this.conn) {
+      this.conn.close();
+      this.conn = null;
+    }
+    this.transport = newTransport;
+  }
+  protocol() {
+    return location.protocol.match(/^https/) ? "wss" : "ws";
+  }
+  endPointURL() {
+    let uri = Ajax.appendParams(Ajax.appendParams(this.endPoint, this.params()), { vsn: this.vsn });
+    if (uri.charAt(0) !== "/") {
+      return uri;
+    }
+    if (uri.charAt(1) === "/") {
+      return `${this.protocol()}:${uri}`;
+    }
+    return `${this.protocol()}://${location.host}${uri}`;
+  }
+  disconnect(callback, code, reason) {
+    this.connectClock++;
+    this.closeWasClean = true;
+    this.reconnectTimer.reset();
+    this.teardown(callback, code, reason);
+  }
+  connect(params) {
+    if (params) {
+      console && console.log("passing params to connect is deprecated. Instead pass :params to the Socket constructor");
+      this.params = closure(params);
+    }
+    if (this.conn) {
+      return;
+    }
+    this.connectClock++;
+    this.closeWasClean = false;
+    this.conn = new this.transport(this.endPointURL());
+    this.conn.binaryType = this.binaryType;
+    this.conn.timeout = this.longpollerTimeout;
+    this.conn.onopen = () => this.onConnOpen();
+    this.conn.onerror = (error) => this.onConnError(error);
+    this.conn.onmessage = (event) => this.onConnMessage(event);
+    this.conn.onclose = (event) => this.onConnClose(event);
+  }
+  log(kind, msg, data) {
+    this.logger(kind, msg, data);
+  }
+  hasLogger() {
+    return this.logger !== null;
+  }
+  onOpen(callback) {
+    let ref = this.makeRef();
+    this.stateChangeCallbacks.open.push([ref, callback]);
+    return ref;
+  }
+  onClose(callback) {
+    let ref = this.makeRef();
+    this.stateChangeCallbacks.close.push([ref, callback]);
+    return ref;
+  }
+  onError(callback) {
+    let ref = this.makeRef();
+    this.stateChangeCallbacks.error.push([ref, callback]);
+    return ref;
+  }
+  onMessage(callback) {
+    let ref = this.makeRef();
+    this.stateChangeCallbacks.message.push([ref, callback]);
+    return ref;
+  }
+  ping(callback) {
+    if (!this.isConnected()) {
+      return false;
+    }
+    let ref = this.makeRef();
+    let startTime = Date.now();
+    this.push({ topic: "phoenix", event: "heartbeat", payload: {}, ref });
+    let onMsgRef = this.onMessage((msg) => {
+      if (msg.ref === ref) {
+        this.off([onMsgRef]);
+        callback(Date.now() - startTime);
+      }
+    });
+    return true;
+  }
+  clearHeartbeats() {
+    clearTimeout(this.heartbeatTimer);
+    clearTimeout(this.heartbeatTimeoutTimer);
+  }
+  onConnOpen() {
+    if (this.hasLogger())
+      this.log("transport", `connected to ${this.endPointURL()}`);
+    this.closeWasClean = false;
+    this.establishedConnections++;
+    this.flushSendBuffer();
+    this.reconnectTimer.reset();
+    this.resetHeartbeat();
+    this.stateChangeCallbacks.open.forEach(([, callback]) => callback());
+  }
+  heartbeatTimeout() {
+    if (this.pendingHeartbeatRef) {
+      this.pendingHeartbeatRef = null;
+      if (this.hasLogger()) {
+        this.log("transport", "heartbeat timeout. Attempting to re-establish connection");
+      }
+      this.triggerChanError();
+      this.closeWasClean = false;
+      this.teardown(() => this.reconnectTimer.scheduleTimeout(), WS_CLOSE_NORMAL, "heartbeat timeout");
+    }
+  }
+  resetHeartbeat() {
+    if (this.conn && this.conn.skipHeartbeat) {
+      return;
+    }
+    this.pendingHeartbeatRef = null;
+    this.clearHeartbeats();
+    this.heartbeatTimer = setTimeout(() => this.sendHeartbeat(), this.heartbeatIntervalMs);
+  }
+  teardown(callback, code, reason) {
+    if (!this.conn) {
+      return callback && callback();
+    }
+    this.waitForBufferDone(() => {
+      if (this.conn) {
+        if (code) {
+          this.conn.close(code, reason || "");
+        } else {
+          this.conn.close();
+        }
+      }
+      this.waitForSocketClosed(() => {
+        if (this.conn) {
+          this.conn.onopen = function() {
+          };
+          this.conn.onerror = function() {
+          };
+          this.conn.onmessage = function() {
+          };
+          this.conn.onclose = function() {
+          };
+          this.conn = null;
+        }
+        callback && callback();
+      });
+    });
+  }
+  waitForBufferDone(callback, tries = 1) {
+    if (tries === 5 || !this.conn || !this.conn.bufferedAmount) {
+      callback();
+      return;
+    }
+    setTimeout(() => {
+      this.waitForBufferDone(callback, tries + 1);
+    }, 150 * tries);
+  }
+  waitForSocketClosed(callback, tries = 1) {
+    if (tries === 5 || !this.conn || this.conn.readyState === SOCKET_STATES.closed) {
+      callback();
+      return;
+    }
+    setTimeout(() => {
+      this.waitForSocketClosed(callback, tries + 1);
+    }, 150 * tries);
+  }
+  onConnClose(event) {
+    let closeCode = event && event.code;
+    if (this.hasLogger())
+      this.log("transport", "close", event);
+    this.triggerChanError();
+    this.clearHeartbeats();
+    if (!this.closeWasClean && closeCode !== 1000) {
+      this.reconnectTimer.scheduleTimeout();
+    }
+    this.stateChangeCallbacks.close.forEach(([, callback]) => callback(event));
+  }
+  onConnError(error) {
+    if (this.hasLogger())
+      this.log("transport", error);
+    let transportBefore = this.transport;
+    let establishedBefore = this.establishedConnections;
+    this.stateChangeCallbacks.error.forEach(([, callback]) => {
+      callback(error, transportBefore, establishedBefore);
+    });
+    if (transportBefore === this.transport || establishedBefore > 0) {
+      this.triggerChanError();
+    }
+  }
+  triggerChanError() {
+    this.channels.forEach((channel) => {
+      if (!(channel.isErrored() || channel.isLeaving() || channel.isClosed())) {
+        channel.trigger(CHANNEL_EVENTS.error);
+      }
+    });
+  }
+  connectionState() {
+    switch (this.conn && this.conn.readyState) {
+      case SOCKET_STATES.connecting:
+        return "connecting";
+      case SOCKET_STATES.open:
+        return "open";
+      case SOCKET_STATES.closing:
+        return "closing";
+      default:
+        return "closed";
+    }
+  }
+  isConnected() {
+    return this.connectionState() === "open";
+  }
+  remove(channel) {
+    this.off(channel.stateChangeRefs);
+    this.channels = this.channels.filter((c) => c.joinRef() !== channel.joinRef());
+  }
+  off(refs) {
+    for (let key in this.stateChangeCallbacks) {
+      this.stateChangeCallbacks[key] = this.stateChangeCallbacks[key].filter(([ref]) => {
+        return refs.indexOf(ref) === -1;
+      });
+    }
+  }
+  channel(topic, chanParams = {}) {
+    let chan = new Channel(topic, chanParams, this);
+    this.channels.push(chan);
+    return chan;
+  }
+  push(data) {
+    if (this.hasLogger()) {
+      let { topic, event, payload, ref, join_ref } = data;
+      this.log("push", `${topic} ${event} (${join_ref}, ${ref})`, payload);
+    }
+    if (this.isConnected()) {
+      this.encode(data, (result) => this.conn.send(result));
+    } else {
+      this.sendBuffer.push(() => this.encode(data, (result) => this.conn.send(result)));
+    }
+  }
+  makeRef() {
+    let newRef = this.ref + 1;
+    if (newRef === this.ref) {
+      this.ref = 0;
+    } else {
+      this.ref = newRef;
+    }
+    return this.ref.toString();
+  }
+  sendHeartbeat() {
+    if (this.pendingHeartbeatRef && !this.isConnected()) {
+      return;
+    }
+    this.pendingHeartbeatRef = this.makeRef();
+    this.push({ topic: "phoenix", event: "heartbeat", payload: {}, ref: this.pendingHeartbeatRef });
+    this.heartbeatTimeoutTimer = setTimeout(() => this.heartbeatTimeout(), this.heartbeatIntervalMs);
+  }
+  flushSendBuffer() {
+    if (this.isConnected() && this.sendBuffer.length > 0) {
+      this.sendBuffer.forEach((callback) => callback());
+      this.sendBuffer = [];
+    }
+  }
+  onConnMessage(rawMessage) {
+    this.decode(rawMessage.data, (msg) => {
+      let { topic, event, payload, ref, join_ref } = msg;
+      if (ref && ref === this.pendingHeartbeatRef) {
+        this.clearHeartbeats();
+        this.pendingHeartbeatRef = null;
+        this.heartbeatTimer = setTimeout(() => this.sendHeartbeat(), this.heartbeatIntervalMs);
+      }
+      if (this.hasLogger())
+        this.log("receive", `${payload.status || ""} ${topic} ${event} ${ref && "(" + ref + ")" || ""}`, payload);
+      for (let i = 0;i < this.channels.length; i++) {
+        const channel = this.channels[i];
+        if (!channel.isMember(topic, event, payload, join_ref)) {
+          continue;
+        }
+        channel.trigger(event, payload, ref, join_ref);
+      }
+      for (let i = 0;i < this.stateChangeCallbacks.message.length; i++) {
+        let [, callback] = this.stateChangeCallbacks.message[i];
+        callback(msg);
+      }
+    });
+  }
+  leaveOpenTopic(topic) {
+    let dupChannel = this.channels.find((c) => c.topic === topic && (c.isJoined() || c.isJoining()));
+    if (dupChannel) {
+      if (this.hasLogger())
+        this.log("transport", `leaving duplicate topic "${topic}"`);
+      dupChannel.leave();
+    }
+  }
+};
+
+// node_modules/fast-json-patch/module/core.mjs
+var exports_core = {};
+__export(exports_core, {
+  validator: () => {
+    {
+      return validator;
+    }
+  },
+  validate: () => {
+    {
+      return validate;
+    }
+  },
+  getValueByPointer: () => {
+    {
+      return getValueByPointer;
+    }
+  },
+  deepClone: () => {
+    {
+      return deepClone;
+    }
+  },
+  applyReducer: () => {
+    {
+      return applyReducer;
+    }
+  },
+  applyPatch: () => {
+    {
+      return applyPatch;
+    }
+  },
+  applyOperation: () => {
+    {
+      return applyOperation;
+    }
+  },
+  _areEquals: () => {
+    {
+      return _areEquals;
+    }
+  },
+  JsonPatchError: () => {
+    {
+      return JsonPatchError;
+    }
+  }
+});
+
+// node_modules/fast-json-patch/module/helpers.mjs
+function hasOwnProperty(obj, key) {
+  return _hasOwnProperty.call(obj, key);
+}
+function _objectKeys(obj) {
+  if (Array.isArray(obj)) {
+    var keys_1 = new Array(obj.length);
+    for (var k = 0;k < keys_1.length; k++) {
+      keys_1[k] = "" + k;
+    }
+    return keys_1;
+  }
+  if (Object.keys) {
+    return Object.keys(obj);
+  }
+  var keys = [];
+  for (var i in obj) {
+    if (hasOwnProperty(obj, i)) {
+      keys.push(i);
+    }
+  }
+  return keys;
+}
+function _deepClone(obj) {
+  switch (typeof obj) {
+    case "object":
+      return JSON.parse(JSON.stringify(obj));
+    case "undefined":
+      return null;
+    default:
+      return obj;
+  }
+}
+function isInteger(str) {
+  var i = 0;
+  var len = str.length;
+  var charCode;
+  while (i < len) {
+    charCode = str.charCodeAt(i);
+    if (charCode >= 48 && charCode <= 57) {
+      i++;
+      continue;
+    }
+    return false;
+  }
+  return true;
+}
+function escapePathComponent(path) {
+  if (path.indexOf("/") === -1 && path.indexOf("~") === -1)
+    return path;
+  return path.replace(/~/g, "~0").replace(/\//g, "~1");
+}
+function unescapePathComponent(path) {
+  return path.replace(/~1/g, "/").replace(/~0/g, "~");
+}
+function hasUndefined(obj) {
+  if (obj === undefined) {
+    return true;
+  }
+  if (obj) {
+    if (Array.isArray(obj)) {
+      for (var i_1 = 0, len = obj.length;i_1 < len; i_1++) {
+        if (hasUndefined(obj[i_1])) {
+          return true;
+        }
+      }
+    } else if (typeof obj === "object") {
+      var objKeys = _objectKeys(obj);
+      var objKeysLength = objKeys.length;
+      for (var i = 0;i < objKeysLength; i++) {
+        if (hasUndefined(obj[objKeys[i]])) {
+          return true;
+        }
+      }
+    }
+  }
+  return false;
+}
+var patchErrorMessageFormatter = function(message, args) {
+  var messageParts = [message];
+  for (var key in args) {
+    var value = typeof args[key] === "object" ? JSON.stringify(args[key], null, 2) : args[key];
+    if (typeof value !== "undefined") {
+      messageParts.push(key + ": " + value);
+    }
+  }
+  return messageParts.join("\n");
+};
+/*!
+ * https://github.com/Starcounter-Jack/JSON-Patch
+ * (c) 2017-2022 Joachim Wester
+ * MIT licensed
+ */
+var __extends = function() {
+  var extendStatics = function(d, b) {
+    extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d2, b2) {
+      d2.__proto__ = b2;
+    } || function(d2, b2) {
+      for (var p in b2)
+        if (b2.hasOwnProperty(p))
+          d2[p] = b2[p];
+    };
+    return extendStatics(d, b);
+  };
+  return function(d, b) {
+    extendStatics(d, b);
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __);
+  };
+}();
+var _hasOwnProperty = Object.prototype.hasOwnProperty;
+var PatchError = function(_super) {
+  __extends(PatchError2, _super);
+  function PatchError2(message, name, index, operation, tree) {
+    var _newTarget = this.constructor;
+    var _this = _super.call(this, patchErrorMessageFormatter(message, { name, index, operation, tree })) || this;
+    _this.name = name;
+    _this.index = index;
+    _this.operation = operation;
+    _this.tree = tree;
+    Object.setPrototypeOf(_this, _newTarget.prototype);
+    _this.message = patchErrorMessageFormatter(message, { name, index, operation, tree });
+    return _this;
+  }
+  return PatchError2;
+}(Error);
+
+// node_modules/fast-json-patch/module/core.mjs
+function getValueByPointer(document2, pointer) {
+  if (pointer == "") {
+    return document2;
+  }
+  var getOriginalDestination = { op: "_get", path: pointer };
+  applyOperation(document2, getOriginalDestination);
+  return getOriginalDestination.value;
+}
+function applyOperation(document2, operation, validateOperation, mutateDocument, banPrototypeModifications, index) {
+  if (validateOperation === undefined) {
+    validateOperation = false;
+  }
+  if (mutateDocument === undefined) {
+    mutateDocument = true;
+  }
+  if (banPrototypeModifications === undefined) {
+    banPrototypeModifications = true;
+  }
+  if (index === undefined) {
+    index = 0;
+  }
+  if (validateOperation) {
+    if (typeof validateOperation == "function") {
+      validateOperation(operation, 0, document2, operation.path);
+    } else {
+      validator(operation, 0);
+    }
+  }
+  if (operation.path === "") {
+    var returnValue = { newDocument: document2 };
+    if (operation.op === "add") {
+      returnValue.newDocument = operation.value;
+      return returnValue;
+    } else if (operation.op === "replace") {
+      returnValue.newDocument = operation.value;
+      returnValue.removed = document2;
+      return returnValue;
+    } else if (operation.op === "move" || operation.op === "copy") {
+      returnValue.newDocument = getValueByPointer(document2, operation.from);
+      if (operation.op === "move") {
+        returnValue.removed = document2;
+      }
+      return returnValue;
+    } else if (operation.op === "test") {
+      returnValue.test = _areEquals(document2, operation.value);
+      if (returnValue.test === false) {
+        throw new JsonPatchError("Test operation failed", "TEST_OPERATION_FAILED", index, operation, document2);
+      }
+      returnValue.newDocument = document2;
+      return returnValue;
+    } else if (operation.op === "remove") {
+      returnValue.removed = document2;
+      returnValue.newDocument = null;
+      return returnValue;
+    } else if (operation.op === "_get") {
+      operation.value = document2;
+      return returnValue;
+    } else {
+      if (validateOperation) {
+        throw new JsonPatchError("Operation `op` property is not one of operations defined in RFC-6902", "OPERATION_OP_INVALID", index, operation, document2);
+      } else {
+        return returnValue;
+      }
+    }
+  } else {
+    if (!mutateDocument) {
+      document2 = _deepClone(document2);
+    }
+    var path = operation.path || "";
+    var keys = path.split("/");
+    var obj = document2;
+    var t = 1;
+    var len = keys.length;
+    var existingPathFragment = undefined;
+    var key = undefined;
+    var validateFunction = undefined;
+    if (typeof validateOperation == "function") {
+      validateFunction = validateOperation;
+    } else {
+      validateFunction = validator;
+    }
+    while (true) {
+      key = keys[t];
+      if (key && key.indexOf("~") != -1) {
+        key = unescapePathComponent(key);
+      }
+      if (banPrototypeModifications && (key == "__proto__" || key == "prototype" && t > 0 && keys[t - 1] == "constructor")) {
+        throw new TypeError("JSON-Patch: modifying `__proto__` or `constructor/prototype` prop is banned for security reasons, if this was on purpose, please set `banPrototypeModifications` flag false and pass it to this function. More info in fast-json-patch README");
+      }
+      if (validateOperation) {
+        if (existingPathFragment === undefined) {
+          if (obj[key] === undefined) {
+            existingPathFragment = keys.slice(0, t).join("/");
+          } else if (t == len - 1) {
+            existingPathFragment = operation.path;
+          }
+          if (existingPathFragment !== undefined) {
+            validateFunction(operation, 0, document2, existingPathFragment);
+          }
+        }
+      }
+      t++;
+      if (Array.isArray(obj)) {
+        if (key === "-") {
+          key = obj.length;
+        } else {
+          if (validateOperation && !isInteger(key)) {
+            throw new JsonPatchError("Expected an unsigned base-10 integer value, making the new referenced value the array element with the zero-based index", "OPERATION_PATH_ILLEGAL_ARRAY_INDEX", index, operation, document2);
+          } else if (isInteger(key)) {
+            key = ~~key;
+          }
+        }
+        if (t >= len) {
+          if (validateOperation && operation.op === "add" && key > obj.length) {
+            throw new JsonPatchError("The specified index MUST NOT be greater than the number of elements in the array", "OPERATION_VALUE_OUT_OF_BOUNDS", index, operation, document2);
+          }
+          var returnValue = arrOps[operation.op].call(operation, obj, key, document2);
+          if (returnValue.test === false) {
+            throw new JsonPatchError("Test operation failed", "TEST_OPERATION_FAILED", index, operation, document2);
+          }
+          return returnValue;
+        }
+      } else {
+        if (t >= len) {
+          var returnValue = objOps[operation.op].call(operation, obj, key, document2);
+          if (returnValue.test === false) {
+            throw new JsonPatchError("Test operation failed", "TEST_OPERATION_FAILED", index, operation, document2);
+          }
+          return returnValue;
+        }
+      }
+      obj = obj[key];
+      if (validateOperation && t < len && (!obj || typeof obj !== "object")) {
+        throw new JsonPatchError("Cannot perform operation at the desired path", "OPERATION_PATH_UNRESOLVABLE", index, operation, document2);
+      }
+    }
+  }
+}
+function applyPatch(document2, patch, validateOperation, mutateDocument, banPrototypeModifications) {
+  if (mutateDocument === undefined) {
+    mutateDocument = true;
+  }
+  if (banPrototypeModifications === undefined) {
+    banPrototypeModifications = true;
+  }
+  if (validateOperation) {
+    if (!Array.isArray(patch)) {
+      throw new JsonPatchError("Patch sequence must be an array", "SEQUENCE_NOT_AN_ARRAY");
+    }
+  }
+  if (!mutateDocument) {
+    document2 = _deepClone(document2);
+  }
+  var results = new Array(patch.length);
+  for (var i = 0, length_1 = patch.length;i < length_1; i++) {
+    results[i] = applyOperation(document2, patch[i], validateOperation, true, banPrototypeModifications, i);
+    document2 = results[i].newDocument;
+  }
+  results.newDocument = document2;
+  return results;
+}
+function applyReducer(document2, operation, index) {
+  var operationResult = applyOperation(document2, operation);
+  if (operationResult.test === false) {
+    throw new JsonPatchError("Test operation failed", "TEST_OPERATION_FAILED", index, operation, document2);
+  }
+  return operationResult.newDocument;
+}
+function validator(operation, index, document2, existingPathFragment) {
+  if (typeof operation !== "object" || operation === null || Array.isArray(operation)) {
+    throw new JsonPatchError("Operation is not an object", "OPERATION_NOT_AN_OBJECT", index, operation, document2);
+  } else if (!objOps[operation.op]) {
+    throw new JsonPatchError("Operation `op` property is not one of operations defined in RFC-6902", "OPERATION_OP_INVALID", index, operation, document2);
+  } else if (typeof operation.path !== "string") {
+    throw new JsonPatchError("Operation `path` property is not a string", "OPERATION_PATH_INVALID", index, operation, document2);
+  } else if (operation.path.indexOf("/") !== 0 && operation.path.length > 0) {
+    throw new JsonPatchError('Operation `path` property must start with "/"', "OPERATION_PATH_INVALID", index, operation, document2);
+  } else if ((operation.op === "move" || operation.op === "copy") && typeof operation.from !== "string") {
+    throw new JsonPatchError("Operation `from` property is not present (applicable in `move` and `copy` operations)", "OPERATION_FROM_REQUIRED", index, operation, document2);
+  } else if ((operation.op === "add" || operation.op === "replace" || operation.op === "test") && operation.value === undefined) {
+    throw new JsonPatchError("Operation `value` property is not present (applicable in `add`, `replace` and `test` operations)", "OPERATION_VALUE_REQUIRED", index, operation, document2);
+  } else if ((operation.op === "add" || operation.op === "replace" || operation.op === "test") && hasUndefined(operation.value)) {
+    throw new JsonPatchError("Operation `value` property is not present (applicable in `add`, `replace` and `test` operations)", "OPERATION_VALUE_CANNOT_CONTAIN_UNDEFINED", index, operation, document2);
+  } else if (document2) {
+    if (operation.op == "add") {
+      var pathLen = operation.path.split("/").length;
+      var existingPathLen = existingPathFragment.split("/").length;
+      if (pathLen !== existingPathLen + 1 && pathLen !== existingPathLen) {
+        throw new JsonPatchError("Cannot perform an `add` operation at the desired path", "OPERATION_PATH_CANNOT_ADD", index, operation, document2);
+      }
+    } else if (operation.op === "replace" || operation.op === "remove" || operation.op === "_get") {
+      if (operation.path !== existingPathFragment) {
+        throw new JsonPatchError("Cannot perform the operation at a path that does not exist", "OPERATION_PATH_UNRESOLVABLE", index, operation, document2);
+      }
+    } else if (operation.op === "move" || operation.op === "copy") {
+      var existingValue = { op: "_get", path: operation.from, value: undefined };
+      var error = validate([existingValue], document2);
+      if (error && error.name === "OPERATION_PATH_UNRESOLVABLE") {
+        throw new JsonPatchError("Cannot perform the operation from a path that does not exist", "OPERATION_FROM_UNRESOLVABLE", index, operation, document2);
+      }
+    }
+  }
+}
+function validate(sequence, document2, externalValidator) {
+  try {
+    if (!Array.isArray(sequence)) {
+      throw new JsonPatchError("Patch sequence must be an array", "SEQUENCE_NOT_AN_ARRAY");
+    }
+    if (document2) {
+      applyPatch(_deepClone(document2), _deepClone(sequence), externalValidator || true);
+    } else {
+      externalValidator = externalValidator || validator;
+      for (var i = 0;i < sequence.length; i++) {
+        externalValidator(sequence[i], i, document2, undefined);
+      }
+    }
+  } catch (e) {
+    if (e instanceof JsonPatchError) {
+      return e;
+    } else {
+      throw e;
+    }
+  }
+}
+function _areEquals(a, b) {
+  if (a === b)
+    return true;
+  if (a && b && typeof a == "object" && typeof b == "object") {
+    var arrA = Array.isArray(a), arrB = Array.isArray(b), i, length, key;
+    if (arrA && arrB) {
+      length = a.length;
+      if (length != b.length)
+        return false;
+      for (i = length;i-- !== 0; )
+        if (!_areEquals(a[i], b[i]))
+          return false;
+      return true;
+    }
+    if (arrA != arrB)
+      return false;
+    var keys = Object.keys(a);
+    length = keys.length;
+    if (length !== Object.keys(b).length)
+      return false;
+    for (i = length;i-- !== 0; )
+      if (!b.hasOwnProperty(keys[i]))
+        return false;
+    for (i = length;i-- !== 0; ) {
+      key = keys[i];
+      if (!_areEquals(a[key], b[key]))
+        return false;
+    }
+    return true;
+  }
+  return a !== a && b !== b;
+}
+var JsonPatchError = PatchError;
+var deepClone = _deepClone;
+var objOps = {
+  add: function(obj, key, document2) {
+    obj[key] = this.value;
+    return { newDocument: document2 };
+  },
+  remove: function(obj, key, document2) {
+    var removed = obj[key];
+    delete obj[key];
+    return { newDocument: document2, removed };
+  },
+  replace: function(obj, key, document2) {
+    var removed = obj[key];
+    obj[key] = this.value;
+    return { newDocument: document2, removed };
+  },
+  move: function(obj, key, document2) {
+    var removed = getValueByPointer(document2, this.path);
+    if (removed) {
+      removed = _deepClone(removed);
+    }
+    var originalValue = applyOperation(document2, { op: "remove", path: this.from }).removed;
+    applyOperation(document2, { op: "add", path: this.path, value: originalValue });
+    return { newDocument: document2, removed };
+  },
+  copy: function(obj, key, document2) {
+    var valueToCopy = getValueByPointer(document2, this.from);
+    applyOperation(document2, { op: "add", path: this.path, value: _deepClone(valueToCopy) });
+    return { newDocument: document2 };
+  },
+  test: function(obj, key, document2) {
+    return { newDocument: document2, test: _areEquals(obj[key], this.value) };
+  },
+  _get: function(obj, key, document2) {
+    this.value = obj[key];
+    return { newDocument: document2 };
+  }
+};
+var arrOps = {
+  add: function(arr, i, document2) {
+    if (isInteger(i)) {
+      arr.splice(i, 0, this.value);
+    } else {
+      arr[i] = this.value;
+    }
+    return { newDocument: document2, index: i };
+  },
+  remove: function(arr, i, document2) {
+    var removedList = arr.splice(i, 1);
+    return { newDocument: document2, removed: removedList[0] };
+  },
+  replace: function(arr, i, document2) {
+    var removed = arr[i];
+    arr[i] = this.value;
+    return { newDocument: document2, removed };
+  },
+  move: objOps.move,
+  copy: objOps.copy,
+  test: objOps.test,
+  _get: objOps._get
+};
+// node_modules/fast-json-patch/module/duplex.mjs
+var exports_duplex = {};
+__export(exports_duplex, {
+  unobserve: () => {
+    {
+      return unobserve;
+    }
+  },
+  observe: () => {
+    {
+      return observe;
+    }
+  },
+  generate: () => {
+    {
+      return generate;
+    }
+  },
+  compare: () => {
+    {
+      return compare;
+    }
+  }
+});
+var getMirror = function(obj) {
+  return beforeDict.get(obj);
+};
+var getObserverFromMirror = function(mirror, callback) {
+  return mirror.observers.get(callback);
+};
+var removeObserverFromMirror = function(mirror, observer) {
+  mirror.observers.delete(observer.callback);
+};
+function unobserve(root, observer) {
+  observer.unobserve();
+}
+function observe(obj, callback) {
+  var patches = [];
+  var observer;
+  var mirror = getMirror(obj);
+  if (!mirror) {
+    mirror = new Mirror(obj);
+    beforeDict.set(obj, mirror);
+  } else {
+    var observerInfo = getObserverFromMirror(mirror, callback);
+    observer = observerInfo && observerInfo.observer;
+  }
+  if (observer) {
+    return observer;
+  }
+  observer = {};
+  mirror.value = _deepClone(obj);
+  if (callback) {
+    observer.callback = callback;
+    observer.next = null;
+    var dirtyCheck = function() {
+      generate(observer);
+    };
+    var fastCheck = function() {
+      clearTimeout(observer.next);
+      observer.next = setTimeout(dirtyCheck);
+    };
+    if (typeof window !== "undefined") {
+      window.addEventListener("mouseup", fastCheck);
+      window.addEventListener("keyup", fastCheck);
+      window.addEventListener("mousedown", fastCheck);
+      window.addEventListener("keydown", fastCheck);
+      window.addEventListener("change", fastCheck);
+    }
+  }
+  observer.patches = patches;
+  observer.object = obj;
+  observer.unobserve = function() {
+    generate(observer);
+    clearTimeout(observer.next);
+    removeObserverFromMirror(mirror, observer);
+    if (typeof window !== "undefined") {
+      window.removeEventListener("mouseup", fastCheck);
+      window.removeEventListener("keyup", fastCheck);
+      window.removeEventListener("mousedown", fastCheck);
+      window.removeEventListener("keydown", fastCheck);
+      window.removeEventListener("change", fastCheck);
+    }
+  };
+  mirror.observers.set(callback, new ObserverInfo(callback, observer));
+  return observer;
+}
+function generate(observer, invertible) {
+  if (invertible === undefined) {
+    invertible = false;
+  }
+  var mirror = beforeDict.get(observer.object);
+  _generate(mirror.value, observer.object, observer.patches, "", invertible);
+  if (observer.patches.length) {
+    applyPatch(mirror.value, observer.patches);
+  }
+  var temp = observer.patches;
+  if (temp.length > 0) {
+    observer.patches = [];
+    if (observer.callback) {
+      observer.callback(temp);
+    }
+  }
+  return temp;
+}
+var _generate = function(mirror, obj, patches, path, invertible) {
+  if (obj === mirror) {
+    return;
+  }
+  if (typeof obj.toJSON === "function") {
+    obj = obj.toJSON();
+  }
+  var newKeys = _objectKeys(obj);
+  var oldKeys = _objectKeys(mirror);
+  var changed = false;
+  var deleted = false;
+  for (var t = oldKeys.length - 1;t >= 0; t--) {
+    var key = oldKeys[t];
+    var oldVal = mirror[key];
+    if (hasOwnProperty(obj, key) && !(obj[key] === undefined && oldVal !== undefined && Array.isArray(obj) === false)) {
+      var newVal = obj[key];
+      if (typeof oldVal == "object" && oldVal != null && typeof newVal == "object" && newVal != null && Array.isArray(oldVal) === Array.isArray(newVal)) {
+        _generate(oldVal, newVal, patches, path + "/" + escapePathComponent(key), invertible);
+      } else {
+        if (oldVal !== newVal) {
+          changed = true;
+          if (invertible) {
+            patches.push({ op: "test", path: path + "/" + escapePathComponent(key), value: _deepClone(oldVal) });
+          }
+          patches.push({ op: "replace", path: path + "/" + escapePathComponent(key), value: _deepClone(newVal) });
+        }
+      }
+    } else if (Array.isArray(mirror) === Array.isArray(obj)) {
+      if (invertible) {
+        patches.push({ op: "test", path: path + "/" + escapePathComponent(key), value: _deepClone(oldVal) });
+      }
+      patches.push({ op: "remove", path: path + "/" + escapePathComponent(key) });
+      deleted = true;
+    } else {
+      if (invertible) {
+        patches.push({ op: "test", path, value: mirror });
+      }
+      patches.push({ op: "replace", path, value: obj });
+      changed = true;
+    }
+  }
+  if (!deleted && newKeys.length == oldKeys.length) {
+    return;
+  }
+  for (var t = 0;t < newKeys.length; t++) {
+    var key = newKeys[t];
+    if (!hasOwnProperty(mirror, key) && obj[key] !== undefined) {
+      patches.push({ op: "add", path: path + "/" + escapePathComponent(key), value: _deepClone(obj[key]) });
+    }
+  }
+};
+function compare(tree1, tree2, invertible) {
+  if (invertible === undefined) {
+    invertible = false;
+  }
+  var patches = [];
+  _generate(tree1, tree2, patches, "", invertible);
+  return patches;
+}
+/*!
+ * https://github.com/Starcounter-Jack/JSON-Patch
+ * (c) 2017-2021 Joachim Wester
+ * MIT license
+ */
+var beforeDict = new WeakMap;
+var Mirror = function() {
+  function Mirror2(obj) {
+    this.observers = new Map;
+    this.obj = obj;
+  }
+  return Mirror2;
+}();
+var ObserverInfo = function() {
+  function ObserverInfo2(callback, observer) {
+    this.callback = callback;
+    this.observer = observer;
+  }
+  return ObserverInfo2;
+}();
+// node_modules/fast-json-patch/index.mjs
+var fast_json_patch_default = Object.assign({}, exports_core, exports_duplex, {
+  JsonPatchError: PatchError,
+  deepClone: _deepClone,
+  escapePathComponent,
+  unescapePathComponent
+});
+
+// node_modules/@lenra/client/dist/route.js
+var { applyPatch: applyPatch2 } = fast_json_patch_default;
+
+class LenraRoute {
+  constructor(socket, route, callback) {
+    this.json = undefined;
+    this.callback = callback;
+    this.route = route;
+    this.channel = socket.channel("route:" + this.route, { mode: "json" });
+    this.channel.on("ui", (data) => {
+      this.json = data;
+      console.log(`New UI from ${this.route}`, this.json);
+      this.notify();
+    });
+    this.channel.on("patchUi", (payload) => {
+      this.json = applyPatch2({ ...this.json }, payload.patch).newDocument;
+      console.log(`New Patch from ${this.route}`, payload.patch, this.json);
+      this.notify();
+    });
+    this.channel.join().receive("ok", (resp) => {
+      console.log(`${this.route} joined successfully`, resp);
+    }).receive("error", (resp) => {
+      console.log(`Unable to join ${this.route}`, resp);
+    });
+  }
+  callListener(listenerCall) {
+    return new Promise((resolve, reject) => {
+      let call = {
+        ...listenerCall
+      };
+      this.channel.push("run", call).receive("ok", (_) => {
+        resolve();
+      }).receive("error", (reasons) => {
+        console.error(reasons);
+        reject(new Error("An error occured while running the listener"));
+      });
+    });
+  }
+  notify() {
+    if (!!this.json) {
+      this.callback(this.json);
+    }
+  }
+  close() {
+    console.log(`Leaving the channel ${this.route}`);
+    this.channel.leave();
+  }
+}
+
+// node_modules/@lenra/client/dist/socket.js
+class LenraSocket {
+  constructor(opts) {
+    this.opts = opts;
+    let params = {
+      token: opts.token,
+      app: opts.appName
+    };
+    this.socket = new Socket(opts.socketEndpoint, { params });
+  }
+  connect() {
+    return new Promise((resolve, reject) => {
+      this.socket.onOpen(() => {
+        resolve();
+      });
+      this.socket.onError(() => {
+        reject();
+      });
+      this.socket.connect();
+      return this;
+    });
+  }
+  close() {
+    if (this.socket)
+      this.socket.disconnect();
+  }
+  route(routeName, callback) {
+    return new LenraRoute(this.socket, routeName, callback);
+  }
+  isConnected() {
+    return !!this.socket;
+  }
+}
+
+// node_modules/@lenra/client/dist/oauth2.js
+var oauth2_client = __toESM(require_oauth2_client_min(), 1);
+
+class LenraOAuth2Client {
+  constructor(opts) {
+    this.opts = opts;
+    this.client = new oauth2_client.OAuth2Client({
+      clientId: opts.clientId,
+      tokenEndpoint: opts.tokenUrl,
+      authorizationEndpoint: opts.authorizeUrl
+    });
+    this.popup = undefined;
+  }
+  async authenticate() {
+    let access_token = sessionStorage.getItem("access_token");
+    if (access_token === null) {
+      const codeVerifier = await oauth2_client.generateCodeVerifier();
+      const authUrl = await this.client.authorizationCode.getAuthorizeUri({
+        redirectUri: this.opts.redirectUri,
+        codeVerifier,
+        scope: this.opts.scopes
+      });
+      this.popup = new OAuthPopup(authUrl);
+      const popupLocation = await this.popup.open();
+      const token = await this.client.authorizationCode.getTokenFromCodeRedirect(popupLocation, {
+        redirectUri: this.opts.redirectUri,
+        codeVerifier
+      });
+      sessionStorage.setItem("access_token", token.accessToken);
+      access_token = token.accessToken;
+    }
+    return access_token;
+  }
+}
+
+class OAuthPopup {
+  constructor(url) {
+    this.id = "LenraOauth2Popup";
+    this.popupOptions = "popup=true";
+    this.iid = undefined;
+    this.promise = undefined;
+    this.window = null;
+    this.url = url;
+  }
+  open() {
+    this.window = window.open(this.url, this.id, this.popupOptions);
+    return this.listenMessage();
+  }
+  listenMessage() {
+    const self2 = this;
+    return new Promise((resolve, reject) => {
+      const handleMessage = (event) => {
+        const href = self2.window.location.href;
+        window.removeEventListener("message", handleMessage);
+        self2.close();
+        resolve(href);
+      };
+      window.addEventListener("message", handleMessage);
+    });
+  }
+  close() {
+    this.cancel();
+    this.window?.close();
+  }
+  cancel() {
+    if (this.iid) {
+      window.clearInterval(this.iid);
+      this.iid = undefined;
+    }
+  }
+}
+
+// node_modules/@lenra/client/dist/application.js
+class LenraApp {
+  constructor(opts) {
+    opts.oauthBaseUri = opts.oauthBaseUri ?? (opts.isProd ? "https://api.lenra.io" : "http://localhost:4444");
+    opts.redirectUri = opts.redirectUri ?? window.location.origin + "/redirect.html";
+    opts.scopes = opts.scopes ?? ["app:websocket"];
+    this.lenraAppOpts = opts;
+    const oAuth2Opts = {
+      clientId: opts.clientId,
+      redirectUri: opts.redirectUri,
+      scopes: opts.scopes,
+      authorizeUrl: opts.oauthBaseUri + "/oauth2/auth",
+      tokenUrl: opts.oauthBaseUri + "/oauth2/token"
+    };
+    this.lenraOAuth2Client = new LenraOAuth2Client(oAuth2Opts);
+  }
+  async connect() {
+    const accessToken = await this.lenraOAuth2Client.authenticate();
+    const socketOpts = {
+      appName: this.lenraAppOpts.appName,
+      token: accessToken,
+      socketEndpoint: this.lenraAppOpts.socketEndpoint ?? (this.lenraAppOpts.isProd ? "wss://api.lenra.io/socket" : "ws://localhost:4001/socket")
+    };
+    this.lenraSocket = new LenraSocket(socketOpts);
+    return this.lenraSocket.connect().then(() => this.lenraSocket);
+  }
+  route(routeName, callback) {
+    if (!this.lenraSocket)
+      throw new Error("Lenra app is not connected. Please call the connect function first.");
+    return this.lenraSocket.route(routeName, callback);
+  }
+  disconnect() {
+    this.lenraSocket?.close();
+  }
+}
 
 // src/containers/board/Board.jsx
 var import_react6 = __toESM(require_react(), 1);
@@ -21372,12 +23578,7 @@ var Ue = function() {
 typeof navigator != "undefined" && navigator.product === "ReactNative" && console.warn("It looks like you've imported 'styled-components' on React Native.\nPerhaps you're looking to import 'styled-components/native'?\nRead more about this at https://www.styled-components.com/docs/basics#react-native"), window["__styled-components-init__"] = window["__styled-components-init__"] || 0, window["__styled-components-init__"] === 1 && console.warn("It looks like there are several instances of 'styled-components' initialized in this application. This may cause dynamic styles to not render properly, errors during the rehydration process, a missing theme prop, and makes your application bigger without good reason.\n\nSee https://s-c.sh/2BAXzed for more info."), window["__styled-components-init__"] += 1;
 var styled_components_browser_esm_default = qe;
 
-// src/constants.js
-var MIN_WIDTH = 9;
-var MAX_WIDTH = 20;
-var MIN_HEIGHT = 9;
-var MAX_HEIGHT = 20;
-var MIN_MINES = 10;
+// app-lenra/src/constants.js
 var CELL_SIZE = 42;
 var CELL_MARGIN = 2;
 var GAME = {
@@ -21407,17 +23608,32 @@ var Wrapper = styled_components_browser_esm_default.div`
 
 // src/components/board/Board.jsx
 var jsx_dev_runtime = __toESM(require_jsx_dev_runtime(), 1);
-var Board = ({
-  width,
-  height,
-  onRightClickBoard
-}) => {
+var Board = (props) => {
+  const [data, setData] = import_react2.useState(null);
+  const [route3, setRoute] = import_react2.useState(null);
+  console.log("props", props);
+  import_react2.useEffect(() => {
+    const lenraApp = window.lenraApp;
+    setRoute(lenraApp.route(`/games/${props.gameId}/board`, (data2) => {
+      setData(data2);
+    }));
+  }, []);
+  const onRightClickBoard = (e2) => {
+    e2.preventDefault();
+  };
+  if (data === null) {
+    return jsx_dev_runtime.jsxDEV(Wrapper, {
+      children: jsx_dev_runtime.jsxDEV("p", {
+        children: "Loading board..."
+      }, undefined, false, undefined, this)
+    }, undefined, false, undefined, this);
+  }
   return jsx_dev_runtime.jsxDEV(Wrapper, {
-    widthSize: width,
+    widthSize: data.width,
     onContextMenu: onRightClickBoard,
-    children: Array(width * height).fill().map((v2, i2) => jsx_dev_runtime.jsxDEV(Cell_default, {
-      x: i2 % width,
-      y: Math.floor(i2 / width)
+    children: Array(data.width * data.height).fill().map((v2, i2) => jsx_dev_runtime.jsxDEV(Cell_default, {
+      x: i2 % data.width,
+      y: Math.floor(i2 / data.width)
     }, i2, false, undefined, this))
   }, undefined, false, undefined, this);
 };
@@ -21539,7 +23755,6 @@ var Slider = styled_components_browser_esm_default.input.attrs({
 		${thumbCSS};
 	}
 `;
-var Slider_default = Slider;
 // src/components/settings/SettingsStyle.js
 var Wrapper2 = styled_components_browser_esm_default.div`
 	margin-top: 30px;
@@ -21566,74 +23781,6 @@ var Mines = styled_components_browser_esm_default.div`
 
 // src/components/settings/Settings.jsx
 var jsx_dev_runtime3 = __toESM(require_jsx_dev_runtime(), 1);
-var Settings = ({
-  width,
-  height,
-  mineCount,
-  maxMineCount,
-  onChangeWidth,
-  onChangeHeight,
-  onChangeMines,
-  onClickSet
-}) => {
-  return jsx_dev_runtime3.jsxDEV(Wrapper2, {
-    children: [
-      jsx_dev_runtime3.jsxDEV(WidthWrapper, {
-        children: [
-          jsx_dev_runtime3.jsxDEV(Width, {
-            children: [
-              "Width: ",
-              width
-            ]
-          }, undefined, true, undefined, this),
-          jsx_dev_runtime3.jsxDEV(Slider_default, {
-            min: MIN_WIDTH,
-            max: MAX_WIDTH,
-            value: width,
-            onChange: onChangeWidth
-          }, undefined, false, undefined, this)
-        ]
-      }, undefined, true, undefined, this),
-      jsx_dev_runtime3.jsxDEV(HeightWrapper, {
-        children: [
-          jsx_dev_runtime3.jsxDEV(Height, {
-            children: [
-              "Height: ",
-              height
-            ]
-          }, undefined, true, undefined, this),
-          jsx_dev_runtime3.jsxDEV(Slider_default, {
-            min: MIN_HEIGHT,
-            max: MAX_HEIGHT,
-            value: height,
-            onChange: onChangeHeight
-          }, undefined, false, undefined, this)
-        ]
-      }, undefined, true, undefined, this),
-      jsx_dev_runtime3.jsxDEV(MinesWrapper, {
-        children: [
-          jsx_dev_runtime3.jsxDEV(Mines, {
-            children: [
-              "Mines: ",
-              mineCount
-            ]
-          }, undefined, true, undefined, this),
-          jsx_dev_runtime3.jsxDEV(Slider_default, {
-            min: MIN_MINES,
-            max: maxMineCount,
-            value: mineCount,
-            onChange: onChangeMines
-          }, undefined, false, undefined, this)
-        ]
-      }, undefined, true, undefined, this),
-      jsx_dev_runtime3.jsxDEV(Button_default, {
-        onClick: onClickSet,
-        children: "Set"
-      }, undefined, false, undefined, this)
-    ]
-  }, undefined, true, undefined, this);
-};
-var Settings_default = Settings;
 // src/components/status/Status.jsx
 var import_react5 = __toESM(require_react(), 1);
 
@@ -21657,7 +23804,7 @@ var RestartButton = styled_components_browser_esm_default.span`
 var SettingsButton = styled_components_browser_esm_default.span`
 	cursor: pointer;
 `;
-var Timer = styled_components_browser_esm_default.div`
+var Timer2 = styled_components_browser_esm_default.div`
 	flex: 1;
 	text-align: right;
 `;
@@ -21697,7 +23844,7 @@ var Status = ({
           }, undefined, false, undefined, this)
         ]
       }, undefined, true, undefined, this),
-      jsx_dev_runtime4.jsxDEV(Timer, {
+      jsx_dev_runtime4.jsxDEV(Timer2, {
         children: [
           "\uD83D\uDD59 ",
           elapsedTime
@@ -21709,22 +23856,6 @@ var Status = ({
 var Status_default = Status;
 // src/containers/board/Board.jsx
 var jsx_dev_runtime5 = __toESM(require_jsx_dev_runtime(), 1);
-var BoardContainer = () => {
-  const enableSettings = false;
-  const width = MIN_WIDTH;
-  const height = MIN_HEIGHT;
-  const onRightClickBoard = import_react6.useCallback((e2) => {
-    e2.preventDefault();
-  }, []);
-  return jsx_dev_runtime5.jsxDEV(jsx_dev_runtime5.Fragment, {
-    children: !enableSettings && jsx_dev_runtime5.jsxDEV(Board_default, {
-      width,
-      height,
-      onRightClickBoard
-    }, undefined, false, undefined, this)
-  }, undefined, false, undefined, this);
-};
-var Board_default2 = BoardContainer;
 // src/containers/board/Cell.jsx
 var import_react7 = __toESM(require_react(), 1);
 var jsx_dev_runtime6 = __toESM(require_jsx_dev_runtime(), 1);
@@ -21805,61 +23936,13 @@ var Cell_default = import_react7.memo(CellContainer);
 // src/containers/settings/Settings.jsx
 var import_react8 = __toESM(require_react(), 1);
 var jsx_dev_runtime7 = __toESM(require_jsx_dev_runtime(), 1);
-var hideSettings = () => {
-  throw new Error("Not implemented");
-};
-var setGame = () => {
-  throw new Error("Not implemented");
-};
-var restartGame = () => {
-  throw new Error("Not implemented");
-};
-var SettingsContainer = () => {
-  const enableSettings = false;
-  const [width, setWidth] = import_react8.useState(MIN_WIDTH);
-  const [height, setHeight] = import_react8.useState(MIN_HEIGHT);
-  const [mineCount, setMineCount] = import_react8.useState(MIN_MINES);
-  import_react8.useEffect(() => {
-    const maxMineCount = (width - 1) * (height - 1);
-    if (mineCount > maxMineCount) {
-      setMineCount(maxMineCount);
-    }
-  }, [width, height, mineCount]);
-  const onChangeWidth = import_react8.useCallback((e2) => {
-    setWidth(parseInt(e2.target.value));
-  }, []);
-  const onChangeHeight = import_react8.useCallback((e2) => {
-    setHeight(parseInt(e2.target.value));
-  }, []);
-  const onChangeMines = import_react8.useCallback((e2) => {
-    setMineCount(parseInt(e2.target.value));
-  }, []);
-  const onClickSet = import_react8.useCallback(() => {
-    setGame(width, height, mineCount);
-    restartGame();
-    hideSettings();
-  }, [width, height, mineCount]);
-  return jsx_dev_runtime7.jsxDEV(jsx_dev_runtime7.Fragment, {
-    children: enableSettings && jsx_dev_runtime7.jsxDEV(Settings_default, {
-      width,
-      height,
-      mineCount,
-      maxMineCount: (width - 1) * (height - 1),
-      onChangeWidth,
-      onChangeHeight,
-      onChangeMines,
-      onClickSet
-    }, undefined, false, undefined, this)
-  }, undefined, false, undefined, this);
-};
-var Settings_default2 = SettingsContainer;
 // src/containers/status/Status.jsx
 var import_react9 = __toESM(require_react(), 1);
 var jsx_dev_runtime8 = __toESM(require_jsx_dev_runtime(), 1);
 var showSettings = () => {
   throw new Error("Not implemented");
 };
-var restartGame2 = () => {
+var restartGame = () => {
   throw new Error("Not implemented");
 };
 var updateElapsedTime = () => {
@@ -21894,7 +23977,7 @@ var StatusContainer = () => {
     }
   }, [gameState]);
   const onClickRestart = import_react9.useCallback(() => {
-    restartGame2();
+    restartGame();
   }, []);
   const onClickSettings = import_react9.useCallback(() => {
     showSettings();
@@ -21924,22 +24007,108 @@ var Title = styled_components_browser_esm_default.h1`
 	text-align: center;
 `;
 
-// src/App.jsx
+// src/components/gameCard/GameCard.jsx
+var import_react10 = __toESM(require_react(), 1);
+
+// src/components/gameCard/GameCardStyle.js
+var Wrapper5 = styled_components_browser_esm_default.div`
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin: 10px auto 0 auto;
+	width: ${({ widthSize }) => widthSize * (CELL_SIZE + CELL_MARGIN * 2)}px;
+`;
+
+// src/components/gameCard/GameCard.jsx
 var jsx_dev_runtime9 = __toESM(require_jsx_dev_runtime(), 1);
-var App = () => {
-  return jsx_dev_runtime9.jsxDEV(Wrapper4, {
+var GameCard = ({
+  id,
+  onClick
+}) => {
+  return jsx_dev_runtime9.jsxDEV(Wrapper5, {
+    onClick,
     children: [
-      jsx_dev_runtime9.jsxDEV(Title, {
-        children: "Minesweeper Game in React"
-      }, undefined, false, undefined, this),
-      jsx_dev_runtime9.jsxDEV(Settings_default2, {}, undefined, false, undefined, this),
-      jsx_dev_runtime9.jsxDEV(Status_default2, {}, undefined, false, undefined, this),
-      jsx_dev_runtime9.jsxDEV(Board_default2, {}, undefined, false, undefined, this)
+      "Game ",
+      id
+    ]
+  }, id, true, undefined, this);
+};
+var GameCard_default = GameCard;
+
+// src/App.jsx
+var jsx_dev_runtime10 = __toESM(require_jsx_dev_runtime(), 1);
+var App = () => {
+  const [connected, setConnected] = import_react11.useState(false);
+  const [data, setData] = import_react11.useState(null);
+  const [route3, setRoute] = import_react11.useState(null);
+  const [currentGame, setCurrentGame] = import_react11.useState(null);
+  function createGame() {
+    route3.callListener(data.onCreateGame);
+  }
+  import_react11.useEffect(() => {
+    const lenraApp = window.lenraApp;
+    console.log("Connecting to Lenra...");
+    lenraApp.connect().then(() => {
+      console.log("Connected to Lenra");
+      setConnected(true);
+      setRoute(lenraApp.route("/games", (data2) => {
+        setData(data2);
+      }));
+    }).catch((error) => {
+      console.error("Failed to connect to Lenra", error);
+      setConnected(false);
+    });
+  }, []);
+  if (!connected) {
+    return jsx_dev_runtime10.jsxDEV(Wrapper4, {
+      children: jsx_dev_runtime10.jsxDEV(Title, {
+        children: "Connecting to Lenra..."
+      }, undefined, false, undefined, this)
+    }, undefined, false, undefined, this);
+  }
+  if (data === null) {
+    return jsx_dev_runtime10.jsxDEV(Wrapper4, {
+      children: jsx_dev_runtime10.jsxDEV(Title, {
+        children: "Loading games..."
+      }, undefined, false, undefined, this)
+    }, undefined, false, undefined, this);
+  }
+  if (currentGame) {
+    return jsx_dev_runtime10.jsxDEV(Wrapper4, {
+      children: [
+        jsx_dev_runtime10.jsxDEV(Status_default2, {
+          gameId: currentGame
+        }, undefined, false, undefined, this),
+        jsx_dev_runtime10.jsxDEV(Board_default, {
+          gameId: currentGame
+        }, undefined, false, undefined, this)
+      ]
+    }, undefined, true, undefined, this);
+  }
+  return jsx_dev_runtime10.jsxDEV(Wrapper4, {
+    children: [
+      data.games.map((game) => jsx_dev_runtime10.jsxDEV(GameCard_default, {
+        id: game.id,
+        onClick: () => setCurrentGame(game.id)
+      }, game.id, false, undefined, this)),
+      jsx_dev_runtime10.jsxDEV(Button_default, {
+        onClick: createGame,
+        children: "Create game"
+      }, undefined, false, undefined, this)
     ]
   }, undefined, true, undefined, this);
 };
 var App_default = App;
 
 // src/index.jsx
-var jsx_dev_runtime10 = __toESM(require_jsx_dev_runtime(), 1);
-import_react_dom.default.render(jsx_dev_runtime10.jsxDEV(App_default, {}, undefined, false, undefined, this), document.getElementById("react-root"));
+var jsx_dev_runtime11 = __toESM(require_jsx_dev_runtime(), 1);
+if (window.location.pathname === "/redirect.html") {
+  window.onload = function() {
+    window.opener.postMessage(window.location.href, `${window.location.protocol}//${window.location.host}`);
+  };
+} else {
+  window.lenraApp = new LenraApp({
+    clientId: "XXX-XXX-XXX"
+  });
+  import_react_dom.default.render(jsx_dev_runtime11.jsxDEV(App_default, {}, undefined, false, undefined, this), document.getElementById("react-root"));
+}

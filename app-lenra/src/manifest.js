@@ -1,5 +1,5 @@
 import { View } from "@lenra/app";
-import { Counter } from "./classes/Counter.js";
+import { Game } from "./classes/Game.js";
 
 /**
  * @type {import("@lenra/app").Manifest["json"]}
@@ -7,15 +7,16 @@ import { Counter } from "./classes/Counter.js";
 export const json = {
     routes: [
         {
-            path: "/counter/global",
-            view: View("counter").find(Counter, {
-                "user": "global"
+            path: "/games",
+            view: View("games").find(Game, {
+                player: "@me"
             })
         },
         {
-            path: "/counter/me",
-            view: View("counter").find(Counter, {
-                "user": "@me"
+            path: "/games/:id/board",
+            view: View("board").find(Game, {
+                _id: "@route.id",
+                player: "@me"
             })
         }
     ]

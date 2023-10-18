@@ -1,5 +1,5 @@
 import React from 'react';
-import { MIN_WIDTH, MAX_WIDTH, MIN_HEIGHT, MAX_HEIGHT, MIN_MINES } from '../../constants';
+import { MIN_WIDTH, MAX_WIDTH, MIN_HEIGHT, MAX_HEIGHT, MIN_MINES } from '../../../app-lenra/src/constants';
 import { 
 	Slider,
 	Button

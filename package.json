@@ -4,8 +4,10 @@
   "description": "Minesweeper Game",
   "main": "./src/index.jsx",
   "scripts": {
-    "start": "bun server.js",
-    "build": "bun build src/index.jsx --outfile=build/main.js && cp public/* build/"
+    "start": "bun --hot server.js",
+    "dev": "cp public/* build/ && bun run build:watch",
+    "build": "bun build src/index.jsx --outfile=build/main.js && cp public/* build/",
+    "build:watch": "bun build src/index.jsx --outfile=build/main.js --watch"
   },
   "repository": {
     "type": "git",
@@ -18,6 +20,7 @@
   },
   "homepage": "https://github.com/nbsp1221/react-minesweeper-game#readme",
   "dependencies": {
+    "@lenra/client": "^1.0.0",
     "immer": "8.0.4",
     "react": "16.14.0",
     "react-dom": "16.14.0",

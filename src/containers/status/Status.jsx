@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback } from 'react';
-import { GAME } from '../../constants';
+import { GAME } from '../../../app-lenra/src/constants';
 import { Status } from '../../components';
 
 const showSettings = () => { throw new Error("Not implemented"); };

@@ -1,8 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import { Board } from '../../components';
-import { MIN_HEIGHT, MIN_WIDTH } from '../../constants.js';
+import { MIN_HEIGHT, MIN_WIDTH } from '../../../app-lenra/src/constants.js';
 
-const BoardContainer = () => {
+const BoardContainer = ({gameId}) => {
+
 	const enableSettings = false;
 	const width = MIN_WIDTH;
 	const height = MIN_HEIGHT;

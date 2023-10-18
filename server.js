@@ -6,10 +6,11 @@ Bun.serve({
     port: 3000,
     async fetch(req) {
         console.log("req", req);
-      let filePath = BASE_PATH + new URL(req.url).pathname;
-      if (filePath.endsWith("/")) {
-        filePath += "index.html";
+      let filePath = new URL(req.url).pathname;
+      if (filePath.endsWith("/") || filePath.endsWith(".html")) {
+        filePath = "/index.html";
       }
+      filePath = BASE_PATH + filePath;
       const file = Bun.file(filePath);
       if (file.exists()) {
         return new Response(file);

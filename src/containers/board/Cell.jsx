@@ -1,5 +1,5 @@
 import React, { memo, useCallback } from 'react';
-import { GAME, CODES } from '../../constants';
+import { GAME, CODES } from '../../../app-lenra/src/constants';
 import { Cell } from '../../components';
 
 const openCell = () => { throw new Error("Not implemented"); };

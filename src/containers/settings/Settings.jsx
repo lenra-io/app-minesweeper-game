@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { MIN_WIDTH, MIN_HEIGHT, MIN_MINES } from '../../constants';
+import { MIN_WIDTH, MIN_HEIGHT, MIN_MINES } from '../../../app-lenra/src/constants';
 import { Settings } from '../../components';
 
 
