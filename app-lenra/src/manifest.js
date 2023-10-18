@@ -20,15 +20,3 @@ export const json = {
         }
     ]
 };
-
-/**
- * @type {import("@lenra/app").Manifest["lenra"]}
- */
-export const lenra = {
-    routes: [
-        {
-            path: "/",
-            view: View("lenra.main")
-        }
-    ]
-};
