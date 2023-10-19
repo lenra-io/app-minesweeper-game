@@ -11,7 +11,7 @@ export const LenraMiddleware = store => {
             case lenra.CONNECT:
                 app.connect().then(s => {
                     socket = s;
-                    dispatch({ type: lenra.CONNECTED })
+                    store.dispatch({ type: lenra.CONNECTED })
                 });
                 break;
         }
