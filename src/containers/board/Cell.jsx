@@ -1,7 +1,7 @@
 import React, { memo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GAME, CODES } from '../../constants';
-import { openCell, rotateCellState } from '../../store/modules/control';
+import { openCell, rotateCellState } from '../../store/modules/game';
 import { Cell } from '../../components';
 
 const CellContainer = ({
@@ -9,8 +9,8 @@ const CellContainer = ({
 	y
 }) => {
 	const dispatch = useDispatch();
-	const gameState = useSelector(rootState => rootState.control.gameState);
-	const cellCode = useSelector(rootState => rootState.control.boardData[y][x]);
+	const gameState = useSelector(rootState => rootState.game.gameState);
+	const cellCode = useSelector(rootState => rootState.game.boardData[y][x]);
 
 	const getCellText = useCallback((code) => {
 		switch (code) {

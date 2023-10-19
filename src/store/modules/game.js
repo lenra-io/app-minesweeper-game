@@ -13,13 +13,13 @@ import {
 	getFlagIncDec
 } from '../../lib/minesweeper';
 
-const SHOW_SETTINGS = 'control/SHOW_SETTINGS';
-const HIDE_SETTINGS = 'control/HIDE_SETTINGS';
-const SET_GAME = 'control/SET_GAME';
-const RESTART_GAME = 'control/RESTART_GAME';
-const UPDATE_ELAPSED_TIME = 'control/UPDATE_ELAPSED_TIME';
-const OPEN_CELL = 'control/OPEN_CELL';
-const ROTATE_CELL_STATE = 'control/ROTATE_CELL_STATE';
+const SHOW_SETTINGS = 'game/SHOW_SETTINGS';
+const HIDE_SETTINGS = 'game/HIDE_SETTINGS';
+const SET_GAME = 'game/SET_GAME';
+const RESTART_GAME = 'game/RESTART_GAME';
+const UPDATE_ELAPSED_TIME = 'game/UPDATE_ELAPSED_TIME';
+const OPEN_CELL = 'game/OPEN_CELL';
+const ROTATE_CELL_STATE = 'game/ROTATE_CELL_STATE';
 
 export const showSettings = () => ({ type: SHOW_SETTINGS });
 export const hideSettings = () => ({ type: HIDE_SETTINGS });
@@ -30,6 +30,7 @@ export const openCell = (x, y) => ({ type: OPEN_CELL, x, y });
 export const rotateCellState = (x, y) => ({ type: ROTATE_CELL_STATE, x, y });
 
 const initialState = {
+	currentGame: null,
 	enableSettings: false,
 	gameState: GAME.READY,
 	enableTimer: false,

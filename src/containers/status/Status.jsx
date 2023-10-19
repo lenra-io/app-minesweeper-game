@@ -1,17 +1,17 @@
 import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GAME } from '../../constants';
-import { showSettings, restartGame, updateElapsedTime } from '../../store/modules/control';
+import { showSettings, restartGame, updateElapsedTime } from '../../store/modules/game';
 import { Status } from '../../components';
 
 const StatusContainer = () => {
 	const dispatch = useDispatch();
-	const enableSettings = useSelector(rootState => rootState.control.enableSettings);
-	const gameState = useSelector(rootState => rootState.control.gameState);
-	const enableTimer = useSelector(rootState => rootState.control.enableTimer);
-	const elapsedTime = useSelector(rootState => rootState.control.elapsedTime);
-	const mineCount = useSelector(rootState => rootState.control.mineCount);
-	const flagCount = useSelector(rootState => rootState.control.flagCount);
+	const enableSettings = useSelector(rootState => rootState.game.enableSettings);
+	const gameState = useSelector(rootState => rootState.game.gameState);
+	const enableTimer = useSelector(rootState => rootState.game.enableTimer);
+	const elapsedTime = useSelector(rootState => rootState.gameapsedTime);
+	const mineCount = useSelector(rootState => rootState.gameneCount);
+	const flagCount = useSelector(rootState => rootState.game.flagCount);
 
 	useEffect(() => {
 		let gameTimer;

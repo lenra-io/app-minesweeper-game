@@ -8,14 +8,16 @@ import {
 	Wrapper,
 	Title
 } from './AppStyle';
+import AppContainer from './containers/app/App.jsx';
 
 const App = () => {
 	return (
 		<Wrapper>
 			<Title>Minesweeper Game in React</Title>
-			<SettingsContainer />
+			<AppContainer />
+			{/* <SettingsContainer />
 			<StatusContainer />
-			<BoardContainer />
+			<BoardContainer /> */}
 		</Wrapper>
 	);
 };
