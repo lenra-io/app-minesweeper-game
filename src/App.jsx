@@ -15,9 +15,6 @@ const App = () => {
 		<Wrapper>
 			<Title>Minesweeper Game in React</Title>
 			<AppContainer />
-			{/* <SettingsContainer />
-			<StatusContainer />
-			<BoardContainer /> */}
 		</Wrapper>
 	);
 };

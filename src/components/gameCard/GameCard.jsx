@@ -9,7 +9,7 @@ const GameCard = ({
 	onClick,
 }) => {
 	return (
-		<Wrapper key={id} onClick={onClick}>
+		<Wrapper onClick={onClick}>
 			Game {id}
 		</Wrapper>
 	);

@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import { default as gameReducer } from './game';
-import { default as lenraReducer } from './lenra';
+import { default as appReducer } from './app';
 
 export const rootReducer = combineReducers({
-	lenra: lenraReducer,
-	game: gameReducer
+	app: appReducer,
+	game: gameReducer,
 });

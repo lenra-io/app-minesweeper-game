@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { hideSettings, setGame, restartGame } from '../../store/modules/game';
-import { Settings } from '../../components';
-import { connect } from '../../store/modules/lenra.js';
+import Button from '../../components/common/Button.js';
+import GameListContainer from '../gameList/GameList.jsx';
+import GameContainer from '../game/Game.jsx';
+import { connect } from '../../store/middlewares/lenra.js';
 
 const AppContainer = () => {
 	const dispatch = useDispatch();
-	const connecting = useSelector(rootState => rootState.lenra.connecting);
-	const connected = useSelector(rootState => rootState.lenra.connected);
+	const connecting = useSelector(rootState => rootState.app.connecting);
+	const connected = useSelector(rootState => rootState.app.connected);
+	const currentGameId = useSelector(rootState => rootState.app.currentGameId);
 
 	const onConnect = useCallback((e) => {
 		dispatch(connect());
@@ -15,7 +17,7 @@ const AppContainer = () => {
 
 	if (!connecting && !connected) {
 		return (
-			<button onClick={onConnect}>Connect</button>
+			<Button onClick={onConnect}>Connect</Button>
 		);
 	}
 	else if (connecting) {
@@ -23,9 +25,13 @@ const AppContainer = () => {
 			<div>Loading...</div>
 		);
 	}
-
+	if (currentGameId === null) {
+		return (
+			<GameListContainer />
+		);
+	}
 	return (
-		<div>Connected</div>
+		<GameContainer/>
 	);
 };
 
