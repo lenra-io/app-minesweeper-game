@@ -1,12 +1,11 @@
 import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GAME } from '../../constants';
-import { showSettings, restartGame, updateElapsedTime } from '../../store/modules/game';
+import { restartGame, updateElapsedTime } from '../../store/modules/game';
 import { Status } from '../../components';
 
 const StatusContainer = () => {
 	const dispatch = useDispatch();
-	const enableSettings = useSelector(rootState => rootState.game.enableSettings);
 	const gameState = useSelector(rootState => rootState.game.gameState);
 	const enableTimer = useSelector(rootState => rootState.game.enableTimer);
 	const elapsedTime = useSelector(rootState => rootState.gameapsedTime);

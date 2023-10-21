@@ -9,7 +9,7 @@ export const CALL_LISTENER = 'lenra/CALL_LISTENER';
 export const connect = () => ({ type: CONNECT });
 export const addRouteListener = (path, callBack) => ({ type: ADD_ROUTE_LISTENER, path, callBack });
 export const removeRouteListener = (path, callBack) => ({ type: REMOVE_ROUTE_LISTENER, path, callBack });
-export const callListener = (path, listener, callBack) => ({ type: CALL_LISTENER, path, listener, callBack });
+export const callListener = (path, listener, event, callBack) => ({ type: CALL_LISTENER, path, listener, event, callBack });
 
 export const LenraMiddleware = store => {
     const app = new LenraApp({
@@ -62,7 +62,8 @@ export const LenraMiddleware = store => {
             case CALL_LISTENER:
                 route = routes[action.path];
                 if (route) {
-                    route.route.callListener(action.listener).then(action.callBack);
+                    const listener = action.listener.split('.').reduce((acc, cur) => acc[cur], route.data);
+                    route.route.callListener({...listener, event: action.event}).then(action.callBack);
                 }
                 break;
         }

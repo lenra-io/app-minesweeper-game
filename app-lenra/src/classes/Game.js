@@ -14,15 +14,14 @@ export class Game extends Data {
      */
     constructor(player, width, height, mineCount) {
         super();
-        if (player) {
-            this.player = player;
-            this.width = width;
-            this.height = height;
-            this.mineCount = mineCount;
-            this.flagCount = 0;
-            this.cells = initBoard(width, height, mineCount);
-            this.revealedCells = [];
-            this.flagedCells = [];
-        }
+        const creating = !!player;
+        this.player = player;
+        this.width = width;
+        this.height = height;
+        this.mineCount = mineCount;
+        this.flagCount = 0;
+        this.cells = creating ? initBoard(width, height, mineCount) : null;
+        this.revealedCells = [];
+        this.flagedCells = [];
     }
 }

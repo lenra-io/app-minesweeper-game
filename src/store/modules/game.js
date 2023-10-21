@@ -1,8 +1,5 @@
 import produce from 'immer';
 import {
-	MIN_WIDTH,
-	MIN_HEIGHT,
-	MIN_MINES,
 	GAME,
 	CODES
 } from '../../constants';
@@ -13,51 +10,43 @@ import {
 	getFlagIncDec
 } from '../../lib/minesweeper';
 
-const SHOW_SETTINGS = 'game/SHOW_SETTINGS';
-const HIDE_SETTINGS = 'game/HIDE_SETTINGS';
-const SET_GAME = 'game/SET_GAME';
-const RESTART_GAME = 'game/RESTART_GAME';
-const UPDATE_ELAPSED_TIME = 'game/UPDATE_ELAPSED_TIME';
-const OPEN_CELL = 'game/OPEN_CELL';
-const ROTATE_CELL_STATE = 'game/ROTATE_CELL_STATE';
+export const SET_BOARD_SIZE = 'game/SET_BOARD_SIZE';
+export const UPDATE_BOARD_DATA = 'game/UPDATE_BOARD_DATA';
+export const RESTART_GAME = 'game/RESTART_GAME';
+export const UPDATE_ELAPSED_TIME = 'game/UPDATE_ELAPSED_TIME';
+export const OPEN_CELL = 'game/OPEN_CELL';
+export const ROTATE_CELL_STATE = 'game/ROTATE_CELL_STATE';
 
-export const showSettings = () => ({ type: SHOW_SETTINGS });
-export const hideSettings = () => ({ type: HIDE_SETTINGS });
-export const setGame = (width, height, mineCount) => ({ type: SET_GAME, width, height, mineCount });
+export const setBoardSize = (width, height) => ({ type: SET_BOARD_SIZE, width, height });
+export const updateBoardData = (boardData) => ({ type: UPDATE_BOARD_DATA, boardData });
 export const restartGame = () => ({ type: RESTART_GAME });
 export const updateElapsedTime = () => ({ type: UPDATE_ELAPSED_TIME });
 export const openCell = (x, y) => ({ type: OPEN_CELL, x, y });
 export const rotateCellState = (x, y) => ({ type: ROTATE_CELL_STATE, x, y });
 
 const initialState = {
-	currentGame: null,
-	enableSettings: false,
 	gameState: GAME.READY,
 	enableTimer: false,
 	elapsedTime: 0,
-	boardData: initBoard(MIN_WIDTH, MIN_HEIGHT, MIN_MINES),
-	width: MIN_WIDTH,
-	height: MIN_HEIGHT,
-	mineCount: MIN_MINES,
+	width: null,
+	height: null,
+	boardData: null,
+	openCellListener: null,
 	flagCount: 0,
-	openedCellCount: 0
+	openedCellCount: 0,
 };
 
 export default function(state = initialState, action) {
 	switch (action.type) {
-		case SHOW_SETTINGS:
-			return produce(state, draft => {
-				draft.enableSettings = true;
-			});
-		case HIDE_SETTINGS:
-			return produce(state, draft => {
-				draft.enableSettings = false;
-			});
-		case SET_GAME:
+		case SET_BOARD_SIZE:
 			return produce(state, draft => {
 				draft.width = action.width;
 				draft.height = action.height;
-				draft.mineCount = action.mineCount;
+			});
+		case UPDATE_BOARD_DATA:
+			return produce(state, draft => {
+				draft.boardData = action.boardData;
+				console.log(action.boardData);
 			});
 		case RESTART_GAME:
 			return produce(state, draft => {

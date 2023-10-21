@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { Board } from '../../components';
 
 const BoardContainer = () => {
-	const enableSettings = useSelector(rootState => rootState.game.enableSettings);
 	const width = useSelector(rootState => rootState.game.width);
 	const height = useSelector(rootState => rootState.game.height);
 
@@ -11,15 +10,16 @@ const BoardContainer = () => {
 		e.preventDefault();
 	}, []);
 
+	if (width===null) {
+		return (<p>Loading...</p>);
+	}
+
 	return (
-		<>
-			{!enableSettings &&
-			<Board
-				width={width}
-				height={height}
-				onRightClickBoard={onRightClickBoard}
-			/>}
-		</>
+		<Board
+			width={width}
+			height={height}
+			onRightClickBoard={onRightClickBoard}
+		/>
 	);
 };
 

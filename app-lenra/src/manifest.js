@@ -8,13 +8,13 @@ export const json = {
     routes: [
         {
             path: "/games",
-            view: View("games").find(Game, {
+            view: View("gameList").find(Game, {
                 player: "@me"
             })
         },
         {
-            path: "/games/:id/board",
-            view: View("board").find(Game, {
+            path: "/games/:id",
+            view: View("game").find(Game, {
                 _id: "@route.id",
                 player: "@me"
             })

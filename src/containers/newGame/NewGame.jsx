@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { MIN_WIDTH, MIN_HEIGHT, MIN_MINES, types, difficulties } from '../../constants';
-import { hideSettings, setGame, restartGame } from '../../store/modules/game';
+import { types, difficulties } from '../../constants';
 import { NewGame } from '../../components';
-import { creatingGame, gameCreated, routes } from '../../store/modules/app.js';
+import { createGame, gameCreated, routes } from '../../store/modules/app.js';
 import { callListener } from '../../store/middlewares/lenra.js';
 
 const NewGameContainer = () => {
@@ -12,7 +11,6 @@ const NewGameContainer = () => {
 	const [type, setType] = useState(types[0]);
 	const [difficulty, setDifficulty] = useState(difficulties[0]);
 	const creating = useSelector(rootState => rootState.app.creatingGame);
-	const createGameListener = useSelector(rootState => rootState.app.createGameListener);
 
 	const onChangeType = useCallback((e) => {
 		setType(types.find(type => type.value === e.target.value));
@@ -24,20 +22,7 @@ const NewGameContainer = () => {
 
 	const onCreateGame = useCallback((e) => {
 		e.preventDefault();
-		dispatch(creatingGame());
-		dispatch(
-			callListener(
-				routes.games,
-				{
-					...createGameListener,
-					event: {
-						type: type.value,
-						difficulty: difficulty.value
-					}
-				},
-				() => dispatch(gameCreated())
-			)
-		);
+		dispatch(createGame(type.value, difficulty.value));
 	}, [type, difficulty]);
 
 	return (

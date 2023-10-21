@@ -1,17 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { hideSettings, setGame, restartGame } from '../../store/modules/game';
-import { NewGame } from '../../components';
+import React from 'react';
+import StatusContainer from '../status/Status.jsx';
+import BoardContainer from '../board/Board.jsx';
 
 const GameContainer = () => {
-	const dispatch = useDispatch();
-	const currentGameId = useSelector(rootState => rootState.app.currentGameId);
-
 	return (
 		<>
-			{/* <SettingsContainer />
-			<StatusContainer />
-			<BoardContainer /> */}
+			{/* <StatusContainer /> */}
+			<BoardContainer />
 		</>
 	);
 };
