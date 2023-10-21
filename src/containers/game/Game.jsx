@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { hideSettings, setGame, restartGame } from '../../store/modules/game';
-import { Settings } from '../../components';
+import { NewGame } from '../../components';
 
 const GameContainer = () => {
 	const dispatch = useDispatch();

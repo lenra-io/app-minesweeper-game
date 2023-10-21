@@ -1,13 +1,30 @@
 // Game Settings
-export const MIN_WIDTH = 9;
-export const MAX_WIDTH = 20;
-export const MIN_HEIGHT = 9;
-export const MAX_HEIGHT = 20;
-export const MIN_MINES = 10;
+export const difficulties = {
+	easy: {
+		width: 9,
+		height: 9,
+		mineCount: 10
+	},
+	medium: {
+		width: 16,
+		height: 16,
+		mineCount: 40
+	},
+	hard: {
+		width: 30,
+		height: 16,
+		mineCount: 99
+	}
+};
 
-// Design Settings
-export const CELL_SIZE = 42;
-export const CELL_MARGIN = 2;
+export const types = {
+	single: {
+		players: 1
+	},
+	versus: {
+		players: 2
+	}
+};
 
 // Game States
 export const GAME = {

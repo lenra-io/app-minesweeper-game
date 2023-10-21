@@ -2,11 +2,13 @@ import { LenraApp } from '@lenra/client';
 
 export const CONNECT = 'lenra/CONNECT';
 export const CONNECTED = 'lenra/CONNECTED';
-export const LISTEN_ROUTE = 'lenra/LISTEN_ROUTE';
+export const ADD_ROUTE_LISTENER = 'lenra/ADD_ROUTE_LISTENER';
+export const REMOVE_ROUTE_LISTENER = 'lenra/REMOVE_ROUTE_LISTENER';
 export const CALL_LISTENER = 'lenra/CALL_LISTENER';
 
 export const connect = () => ({ type: CONNECT });
-export const listenRoute = (path, callBack) => ({ type: LISTEN_ROUTE, path, callBack });
+export const addRouteListener = (path, callBack) => ({ type: ADD_ROUTE_LISTENER, path, callBack });
+export const removeRouteListener = (path, callBack) => ({ type: REMOVE_ROUTE_LISTENER, path, callBack });
 export const callListener = (path, listener, callBack) => ({ type: CALL_LISTENER, path, listener, callBack });
 
 export const LenraMiddleware = store => {
@@ -14,7 +16,7 @@ export const LenraMiddleware = store => {
         clientId: "XXX-XXX-XXX",
     });
     /**
-     * @type {{[path: string]: {listeners: Array<Function>, route: import("@lenra/client").LenraRoute}}}
+     * @type {{[path: string]: {listeners: Array<Function>, route: import("@lenra/client").LenraRoute, data: any}}}
      */
     const routes = {};
     return next => action => {
@@ -25,28 +27,37 @@ export const LenraMiddleware = store => {
                     store.dispatch({ type: CONNECTED })
                 });
                 break;
-            case LISTEN_ROUTE:
+            case ADD_ROUTE_LISTENER:
                 route = routes[action.path];
                 if (!route) {
-                    console.log("Listen route", action.path);
                     route = {
                         listeners: [],
+                        data: null,
                         route: app.route(action.path, (data) => {
-                            data = JSON.parse(JSON.stringify(data));
+                            route.data = JSON.parse(JSON.stringify(data));
                             route.listeners.forEach(callBack => {
-                                callBack(store, data);
+                                callBack(store, route.data);
                             });
                         })
                     };
                     routes[action.path] = route;
                 }
                 else {
-                    if (route.route.json) {
-                        const data = JSON.parse(JSON.stringify(route.route.json));
-                        action.callBack(store, data);
+                    if (route.data !== null) {
+                        action.callBack(store, route.data);
                     }
                 }
                 route.listeners.push(action.callBack);
+                break;
+            case REMOVE_ROUTE_LISTENER:
+                route = routes[action.path];
+                if (route) {
+                    route.listeners = route.listeners.filter(callBack => callBack !== action.callBack);
+                    if (route.listeners.length === 0) {
+                        route.route.close();
+                        delete routes[action.path];
+                    }
+                }
                 break;
             case CALL_LISTENER:
                 route = routes[action.path];

@@ -1,15 +1,15 @@
 import { SET_GAME, routes, setCreateGameListener, setGameList } from '../modules/app.js';
-import { CONNECTED, listenRoute } from './lenra.js';
+import { CONNECTED, addRouteListener } from './lenra.js';
 
 export const AppMiddleware = store => {
     return next => action => {
         switch (action.type) {
             case CONNECTED:
-                store.dispatch(listenRoute(routes.games, onGamesChange));
+                store.dispatch(addRouteListener(routes.games, onGamesChange));
                 break;
             case SET_GAME:
                 if (action.gameId) {
-                    store.dispatch(listenRoute(routes.game.replace(':id', action.gameId), (store, data) => {
+                    store.dispatch(addRouteListener(routes.game.replace(':id', action.gameId), (store, data) => {
                         console.log("Game route changed");
                         // store.dispatch(setGame(data));
                     }));

@@ -1,9 +1,4 @@
 import React from 'react';
-import { 
-	SettingsContainer,
-	StatusContainer,
-	BoardContainer
-} from './containers';
 import {
 	Wrapper,
 	Title
