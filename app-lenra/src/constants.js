@@ -41,6 +41,4 @@ export const CODES = {
 	FLAG: -2,
 	QUESTION: -3,
 	MINE: -4,
-	MINE_FLAG: -5,
-	MINE_QUESTION: -6
 };

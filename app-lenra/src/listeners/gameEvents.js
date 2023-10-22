@@ -1,6 +1,6 @@
 import { Api } from '@lenra/app';
 import { Game } from '../classes/Game.js';
-import { difficulties } from '../constants.js';
+import { CODES, difficulties } from '../constants.js';
 import { openCell } from '../lib/minesweeper.js';
 
 /**
@@ -51,6 +51,24 @@ export async function revealCell(props, event, api) {
  * @param {{position: CellPosition}} event
  * @param {Api} api
  */
-export async function incrementCellFlag(props, event, api) {
-
+export async function rotateCellFlag(props, event, api) {
+    const { game: gameId } = props;
+    const { x, y } = event;
+    const transaction = await api.data.startTransaction();
+    const coll = transaction.coll(Game);
+    const game = await coll.getDoc(gameId);
+    const flagedCellIndex = game.flagedCells.findIndex(({ x: cx, y: cy }) => cx === x && cy === y);
+    if (flagedCellIndex !== -1) {
+        const flagedCell = game.flagedCells[flagedCellIndex];
+        if (flagedCell.flag === CODES.FLAG) {
+            flagedCell.flag = CODES.QUESTION;
+        }
+        else {
+            game.flagedCells.splice(flagedCellIndex, 1);
+        }
+    } else {
+        game.flagedCells.push({ x, y, flag: CODES.FLAG });
+    }
+    await coll.updateDoc(game);
+    await transaction.commit();
 }

@@ -16,16 +16,21 @@ export default function ([game], _props) {
   game.revealedCells.forEach(({x, y}) => {
     boardData[y][x] = game.cells[y][x];
   });
-  console.log(boardData);
+  let flagCount = 0;
+  game.flagedCells.forEach(({x, y, flag}) => {
+    boardData[y][x] = flag;
+    if (flag === CODES.FLAG) flagCount++;
+  });
   return {
     width: game.width,
     height: game.height,
     boardData,
+    flagCount,
     onRevealCell: Listener("revealCell")
       .props({
         game: game._id
       }),
-    onIncrementCellFlag: Listener("incrementCellFlag")
+      onRotateCellFlag: Listener("rotateCellFlag")
       .props({
         game: game._id
       })

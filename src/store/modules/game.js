@@ -15,14 +15,14 @@ export const UPDATE_BOARD_DATA = 'game/UPDATE_BOARD_DATA';
 export const RESTART_GAME = 'game/RESTART_GAME';
 export const UPDATE_ELAPSED_TIME = 'game/UPDATE_ELAPSED_TIME';
 export const OPEN_CELL = 'game/OPEN_CELL';
-export const ROTATE_CELL_STATE = 'game/ROTATE_CELL_STATE';
+export const ROTATE_CELL_FLAG = 'game/ROTATE_CELL_FLAG';
 
 export const setBoardSize = (width, height) => ({ type: SET_BOARD_SIZE, width, height });
 export const updateBoardData = (boardData) => ({ type: UPDATE_BOARD_DATA, boardData });
 export const restartGame = () => ({ type: RESTART_GAME });
 export const updateElapsedTime = () => ({ type: UPDATE_ELAPSED_TIME });
 export const openCell = (x, y) => ({ type: OPEN_CELL, x, y });
-export const rotateCellState = (x, y) => ({ type: ROTATE_CELL_STATE, x, y });
+export const rotateCellFlag = (x, y) => ({ type: ROTATE_CELL_FLAG, x, y });
 
 const initialState = {
 	gameState: GAME.READY,
@@ -63,38 +63,22 @@ export default function(state = initialState, action) {
 			});
 		case OPEN_CELL:
 			return produce(state, draft => {
-				const code = state.boardData[action.y][action.x];
 				draft.gameState = GAME.RUN;
 
 				// Start timer if click on cell
 				if (!state.enableTimer) {
 					draft.enableTimer = true;
 				}
-
-				if (code === CODES.MINE) {
-					draft.gameState = GAME.LOSE;
-					draft.enableTimer = false;
-				}
-				else if (code === CODES.NOTHING) {
-					const expandResult = expandOpenedCell(draft.boardData, action.x, action.y);
-					draft.boardData = expandResult.boardData;
-					draft.openedCellCount += expandResult.openedCellCount;
-
-					// Win
-					if (state.width * state.height - state.mineCount === draft.openedCellCount) {
-						draft.gameState = GAME.WIN;
-						draft.enableTimer = false;
-					}
+				if (draft.boardData[action.y][action.x] === CODES.NOTHING) {
+					draft.boardData[action.y][action.x] = CODES.LOADING;
 				}
 			});
-		case ROTATE_CELL_STATE:
+		case ROTATE_CELL_FLAG:
 			return produce(state, draft => {
 				const code = state.boardData[action.y][action.x];
 
-				if (code !== CODES.OPENED) {
-					draft.boardData[action.y][action.x] = getNextCellCode(code);
-					draft.flagCount += getFlagIncDec(code);
-				}
+				draft.boardData[action.y][action.x] = getNextCellCode(code);
+				draft.flagCount += getFlagIncDec(code);
 			});
 		default:
 			return state;

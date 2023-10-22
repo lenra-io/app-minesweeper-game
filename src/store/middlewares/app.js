@@ -1,5 +1,5 @@
 import { CREATE_GAME, SET_GAME, gameCreated, routes, setGameList } from '../modules/app.js';
-import { setBoardSize, updateBoardData, OPEN_CELL } from '../modules/game.js';
+import { setBoardSize, updateBoardData, OPEN_CELL, ROTATE_CELL_FLAG } from '../modules/game.js';
 import { CONNECTED, addRouteListener, callListener } from './lenra.js';
 
 export const AppMiddleware = store => {
@@ -36,6 +36,18 @@ export const AppMiddleware = store => {
                     callListener(
                         routes.game.replace(':id', currentGameId),
                         "onRevealCell",
+                        {
+                            x: action.x,
+                            y: action.y
+                        }
+                    )
+                );
+                break;
+            case ROTATE_CELL_FLAG:
+                store.dispatch(
+                    callListener(
+                        routes.game.replace(':id', currentGameId),
+                        "onRotateCellFlag",
                         {
                             x: action.x,
                             y: action.y
