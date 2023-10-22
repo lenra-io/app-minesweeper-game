@@ -10,15 +10,17 @@ import {
 	getFlagIncDec
 } from '../../lib/minesweeper';
 
-export const SET_BOARD_SIZE = 'game/SET_BOARD_SIZE';
+export const UPDATE_ATTRIBUTES = 'game/UPDATE_ATTRIBUTES';
 export const UPDATE_BOARD_DATA = 'game/UPDATE_BOARD_DATA';
+export const UPDATE_STATUS = 'game/UPDATE_STATUS';
 export const RESTART_GAME = 'game/RESTART_GAME';
 export const UPDATE_ELAPSED_TIME = 'game/UPDATE_ELAPSED_TIME';
 export const OPEN_CELL = 'game/OPEN_CELL';
 export const ROTATE_CELL_FLAG = 'game/ROTATE_CELL_FLAG';
 
-export const setBoardSize = (width, height) => ({ type: SET_BOARD_SIZE, width, height });
+export const updateAttributes = (width, height, mineCount) => ({ type: UPDATE_ATTRIBUTES, width, height, mineCount });
 export const updateBoardData = (boardData) => ({ type: UPDATE_BOARD_DATA, boardData });
+export const updateStatus = (state, remainingFlags) => ({ type: UPDATE_STATUS, state, remainingFlags });
 export const restartGame = () => ({ type: RESTART_GAME });
 export const updateElapsedTime = () => ({ type: UPDATE_ELAPSED_TIME });
 export const openCell = (x, y) => ({ type: OPEN_CELL, x, y });
@@ -31,32 +33,37 @@ const initialState = {
 	width: null,
 	height: null,
 	boardData: null,
-	openCellListener: null,
-	flagCount: 0,
-	openedCellCount: 0,
+	mineCount: null,
+	remainingFlags: null,
 };
 
 export default function(state = initialState, action) {
 	switch (action.type) {
-		case SET_BOARD_SIZE:
+		case UPDATE_ATTRIBUTES:
 			return produce(state, draft => {
 				draft.width = action.width;
 				draft.height = action.height;
+				draft.mineCount = action.mineCount;
 			});
 		case UPDATE_BOARD_DATA:
 			return produce(state, draft => {
 				draft.boardData = action.boardData;
 				console.log(action.boardData);
 			});
-		case RESTART_GAME:
+		case UPDATE_STATUS:
 			return produce(state, draft => {
-				draft.gameState = GAME.READY;
-				draft.enableTimer = false;
-				draft.elapsedTime = 0;
-				draft.boardData = initBoard(state.width, state.height, state.mineCount);
-				draft.flagCount = 0;
-				draft.openedCellCount = 0;
+				draft.gameState = action.state;
+				draft.remainingFlags = action.remainingFlags;
 			});
+		// case RESTART_GAME:
+		// 	return produce(state, draft => {
+		// 		draft.gameState = GAME.READY;
+		// 		draft.enableTimer = false;
+		// 		draft.elapsedTime = 0;
+		// 		draft.boardData = initBoard(state.width, state.height, state.mineCount);
+		// 		draft.flagCount = 0;
+		// 		draft.openedCellCount = 0;
+		// 	});
 		case UPDATE_ELAPSED_TIME:
 			return produce(state, draft => {
 				draft.elapsedTime++;
@@ -78,7 +85,7 @@ export default function(state = initialState, action) {
 				const code = state.boardData[action.y][action.x];
 
 				draft.boardData[action.y][action.x] = getNextCellCode(code);
-				draft.flagCount += getFlagIncDec(code);
+				draft.remainingFlags -= getFlagIncDec(code);
 			});
 		default:
 			return state;

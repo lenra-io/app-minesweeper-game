@@ -1,6 +1,6 @@
 import { Api } from '@lenra/app';
 import { Game } from '../classes/Game.js';
-import { CODES, difficulties } from '../constants.js';
+import { CODES, GAME, difficulties } from '../constants.js';
 import { openCell } from '../lib/minesweeper.js';
 
 /**
@@ -35,13 +35,28 @@ export async function revealCell(props, event, api) {
     const coll = transaction.coll(Game);
     const game = await coll.getDoc(gameId);
 
-    if (game.revealedCells.some(({ x: cx, y: cy }) => cx === x && cy === y)) return transaction.abort();
+    if (game.revealedCells.some(matchPoint(x, y)) || game.flagedCells.some(matchPoint(x, y))) return transaction.abort();
 
-    // TODO: check if cell is flagged
-    // TODO: check if cell is a mine
-    // TODO: check if game is over
+    // check if cell is a mine
+    if (game.cells[y][x] === CODES.MINE) {
+        game.state = GAME.LOSE;
+        // reveal all mines
+        game.cells.forEach((row, y) => {
+            row.forEach((cell, x) => {
+                if (cell === CODES.MINE) game.revealedCells.push({ x, y });
+            });
+        });
+    }
+    else {
+        // check if game is over
+        const newOpenedCells = openCell(game.revealedCells, game.cells, x, y);
+        game.revealedCells.push(...newOpenedCells);
+        if (game.revealedCells.length === game.width * game.height - game.mineCount) {
+            game.state = GAME.WIN;
+        }
+    }
 
-    await coll.updateMany({ _id: gameId }, { $push: { revealedCells: { $each: openCell(game.revealedCells, game.cells, x, y) } } });
+    await coll.updateDoc(game);
     await transaction.commit();
 }
 
@@ -71,4 +86,8 @@ export async function rotateCellFlag(props, event, api) {
     }
     await coll.updateDoc(game);
     await transaction.commit();
+}
+
+function matchPoint(x, y) {
+    return ({ x: cx, y: cy }) => cx === x && cy === y;
 }

@@ -1,5 +1,6 @@
 import { Data } from "@lenra/app";
 import { initBoard } from "../lib/minesweeper.js";
+import { GAME } from "../constants.js";
 
 export class Game extends Data {
     /**
@@ -16,6 +17,7 @@ export class Game extends Data {
         super();
         const creating = !!player;
         this.player = player;
+        this.state = creating ? GAME.READY : null;
         this.width = width;
         this.height = height;
         this.mineCount = mineCount;

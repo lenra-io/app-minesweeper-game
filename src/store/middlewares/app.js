@@ -1,6 +1,6 @@
 import { CREATE_GAME, SET_GAME, gameCreated, routes, setGameList } from '../modules/app.js';
-import { setBoardSize, updateBoardData, OPEN_CELL, ROTATE_CELL_FLAG } from '../modules/game.js';
-import { CONNECTED, addRouteListener, callListener } from './lenra.js';
+import { updateBoardData, OPEN_CELL, ROTATE_CELL_FLAG, updateAttributes, updateStatus } from '../modules/game.js';
+import { CONNECTED, addRouteListener, callListener, removeRouteListener } from './lenra.js';
 
 export const AppMiddleware = store => {
     let currentGameId = null;
@@ -24,7 +24,7 @@ export const AppMiddleware = store => {
                 break;
             case SET_GAME:
                 if (currentGameId !== null) {
-                    store.dispatch(removeEventListener(routes.game.replace(':id', currentGameId), onGameChange));
+                    store.dispatch(removeRouteListener(routes.game.replace(':id', currentGameId), onGameChange));
                 }
                 currentGameId = action.gameId;
                 if (action.gameId) {
@@ -67,6 +67,7 @@ export const AppMiddleware = store => {
     function onGameChange(store, data) {
         console.log("Game route changed");
         store.dispatch(updateBoardData(data.boardData));
-        store.dispatch(setBoardSize(data.width, data.height));
+        store.dispatch(updateAttributes(data.width, data.height, data.mineCount));
+        store.dispatch(updateStatus(data.state, data.remainingFlags));
     }
 }

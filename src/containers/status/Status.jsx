@@ -8,9 +8,9 @@ const StatusContainer = () => {
 	const dispatch = useDispatch();
 	const gameState = useSelector(rootState => rootState.game.gameState);
 	const enableTimer = useSelector(rootState => rootState.game.enableTimer);
-	const elapsedTime = useSelector(rootState => rootState.gameapsedTime);
-	const mineCount = useSelector(rootState => rootState.gameneCount);
-	const flagCount = useSelector(rootState => rootState.game.flagCount);
+	const elapsedTime = useSelector(rootState => rootState.game.elapsedTime);
+	const mineCount = useSelector(rootState => rootState.game.mineCount);
+	const remainingFlags = useSelector(rootState => rootState.game.remainingFlags);
 
 	useEffect(() => {
 		let gameTimer;
@@ -46,18 +46,14 @@ const StatusContainer = () => {
 	}, []);
 
 	return (
-		<>
-			{!enableSettings &&
-			<Status
-				leftMineCount={mineCount - flagCount}
-				mineCount={mineCount}
-				resultEmoji={getResultEmoji(gameState)}
-				enableSettings={gameState !== GAME.RUN}
-				elapsedTime={elapsedTime.toString().padStart(3, '0')}
-				onClickRestart={onClickRestart}
-				onClickSettings={onClickSettings}
-			/>}
-		</>
+		<Status
+			leftMineCount={remainingFlags}
+			mineCount={mineCount}
+			resultEmoji={getResultEmoji(gameState)}
+			elapsedTime={elapsedTime.toString().padStart(3, '0')}
+			onClickRestart={onClickRestart}
+			onClickSettings={onClickSettings}
+		/>
 	);
 };
 
