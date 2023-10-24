@@ -9,6 +9,7 @@ import {
 	getNextCellCode,
 	getFlagIncDec
 } from '../../lib/minesweeper';
+import { SET_GAME } from './app.js';
 
 export const UPDATE_ATTRIBUTES = 'game/UPDATE_ATTRIBUTES';
 export const UPDATE_BOARD_DATA = 'game/UPDATE_BOARD_DATA';
@@ -55,15 +56,8 @@ export default function(state = initialState, action) {
 				draft.gameState = action.state;
 				draft.remainingFlags = action.remainingFlags;
 			});
-		// case RESTART_GAME:
-		// 	return produce(state, draft => {
-		// 		draft.gameState = GAME.READY;
-		// 		draft.enableTimer = false;
-		// 		draft.elapsedTime = 0;
-		// 		draft.boardData = initBoard(state.width, state.height, state.mineCount);
-		// 		draft.flagCount = 0;
-		// 		draft.openedCellCount = 0;
-		// 	});
+		case SET_GAME:
+			return initialState;
 		case UPDATE_ELAPSED_TIME:
 			return produce(state, draft => {
 				draft.elapsedTime++;

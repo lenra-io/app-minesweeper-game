@@ -23,7 +23,7 @@ const GameListContainer = () => {
 		<>
 		<ul>
 			{
-				games.map((game) => <GameCard key={game.id} id={game.id} onClick={() => dispatch(setGame(game.id))} />)
+				games.map((game) => <GameCard key={game.id} id={game.id} type={game.type} difficulty={game.difficulty} onClick={() => dispatch(setGame(game.id))} />)
 			}
 		</ul>
 		<Button onClick={onCreateGame}>Create game</Button>

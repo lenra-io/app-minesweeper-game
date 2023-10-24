@@ -3,14 +3,16 @@ import { CellContainer } from '../../containers';
 import {
 	Wrapper
 } from './GameCardStyle';
+import { difficulties, types } from '../../constants.js';
 
 const GameCard = ({
-	id,
+	type,
+	difficulty,
 	onClick,
 }) => {
 	return (
 		<Wrapper onClick={onClick}>
-			Game {id}
+			{types.find(t => t.value===type).name} - {difficulties.find(d => d.value===difficulty).name}
 		</Wrapper>
 	);
 };

@@ -12,6 +12,8 @@ export default function (games, _props) {
         games: games.map(game => ({
             id: game._id,
             state: game.state,
+            type: game.type,
+            difficulty: game.difficulty,
         })),
         onCreateGame: Listener("createGame")
     }
