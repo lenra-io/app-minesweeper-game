@@ -31,8 +31,12 @@ export async function createGame(_props, event, api) {
             // return transaction.abort();
         const waitingPlayers = await waitingPlayerColl.find({ type, difficulty });
         // Check if there is enough waiting players
-        if (players>waitingPlayers.length + 1) return;
+        if (players>waitingPlayers.length + 1) {
+            // Create a new waiting player
+            await waitingPlayerColl.createDoc(new WaitingPlayer("@me", type, difficulty));
+            return;
             // return transaction.abort();
+        }
 
         // Add the players
         while (playerList.length < players) {

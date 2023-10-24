@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/nbsp1221/react-minesweeper-game#readme",
   "dependencies": {
-    "@lenra/client": "^1.0.0",
+    "@lenra/client": "^1.1.0-beta.1",
     "immer": "8.0.4",
     "react": "16.14.0",
     "react-dom": "16.14.0",

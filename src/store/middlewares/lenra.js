@@ -23,7 +23,13 @@ export const LenraMiddleware = store => {
         let route;
         switch (action.type) {
             case CONNECT:
-                app.connect().then(s => {
+                const params = new URLSearchParams(location.search);
+                const socketParams = {};
+                if (params.has('user')) {
+                    socketParams.userId = params.get('user');
+                }
+                console.log(socketParams);
+                app.connect(socketParams).then(s => {
                     store.dispatch({ type: CONNECTED })
                 });
                 break;
