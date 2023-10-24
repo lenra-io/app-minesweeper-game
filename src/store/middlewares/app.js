@@ -67,15 +67,15 @@ export const AppMiddleware = store => {
             const oldGames = store.getState().app.games;
             const newGame = data.games.find(game => !oldGames.some(oldGame => oldGame.id === game.id));
             store.dispatch(setGame(newGame.id));
-            store.dispatch(gameCreated());
             openCreatedGame = false;
         }
         store.dispatch(setGameList(data.games));
     }
 
-    function onGameCreated(store, data) {
+    function onGameCreated() {
         console.log("Game created");
         openCreatedGame = true;
+        store.dispatch(gameCreated());
     }
 
     function onGameChange(store, data) {

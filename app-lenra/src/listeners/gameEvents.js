@@ -1,7 +1,8 @@
 import { Api } from '@lenra/app';
 import { Game } from '../classes/Game.js';
-import { CODES, GAME, difficulties } from '../constants.js';
-import { openCell } from '../lib/minesweeper.js';
+import { CODES, GAME, difficulties, types } from '../constants.js';
+import { initBoard, openCell } from '../lib/minesweeper.js';
+import { WaitingPlayer } from '../classes/WaitingPlayer.js';
 
 /**
  * @typedef {Object} CellPosition
@@ -17,8 +18,43 @@ import { openCell } from '../lib/minesweeper.js';
  */
 export async function createGame(_props, event, api) {
     const { type, difficulty } = event;
+    const { players } = types[type];
     const { width, height, mineCount } = difficulties[difficulty];
-    const game = Game.create("@me", type, difficulty);
+    const playerList = ["@me"];
+    // TODO: handle transaction
+    // const transaction = await api.data.startTransaction();
+    if (players > 1) {
+        // Search for waiting players
+        const waitingPlayerColl = api.data.coll(WaitingPlayer);
+        // Check if there is a matching waiting player for the current user
+        if (await waitingPlayerColl.find({ user: "@me", type, difficulty }).then(players => players.length > 0)) return;
+            // return transaction.abort();
+        const waitingPlayers = await waitingPlayerColl.find({ type, difficulty });
+        // Check if there is enough waiting players
+        if (players>waitingPlayers.length + 1) return;
+            // return transaction.abort();
+
+        // Add the players
+        while (playerList.length < players) {
+            const waitingPlayer = waitingPlayers.pop();
+            playerList.push(waitingPlayer.user);
+            await waitingPlayerColl.deleteDoc(waitingPlayer);
+        }
+        // await transaction.commit();
+    }
+    console.log("create game", playerList);
+    const game = new Game(
+        playerList,
+        type,
+        difficulty,
+        GAME.READY,
+        width,
+        height,
+        mineCount,
+        initBoard(width, height, mineCount),
+        [],
+        []
+    );
     await api.data.coll(Game).createDoc(game);
 }
 

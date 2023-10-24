@@ -10,7 +10,7 @@ export const json = {
         {
             path: "/games",
             view: View("gameList").find(Game, {
-                player: "@me",
+                players: "@me",
                 $or: [
                     { state: GAME.READY },
                     { state: GAME.RUN }
@@ -21,7 +21,7 @@ export const json = {
             path: "/games/:id",
             view: View("game").find(Game, {
                 _id: "@route.id",
-                player: "@me"
+                players: "@me"
             })
         }
     ]
