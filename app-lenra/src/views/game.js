@@ -1,6 +1,6 @@
 import { Listener } from "@lenra/app";
-import { Game } from "../classes/Game.js";
-import { CODES } from "../constants.js";
+import { Game, PlayerState } from "../classes/Game.js";
+import { CODES, types } from "../constants.js";
 
 /**
  * 
@@ -8,33 +8,70 @@ import { CODES } from "../constants.js";
  * @param {*} _props 
  * @returns {import("@lenra/app").JsonViewResponse}
  */
-export default function ([game], _props) {
+export default function ([game], _props, context) {
+  const { me } = context;
   const boardData = [];
+  let flagCount = 0;
+  const playerState = game.playerStates.find(({ user }) => user === me);
+  const revealedCells = game.playerStates.flatMap(state => state.revealedCells);
+
   for (let i = 0; i < game.height; i++) {
     boardData.push(Array(game.width).fill(CODES.NOTHING));
   }
-  game.revealedCells.forEach(({ x, y }) => {
+  revealedCells.forEach(({ x, y }) => {
     boardData[y][x] = game.cells[y][x];
   });
-  let flagCount = 0;
-  game.flagedCells.forEach(({ x, y, flag }) => {
+  playerState.flagedCells.forEach(({ x, y, flag }) => {
+    if (boardData[y][x] !== CODES.NOTHING) return;
     boardData[y][x] = flag;
     if (flag === CODES.FLAG) flagCount++;
   });
-  return {
+
+  const result = {
     width: game.width,
     height: game.height,
     mineCount: game.mineCount,
     state: game.state,
+    myTurn: game.nextPlayers[0] === me,
     boardData,
     remainingFlags: game.mineCount - flagCount,
     onRevealCell: Listener("revealCell")
       .props({
+        me,
         game: game._id
       }),
     onRotateCellFlag: Listener("rotateCellFlag")
       .props({
+        me,
         game: game._id
       })
-  };
+  }
+
+  if (game.type === "versus") {
+    game.playerStates
+      .sort((a, b) => {
+        if (a.user === me) return -1;
+        return a.user.localeCompare(b.user);
+      });
+    result.scores = game.playerStates
+      .map(playerState => calculatePlayerStateScore(game.type, boardData, playerState));
+  }
+
+  return result;
+}
+
+/**
+ * 
+ * @param {string} _type 
+ * @param {number[][]} boardData 
+ * @param {PlayerState} playerState 
+ * @returns 
+ */
+function calculatePlayerStateScore(_type, boardData, playerState) {
+  return playerState.revealedCells
+    .map(({ x, y }) => {
+      if (boardData[y][x] === CODES.MINE) return 0;
+      return boardData[y][x];
+    })
+    .reduce((sum, val) => sum + val, 0);
 }

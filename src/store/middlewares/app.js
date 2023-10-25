@@ -1,5 +1,5 @@
 import { CREATE_GAME, SET_GAME, gameCreated, routes, setGame, setGameList } from '../modules/app.js';
-import { updateBoardData, OPEN_CELL, ROTATE_CELL_FLAG, updateAttributes, updateStatus } from '../modules/game.js';
+import { updateBoardData, OPEN_CELL, ROTATE_CELL_FLAG, updateAttributes, updateStatus, updateScore as updateScores } from '../modules/game.js';
 import { CONNECTED, addRouteListener, callListener, removeRouteListener } from './lenra.js';
 
 export const AppMiddleware = store => {
@@ -82,6 +82,7 @@ export const AppMiddleware = store => {
         console.log("Game route changed");
         store.dispatch(updateBoardData(data.boardData));
         store.dispatch(updateAttributes(data.width, data.height, data.mineCount));
-        store.dispatch(updateStatus(data.state, data.remainingFlags));
+        store.dispatch(updateStatus(data.state, data.myTurn, data.remainingFlags));
+        store.dispatch(updateScores(data.scores));
     }
 }

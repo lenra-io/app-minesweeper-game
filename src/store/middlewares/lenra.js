@@ -28,7 +28,6 @@ export const LenraMiddleware = store => {
                 if (params.has('user')) {
                     socketParams.userId = params.get('user');
                 }
-                console.log(socketParams);
                 app.connect(socketParams).then(s => {
                     store.dispatch({ type: CONNECTED })
                 });

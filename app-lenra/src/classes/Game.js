@@ -12,10 +12,10 @@ export class Game extends Data {
      * @param {number} height The board height
      * @param {number} mineCount The board mine count
      * @param {number[][]} cells The cells values of the board
-     * @param {{x: number, y: number}[]} revealedCells The cells revealed positions
-     * @param {{x: number, y: number, flag: number}[]} flagedCells The cells revealed positions
+     * @param {string[]} nextPlayers The ordered ids of the next players
+     * @param {PlayerState[]} playerStates The players states
      */
-    constructor(players, type, difficulty, state, width, height, mineCount, cells, revealedCells, flagedCells) {
+    constructor(players, type, difficulty, state, width, height, mineCount, cells, nextPlayers, playerStates) {
         super();
         this.players = players;
         this.type = type;
@@ -25,6 +25,19 @@ export class Game extends Data {
         this.height = height;
         this.mineCount = mineCount;
         this.cells = cells;
+        this.nextPlayers = nextPlayers;
+        this.playerStates = playerStates;
+    }
+}
+
+export class PlayerState {
+    /**
+     * @param {string} user The user id
+     * @param {{x: number, y: number}[]} revealedCells The cells revealed positions
+     * @param {{x: number, y: number, flag: number}[]} flagedCells The cells revealed positions
+     */
+    constructor(user, revealedCells = [], flagedCells = []) {
+        this.user = user;
         this.revealedCells = revealedCells;
         this.flagedCells = flagedCells;
     }

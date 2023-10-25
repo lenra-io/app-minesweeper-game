@@ -11,6 +11,7 @@ const CellContainer = ({
 	const dispatch = useDispatch();
 	const gameState = useSelector(rootState => rootState.game.gameState);
 	const cellCode = useSelector(rootState => rootState.game.boardData[y][x]);
+	const myTurn = useSelector(rootState => rootState.game.myTurn);
 
 	const getCellText = useCallback((code) => {
 		switch (code) {
@@ -38,10 +39,12 @@ const CellContainer = ({
 	}, [gameState]);
 
 	const onClickCell = useCallback(() => {
-		if (gameState === GAME.READY || gameState === GAME.RUN) {
-			dispatch(openCell(x, y));
+		console.log(gameState, myTurn);
+		if (!(gameState === GAME.READY || gameState === GAME.RUN) || !myTurn) {
+			return;
 		}
-	}, [gameState]);
+		dispatch(openCell(x, y));
+	}, [gameState, myTurn]);
 
 	const onRightClickCell = useCallback((e) => {
 		e.preventDefault();

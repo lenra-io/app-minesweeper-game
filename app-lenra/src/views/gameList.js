@@ -7,7 +7,7 @@ import { Game } from "../classes/Game.js";
  * @param {*} _props 
  * @returns {import("@lenra/app").JsonViewResponse}
  */
-export default function (games, _props) {
+export default function (games, _props, context) {
     return {
         games: games.map(game => ({
             id: game._id,
@@ -16,5 +16,6 @@ export default function (games, _props) {
             difficulty: game.difficulty,
         })),
         onCreateGame: Listener("createGame")
+            .props({ me: context.me })
     }
 }
