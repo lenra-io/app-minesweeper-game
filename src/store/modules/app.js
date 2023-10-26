@@ -21,11 +21,6 @@ export const setGameList = (games) => ({ type: SET_GAME_LIST, games });
 const initialState = {
 	connected: false,
 	connecting: false,
-	newGame: false,
-	creatingGame: false,
-	currentGameId: null,
-	games: null,
-	createGameListener: null,
 };
 
 export default function (state = initialState, action) {
@@ -38,27 +33,6 @@ export default function (state = initialState, action) {
 			return produce(state, draft => {
 				draft.connecting = false;
 				draft.connected = true;
-			});
-		case NEW_GAME:
-			return produce(state, draft => {
-				draft.newGame = true;
-			});
-		case CREATE_GAME:
-			return produce(state, draft => {
-				draft.creatingGame = true;
-			});
-		case GAME_CREATED:
-			return produce(state, draft => {
-				draft.creatingGame = false;
-				draft.newGame = false;
-			});
-		case SET_GAME:
-			return produce(state, draft => {
-				draft.currentGameId = action.gameId;
-			});
-		case SET_GAME_LIST:
-			return produce(state, draft => {
-				draft.games = action.games;
 			});
 		default:
 			return state;
