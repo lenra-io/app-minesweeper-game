@@ -30,6 +30,7 @@ export const types = {
 export const GAME = {
 	READY: 'ready',
 	RUN: 'run',
+	FINISHED: 'finished',
 	WIN: 'win',
 	LOSE: 'lose'
 };

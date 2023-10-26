@@ -1,6 +1,7 @@
 import { Listener } from "@lenra/app";
 import { Game, PlayerState } from "../classes/Game.js";
 import { CODES, types } from "../constants.js";
+import { calculatePlayerStateScore, currentUserGameState } from "../lib/minesweeper.js";
 
 /**
  * 
@@ -31,7 +32,7 @@ export default function ([game], _props, context) {
     width: game.width,
     height: game.height,
     mineCount: game.mineCount,
-    state: game.state,
+    state: currentUserGameState(game, me),
     myTurn: game.nextPlayers[0] === me,
     boardData,
     remainingFlags: game.mineCount - flagCount,
@@ -51,6 +52,7 @@ export default function ([game], _props, context) {
     game.playerStates
       .sort((a, b) => {
         if (a.user === me) return -1;
+        if (b.user === me) return 1;
         return a.user.localeCompare(b.user);
       });
     result.scores = game.playerStates
@@ -60,18 +62,3 @@ export default function ([game], _props, context) {
   return result;
 }
 
-/**
- * 
- * @param {string} _type 
- * @param {number[][]} boardData 
- * @param {PlayerState} playerState 
- * @returns 
- */
-function calculatePlayerStateScore(_type, boardData, playerState) {
-  return playerState.revealedCells
-    .map(({ x, y }) => {
-      if (boardData[y][x] === CODES.MINE) return 0;
-      return boardData[y][x];
-    })
-    .reduce((sum, val) => sum + val, 0);
-}

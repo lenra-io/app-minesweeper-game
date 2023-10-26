@@ -1,4 +1,5 @@
-import { CODES } from '../constants';
+import { Game } from '../classes/Game.js';
+import { CODES, GAME } from '../constants';
 
 const arroundPoint = [
 	{ x: -1, y: -1 }, { x: 0, y: -1 }, { x: 1, y: -1 },
@@ -68,3 +69,40 @@ export function openCell(revealedCells, boardData, x, y) {
 
 	return newOpenedCells;
 };
+
+/**
+ * 
+ * @param {string} _type 
+ * @param {number[][]} boardData 
+ * @param {PlayerState} playerState 
+ * @returns 
+ */
+export function calculatePlayerStateScore(_type, boardData, playerState) {
+	return playerState.revealedCells
+	  .map(({ x, y }) => {
+		if (boardData[y][x] === CODES.MINE) return 0;
+		return boardData[y][x];
+	  })
+	  .reduce((sum, val) => sum + val, 0);
+  }
+
+/**
+ * 
+ * @param {Game} game The game
+ * @param {string} me The current user
+ */
+export function currentUserGameState(game, me) {
+	if (game.state !== GAME.FINISHED) return game.state;
+	const playerState = game.playerStates.find(({ user }) => user === me);
+	if (playerState.revealedCells.some(({ x, y }) => game.cells[y][x] === CODES.MINE)) return GAME.LOSE;
+	switch (game.type) {
+		case "versus":
+			const playerScores = game.playerStates.map(state => ({
+				user: state.user,
+				score: calculatePlayerStateScore(game.type, game.cells, state)
+			})).sort((a, b) => b.score - a.score);
+			if (playerScores[0].user !== me) return GAME.LOSE;
+			break;
+	}
+	return GAME.WIN;
+}

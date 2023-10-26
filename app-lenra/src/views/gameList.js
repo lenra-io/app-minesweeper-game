@@ -1,5 +1,6 @@
 import { Listener } from "@lenra/app";
 import { Game } from "../classes/Game.js";
+import { currentUserGameState } from "../lib/minesweeper.js";
 
 /**
  * 
@@ -8,14 +9,15 @@ import { Game } from "../classes/Game.js";
  * @returns {import("@lenra/app").JsonViewResponse}
  */
 export default function (games, _props, context) {
+    const { me } = context;
     return {
         games: games.map(game => ({
             id: game._id,
-            state: game.state,
+            state: currentUserGameState(game, me),
             type: game.type,
             difficulty: game.difficulty,
         })),
         onCreateGame: Listener("createGame")
-            .props({ me: context.me })
+            .props({ me })
     }
 }

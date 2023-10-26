@@ -87,7 +87,7 @@ export async function revealCell(props, event, api) {
 
     // check if cell is a mine
     if (game.cells[y][x] === CODES.MINE) {
-        game.state = GAME.LOSE;
+        game.state = GAME.FINISHED;
         // reveal all mines
         game.cells.forEach((row, y) => {
             row.forEach((cell, x) => {
@@ -100,7 +100,7 @@ export async function revealCell(props, event, api) {
         const newOpenedCells = openCell(revealedCells, game.cells, x, y);
         playerState.revealedCells.push(...newOpenedCells);
         if (revealedCells.length + newOpenedCells.length === game.width * game.height - game.mineCount) {
-            game.state = GAME.WIN;
+            game.state = GAME.FINISHED;
         }
     }
     // Make the current player the last one
