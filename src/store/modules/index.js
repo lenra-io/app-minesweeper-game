@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import { default as controlReducer } from './control';
+import { default as gameReducer } from './game';
+import { default as appReducer } from './app';
 
 export const rootReducer = combineReducers({
-	control: controlReducer
+	app: appReducer,
+	game: gameReducer,
 });

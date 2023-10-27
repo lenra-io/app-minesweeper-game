@@ -6,29 +6,11 @@ import { Counter } from "./classes/Counter.js";
  */
 export const json = {
     routes: [
-        {
-            path: "/counter/global",
-            view: View("counter").find(Counter, {
-                "user": "global"
-            })
-        },
-        {
-            path: "/counter/me",
-            view: View("counter").find(Counter, {
-                "user": "@me"
-            })
-        }
-    ]
-};
-
-/**
- * @type {import("@lenra/app").Manifest["lenra"]}
- */
-export const lenra = {
-    routes: [
-        {
-            path: "/",
-            view: View("lenra.main")
-        }
+        // {
+        //     path: "/counter/global",
+        //     view: View("counter").find(Counter, {
+        //         "user": "global"
+        //     })
+        // }
     ]
 };

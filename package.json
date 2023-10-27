@@ -1,11 +1,13 @@
 {
-  "name": "react-minesweeper-game",
+  "name": "minesweeper-game",
   "version": "1.0.0",
-  "description": "Minesweeper Game in React",
+  "description": "Minesweeper Game",
   "main": "./src/index.jsx",
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server --hot --open",
-    "build": "cross-env NODE_ENV=production webpack --progress"
+    "start": "bun --hot server.js",
+    "dev": "cp public/* build/ && bun run build:watch",
+    "build": "bun build src/index.jsx --outfile=build/main.js && cp public/* build/",
+    "build:watch": "bun build src/index.jsx --outfile=build/main.js --watch"
   },
   "repository": {
     "type": "git",

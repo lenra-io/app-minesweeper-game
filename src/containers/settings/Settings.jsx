@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MIN_WIDTH, MIN_HEIGHT, MIN_MINES } from '../../constants';
-import { hideSettings, setGame, restartGame } from '../../store/modules/control';
+import { hideSettings, setGame, restartGame } from '../../store/modules/game';
 import { Settings } from '../../components';
 
 const SettingsContainer = () => {
 	const dispatch = useDispatch();
-	const enableSettings = useSelector(rootState => rootState.control.enableSettings);
+	const enableSettings = useSelector(rootState => rootState.game.enableSettings);
 
 	const [width, setWidth] = useState(MIN_WIDTH);
 	const [height, setHeight] = useState(MIN_HEIGHT);
