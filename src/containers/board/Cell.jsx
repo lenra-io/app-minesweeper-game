@@ -1,7 +1,7 @@
 import React, { memo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GAME, CODES } from '../../constants';
-import { openCell, rotateCellState } from '../../store/modules/game';
+import { openCell, rotateCellFlag } from '../../store/modules/game';
 import { Cell } from '../../components';
 
 const CellContainer = ({
@@ -19,26 +19,8 @@ const CellContainer = ({
 				return '';
 			case CODES.FLAG:
 				return '🚩'
-			case CODES.MINE_FLAG:
-				switch (gameState) {
-					case GAME.WIN:
-						return '💣';
-					case GAME.LOSE:
-						return '💥';
-					default:
-						return '🚩';
-				}
 			case CODES.QUESTION:
 				return '❔'
-			case CODES.MINE_QUESTION:
-				switch (gameState) {
-					case GAME.WIN:
-						return '💣';
-					case GAME.LOSE:
-						return '💥';
-					default:
-						return '❔';
-				}
 			case CODES.MINE:
 				switch (gameState) {
 					case GAME.WIN:
@@ -48,6 +30,8 @@ const CellContainer = ({
 					default:
 						return '';
 				}
+			case CODES.LOADING:
+				return '...';
 			default:
 				return code;
 		}
@@ -63,7 +47,7 @@ const CellContainer = ({
 		e.preventDefault();
 
 		if (gameState === GAME.READY || gameState === GAME.RUN) {
-			dispatch(rotateCellState(x, y))
+			dispatch(rotateCellFlag(x, y))
 		}
 	}, [gameState]);
 

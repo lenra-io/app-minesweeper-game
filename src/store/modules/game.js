@@ -1,8 +1,5 @@
 import produce from 'immer';
 import {
-	MIN_WIDTH,
-	MIN_HEIGHT,
-	MIN_MINES,
 	GAME,
 	CODES
 } from '../../constants';
@@ -12,99 +9,77 @@ import {
 	getNextCellCode,
 	getFlagIncDec
 } from '../../lib/minesweeper';
+import { SET_GAME } from './app.js';
 
-const SHOW_SETTINGS = 'game/SHOW_SETTINGS';
-const HIDE_SETTINGS = 'game/HIDE_SETTINGS';
-const SET_GAME = 'game/SET_GAME';
-const RESTART_GAME = 'game/RESTART_GAME';
-const UPDATE_ELAPSED_TIME = 'game/UPDATE_ELAPSED_TIME';
-const OPEN_CELL = 'game/OPEN_CELL';
-const ROTATE_CELL_STATE = 'game/ROTATE_CELL_STATE';
+export const UPDATE_ATTRIBUTES = 'game/UPDATE_ATTRIBUTES';
+export const UPDATE_BOARD_DATA = 'game/UPDATE_BOARD_DATA';
+export const UPDATE_STATUS = 'game/UPDATE_STATUS';
+export const RESTART_GAME = 'game/RESTART_GAME';
+export const UPDATE_ELAPSED_TIME = 'game/UPDATE_ELAPSED_TIME';
+export const OPEN_CELL = 'game/OPEN_CELL';
+export const ROTATE_CELL_FLAG = 'game/ROTATE_CELL_FLAG';
 
-export const showSettings = () => ({ type: SHOW_SETTINGS });
-export const hideSettings = () => ({ type: HIDE_SETTINGS });
-export const setGame = (width, height, mineCount) => ({ type: SET_GAME, width, height, mineCount });
+export const updateAttributes = (width, height, mineCount) => ({ type: UPDATE_ATTRIBUTES, width, height, mineCount });
+export const updateBoardData = (boardData) => ({ type: UPDATE_BOARD_DATA, boardData });
+export const updateStatus = (state, remainingFlags) => ({ type: UPDATE_STATUS, state, remainingFlags });
 export const restartGame = () => ({ type: RESTART_GAME });
 export const updateElapsedTime = () => ({ type: UPDATE_ELAPSED_TIME });
 export const openCell = (x, y) => ({ type: OPEN_CELL, x, y });
-export const rotateCellState = (x, y) => ({ type: ROTATE_CELL_STATE, x, y });
+export const rotateCellFlag = (x, y) => ({ type: ROTATE_CELL_FLAG, x, y });
 
 const initialState = {
-	enableSettings: false,
 	gameState: GAME.READY,
 	enableTimer: false,
 	elapsedTime: 0,
-	boardData: initBoard(MIN_WIDTH, MIN_HEIGHT, MIN_MINES),
-	width: MIN_WIDTH,
-	height: MIN_HEIGHT,
-	mineCount: MIN_MINES,
-	flagCount: 0,
-	openedCellCount: 0
+	width: null,
+	height: null,
+	boardData: null,
+	mineCount: null,
+	remainingFlags: null,
 };
 
 export default function(state = initialState, action) {
 	switch (action.type) {
-		case SHOW_SETTINGS:
-			return produce(state, draft => {
-				draft.enableSettings = true;
-			});
-		case HIDE_SETTINGS:
-			return produce(state, draft => {
-				draft.enableSettings = false;
-			});
-		case SET_GAME:
+		case UPDATE_ATTRIBUTES:
 			return produce(state, draft => {
 				draft.width = action.width;
 				draft.height = action.height;
 				draft.mineCount = action.mineCount;
 			});
-		case RESTART_GAME:
+		case UPDATE_BOARD_DATA:
 			return produce(state, draft => {
-				draft.gameState = GAME.READY;
-				draft.enableTimer = false;
-				draft.elapsedTime = 0;
-				draft.boardData = initBoard(state.width, state.height, state.mineCount);
-				draft.flagCount = 0;
-				draft.openedCellCount = 0;
+				draft.boardData = action.boardData;
+				console.log(action.boardData);
 			});
+		case UPDATE_STATUS:
+			return produce(state, draft => {
+				draft.gameState = action.state;
+				draft.remainingFlags = action.remainingFlags;
+			});
+		case SET_GAME:
+			return initialState;
 		case UPDATE_ELAPSED_TIME:
 			return produce(state, draft => {
 				draft.elapsedTime++;
 			});
 		case OPEN_CELL:
 			return produce(state, draft => {
-				const code = state.boardData[action.y][action.x];
 				draft.gameState = GAME.RUN;
 
 				// Start timer if click on cell
 				if (!state.enableTimer) {
 					draft.enableTimer = true;
 				}
-
-				if (code === CODES.MINE) {
-					draft.gameState = GAME.LOSE;
-					draft.enableTimer = false;
-				}
-				else if (code === CODES.NOTHING) {
-					const expandResult = expandOpenedCell(draft.boardData, action.x, action.y);
-					draft.boardData = expandResult.boardData;
-					draft.openedCellCount += expandResult.openedCellCount;
-
-					// Win
-					if (state.width * state.height - state.mineCount === draft.openedCellCount) {
-						draft.gameState = GAME.WIN;
-						draft.enableTimer = false;
-					}
+				if (draft.boardData[action.y][action.x] === CODES.NOTHING) {
+					draft.boardData[action.y][action.x] = CODES.LOADING;
 				}
 			});
-		case ROTATE_CELL_STATE:
+		case ROTATE_CELL_FLAG:
 			return produce(state, draft => {
 				const code = state.boardData[action.y][action.x];
 
-				if (code !== CODES.OPENED) {
-					draft.boardData[action.y][action.x] = getNextCellCode(code);
-					draft.flagCount += getFlagIncDec(code);
-				}
+				draft.boardData[action.y][action.x] = getNextCellCode(code);
+				draft.remainingFlags -= getFlagIncDec(code);
 			});
 		default:
 			return state;

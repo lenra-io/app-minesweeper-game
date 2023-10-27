@@ -1,17 +1,16 @@
 import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GAME } from '../../constants';
-import { showSettings, restartGame, updateElapsedTime } from '../../store/modules/game';
+import { restartGame, updateElapsedTime } from '../../store/modules/game';
 import { Status } from '../../components';
 
 const StatusContainer = () => {
 	const dispatch = useDispatch();
-	const enableSettings = useSelector(rootState => rootState.game.enableSettings);
 	const gameState = useSelector(rootState => rootState.game.gameState);
 	const enableTimer = useSelector(rootState => rootState.game.enableTimer);
 	const elapsedTime = useSelector(rootState => rootState.game.elapsedTime);
 	const mineCount = useSelector(rootState => rootState.game.mineCount);
-	const flagCount = useSelector(rootState => rootState.game.flagCount);
+	const remainingFlags = useSelector(rootState => rootState.game.remainingFlags);
 
 	useEffect(() => {
 		let gameTimer;
@@ -47,18 +46,14 @@ const StatusContainer = () => {
 	}, []);
 
 	return (
-		<>
-			{!enableSettings &&
-			<Status
-				leftMineCount={mineCount - flagCount}
-				mineCount={mineCount}
-				resultEmoji={getResultEmoji(gameState)}
-				enableSettings={gameState !== GAME.RUN}
-				elapsedTime={elapsedTime.toString().padStart(3, '0')}
-				onClickRestart={onClickRestart}
-				onClickSettings={onClickSettings}
-			/>}
-		</>
+		<Status
+			leftMineCount={remainingFlags}
+			mineCount={mineCount}
+			resultEmoji={getResultEmoji(gameState)}
+			elapsedTime={elapsedTime.toString().padStart(3, '0')}
+			onClickRestart={onClickRestart}
+			onClickSettings={onClickSettings}
+		/>
 	);
 };
 

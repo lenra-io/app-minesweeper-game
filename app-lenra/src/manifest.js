@@ -1,16 +1,28 @@
 import { View } from "@lenra/app";
-import { Counter } from "./classes/Counter.js";
+import { Game } from "./classes/Game.js";
+import { GAME } from "./constants.js";
 
 /**
  * @type {import("@lenra/app").Manifest["json"]}
  */
 export const json = {
     routes: [
-        // {
-        //     path: "/counter/global",
-        //     view: View("counter").find(Counter, {
-        //         "user": "global"
-        //     })
-        // }
+        {
+            path: "/games",
+            view: View("gameList").find(Game, {
+                player: "@me",
+                $or: [
+                    { state: GAME.READY },
+                    { state: GAME.RUN }
+                ]
+            })
+        },
+        {
+            path: "/games/:id",
+            view: View("game").find(Game, {
+                _id: "@route.id",
+                player: "@me"
+            })
+        }
     ]
 };
