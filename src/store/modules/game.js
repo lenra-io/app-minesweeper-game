@@ -12,6 +12,7 @@ import {
 	getNextCellCode,
 	getFlagIncDec
 } from '../../lib/minesweeper';
+import * as app from './app.js';
 
 const SHOW_SETTINGS = 'game/SHOW_SETTINGS';
 const HIDE_SETTINGS = 'game/HIDE_SETTINGS';
@@ -58,6 +59,7 @@ export default function(state = initialState, action) {
 				draft.height = action.height;
 				draft.mineCount = action.mineCount;
 			});
+		case app.SET_GAME:
 		case RESTART_GAME:
 			return produce(state, draft => {
 				draft.gameState = GAME.READY;
