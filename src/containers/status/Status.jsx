@@ -11,6 +11,8 @@ const StatusContainer = () => {
 	const elapsedTime = useSelector(rootState => rootState.game.elapsedTime);
 	const mineCount = useSelector(rootState => rootState.game.mineCount);
 	const remainingFlags = useSelector(rootState => rootState.game.remainingFlags);
+	const scores = useSelector(rootState => rootState.game.scores);
+	const myTurn = useSelector(rootState => rootState.game.myTurn);
 
 	useEffect(() => {
 		let gameTimer;
@@ -51,6 +53,8 @@ const StatusContainer = () => {
 			mineCount={mineCount}
 			resultEmoji={getResultEmoji(gameState)}
 			elapsedTime={elapsedTime.toString().padStart(3, '0')}
+			scores={scores}
+			myTurn={myTurn}
 			onClickRestart={onClickRestart}
 			onClickSettings={onClickSettings}
 		/>

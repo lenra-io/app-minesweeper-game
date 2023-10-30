@@ -14,6 +14,7 @@ import { SET_GAME } from './app.js';
 export const UPDATE_ATTRIBUTES = 'game/UPDATE_ATTRIBUTES';
 export const UPDATE_BOARD_DATA = 'game/UPDATE_BOARD_DATA';
 export const UPDATE_STATUS = 'game/UPDATE_STATUS';
+export const UPDATE_SCORES = 'game/UPDATE_SCORES';
 export const RESTART_GAME = 'game/RESTART_GAME';
 export const UPDATE_ELAPSED_TIME = 'game/UPDATE_ELAPSED_TIME';
 export const OPEN_CELL = 'game/OPEN_CELL';
@@ -21,7 +22,8 @@ export const ROTATE_CELL_FLAG = 'game/ROTATE_CELL_FLAG';
 
 export const updateAttributes = (width, height, mineCount) => ({ type: UPDATE_ATTRIBUTES, width, height, mineCount });
 export const updateBoardData = (boardData) => ({ type: UPDATE_BOARD_DATA, boardData });
-export const updateStatus = (state, remainingFlags) => ({ type: UPDATE_STATUS, state, remainingFlags });
+export const updateStatus = (state, myTurn, remainingFlags) => ({ type: UPDATE_STATUS, state, myTurn, remainingFlags });
+export const updateScore = (scores) => ({ type: UPDATE_SCORES, scores });
 export const restartGame = () => ({ type: RESTART_GAME });
 export const updateElapsedTime = () => ({ type: UPDATE_ELAPSED_TIME });
 export const openCell = (x, y) => ({ type: OPEN_CELL, x, y });
@@ -35,10 +37,12 @@ const initialState = {
 	height: null,
 	boardData: null,
 	mineCount: null,
+	myTurn: null,
 	remainingFlags: null,
+	scores: null,
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
 	switch (action.type) {
 		case UPDATE_ATTRIBUTES:
 			return produce(state, draft => {
@@ -55,6 +59,11 @@ export default function(state = initialState, action) {
 			return produce(state, draft => {
 				draft.gameState = action.state;
 				draft.remainingFlags = action.remainingFlags;
+				draft.myTurn = action.myTurn;
+			});
+		case UPDATE_SCORES:
+			return produce(state, draft => {
+				draft.scores = action.scores;
 			});
 		case SET_GAME:
 			return initialState;

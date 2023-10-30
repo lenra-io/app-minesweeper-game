@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Board } from '../../components';
 
 const BoardContainer = () => {
+	const gameState = useSelector(rootState => rootState.game.gameState);
 	const width = useSelector(rootState => rootState.game.width);
 	const height = useSelector(rootState => rootState.game.height);
 
@@ -18,6 +19,7 @@ const BoardContainer = () => {
 		<Board
 			width={width}
 			height={height}
+			state={gameState}
 			onRightClickBoard={onRightClickBoard}
 		/>
 	);

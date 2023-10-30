@@ -13,7 +13,7 @@ export const SET_GAME = 'app/SET_GAME';
 export const SET_GAME_LIST = 'app/REFRESH_GAME_LIST';
 
 export const newGame = () => ({ type: NEW_GAME });
-export const createGame = (difficulty) => ({ type: CREATE_GAME, difficulty });
+export const createGame = (type, difficulty) => ({ type: CREATE_GAME, gameType: type, difficulty });
 export const gameCreated = () => ({ type: GAME_CREATED });
 export const setGame = (gameId) => ({ type: SET_GAME, gameId });
 export const setGameList = (games) => ({ type: SET_GAME_LIST, games });

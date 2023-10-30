@@ -17,10 +17,20 @@ export const difficulties = {
 	}
 };
 
+export const types = {
+	single: {
+		players: 1
+	},
+	versus: {
+		players: 2
+	}
+};
+
 // Game States
 export const GAME = {
 	READY: 'ready',
 	RUN: 'run',
+	FINISHED: 'finished',
 	WIN: 'win',
 	LOSE: 'lose'
 };

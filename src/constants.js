@@ -14,6 +14,17 @@ export const difficulties = [
 	}
 ];
 
+export const types = [
+	{
+		name: "Single player",
+		value: "single"
+	},
+	{
+		name: "Versus",
+		value: "versus"
+	}
+];
+
 export const MIN_WIDTH = 9;
 export const MAX_WIDTH = 20;
 export const MIN_HEIGHT = 9;

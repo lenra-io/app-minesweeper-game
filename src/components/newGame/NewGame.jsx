@@ -1,5 +1,5 @@
 import React from 'react';
-import { difficulties } from '../../constants';
+import { difficulties, types } from '../../constants';
 import { 
 	Button
 } from '../common';
@@ -10,13 +10,24 @@ import {
 } from './NewGameStyle';
 
 const NewGame = ({
+	type,
 	difficulty,
 	creating,
+	setType,
 	setDifficulty,
 	onCreateGame,
 }) => {
 	return (
 		<Wrapper>
+			<RadioGroup>
+				{
+					types.map(t => (
+						<Radio key={t.value} selected={t === type} onClick={() => setType(t)}>
+							{t.name}
+						</Radio>
+					))
+				}
+			</RadioGroup>
 			<RadioGroup>
 				{
 					difficulties.map(d => (
