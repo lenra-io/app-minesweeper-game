@@ -22,15 +22,6 @@ export const AppMiddleware = store => {
                     )
                 );
                 break;
-            case SET_GAME:
-                if (currentGameId !== null) {
-                    store.dispatch(removeRouteListener(routes.game.replace(':id', currentGameId), onGameChange));
-                }
-                currentGameId = action.gameId;
-                if (action.gameId) {
-                    store.dispatch(addRouteListener(routes.game.replace(':id', action.gameId), onGameChange));
-                }
-                break;
         }
         return next(action);
     }
