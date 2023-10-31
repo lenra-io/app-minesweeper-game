@@ -25,6 +25,7 @@ jobs:
           path: build
   publish:
     name: Publish pages
+    needs: build
     runs-on: ubuntu-latest
     permissions:
       pages: write      # to deploy to Pages
