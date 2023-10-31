@@ -1,5 +1,6 @@
 import { Api } from '@lenra/app';
 import { Game } from '../classes/Game.js';
+import { GAME, difficulties } from '../constants.js';
 
 /**
  * Create a new game
@@ -9,6 +10,17 @@ import { Game } from '../classes/Game.js';
  */
 export async function createGame(_props, event, api) {
     const { difficulty } = event;
-    const game = Game.create("@me", difficulty);
+    const { width, height, mineCount } = difficulties[difficulty];
+    const game = new Game(
+        "@me",
+        difficulty,
+        GAME.READY,
+        width,
+        height,
+        mineCount,
+        initBoard(width, height, mineCount),
+        [],
+        []
+    );
     await api.data.coll(Game).createDoc(game);
 }
