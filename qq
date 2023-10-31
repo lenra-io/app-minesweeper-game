@@ -1,0 +1,23 @@
+[1mdiff --git a/app-lenra/src/classes/Game.js b/app-lenra/src/classes/Game.js[m
+[1mindex b27a74c..2de5713 100644[m
+[1m--- a/app-lenra/src/classes/Game.js[m
+[1m+++ b/app-lenra/src/classes/Game.js[m
+[36m@@ -1,6 +1,4 @@[m
+ import { Data } from "@lenra/app";[m
+[31m-import { initBoard } from "../lib/minesweeper.js";[m
+[31m-import { GAME, difficulties } from "../constants.js";[m
+ [m
+ export class Game extends Data {[m
+     /**[m
+[1mdiff --git a/app-lenra/src/listeners/gameEvents.js b/app-lenra/src/listeners/gameEvents.js[m
+[1mindex 75e3cc6..cb45f08 100644[m
+[1m--- a/app-lenra/src/listeners/gameEvents.js[m
+[1m+++ b/app-lenra/src/listeners/gameEvents.js[m
+[36m@@ -1,6 +1,7 @@[m
+ import { Api } from '@lenra/app';[m
+ import { Game } from '../classes/Game.js';[m
+ import { GAME, difficulties } from '../constants.js';[m
+[32m+[m[32mimport { initBoard } from "../lib/minesweeper.js";[m
+ [m
+ /**[m
+  * Create a new game[m

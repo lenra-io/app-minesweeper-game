@@ -1,6 +1,7 @@
 import { Api } from '@lenra/app';
 import { Game } from '../classes/Game.js';
 import { GAME, difficulties } from '../constants.js';
+import { initBoard } from "../lib/minesweeper.js";
 
 /**
  * Create a new game
