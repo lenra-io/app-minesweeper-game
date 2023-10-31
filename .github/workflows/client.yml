@@ -18,11 +18,10 @@ jobs:
           bun-version: latest
       - run: bun i
       - run: bun run build
-      - name: Archive production artifacts
-        uses: actions/upload-artifact@v3
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v2
         with:
-          name: build
-          path: build
+          path: build/
   publish:
     name: Publish pages
     needs: build
@@ -37,6 +36,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2 # or the latest "vX.X.X" version tag for this action
-        with:
-          artifact_name: build
+        uses: actions/deploy-pages@v2
