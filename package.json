@@ -6,8 +6,8 @@
   "scripts": {
     "start": "bun --hot server.js",
     "dev": "cp public/* build/ && bun run build:watch",
-    "build": "bun build src/index.jsx --outfile=build/main.js && cp public/* build/",
-    "build:watch": "bun build src/index.jsx --outfile=build/main.js --watch"
+    "build": "bun build src/index.jsx --outfile=build/main.js --define 'process.env.NODE_ENV:\"production\"' --minify && cp public/* build/",
+    "build:watch": "bun build src/index.jsx --outfile=build/main.js --watch --define 'process.env.NODE_ENV:\"production\"' --sourcemap=inline"
   },
   "repository": {
     "type": "git",

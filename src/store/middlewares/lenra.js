@@ -11,9 +11,12 @@ export const addRouteListener = (path, callBack) => ({ type: ADD_ROUTE_LISTENER,
 export const removeRouteListener = (path, callBack) => ({ type: REMOVE_ROUTE_LISTENER, path, callBack });
 export const callListener = (path, listener, event, callBack) => ({ type: CALL_LISTENER, path, listener, event, callBack });
 
+const isProd = process.env.NODE_ENV === 'production';
+
 export const LenraMiddleware = store => {
     const app = new LenraApp({
-        clientId: "XXX-XXX-XXX",
+        clientId: "85be8c69-4633-499f-b483-86c7107a4b54",
+        isProd,
     });
     /**
      * @type {{[path: string]: {listeners: Array<Function>, route: import("@lenra/client").LenraRoute, data: any}}}
@@ -23,10 +26,12 @@ export const LenraMiddleware = store => {
         let route;
         switch (action.type) {
             case CONNECT:
-                const params = new URLSearchParams(location.search);
                 const socketParams = {};
-                if (params.has('user')) {
-                    socketParams.userId = params.get('user');
+                if (!isProd) {
+                    const params = new URLSearchParams(location.search);
+                    if (params.has('user')) {
+                        socketParams.userId = params.get('user');
+                    }
                 }
                 app.connect(socketParams).then(s => {
                     store.dispatch({ type: CONNECTED })
@@ -68,7 +73,7 @@ export const LenraMiddleware = store => {
                 route = routes[action.path];
                 if (route) {
                     const listener = action.listener.split('.').reduce((acc, cur) => acc[cur], route.data);
-                    route.route.callListener({...listener, event: action.event}).then(action.callBack);
+                    route.route.callListener({ ...listener, event: action.event }).then(action.callBack);
                 }
                 break;
         }

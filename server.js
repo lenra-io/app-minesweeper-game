@@ -6,14 +6,21 @@ Bun.serve({
     port: 3000,
     async fetch(req) {
         console.log("req", req);
-      let filePath = new URL(req.url).pathname;
-      if (filePath.endsWith("/") || filePath.endsWith(".html")) {
-        filePath = "/index.html";
+      let requestPath = new URL(req.url).pathname;
+      if (requestPath==="/") {
+        requestPath = "/index.html";
       }
-      filePath = BASE_PATH + filePath;
+      const filePath = BASE_PATH + requestPath;
       const file = Bun.file(filePath);
       if (file.exists()) {
-        return new Response(file);
+        const headers = {};
+        // if (requestPath.endsWith(".js")) {
+        //   headers["content-type"] = "text/javascript";
+        //   headers["source-map"] = requestPath + ".map";
+        // }
+        return new Response(file, {
+          headers,
+        });
       }
       return new Response(null, {
         status: 404,
