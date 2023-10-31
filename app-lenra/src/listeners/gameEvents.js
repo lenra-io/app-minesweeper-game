@@ -1,7 +1,7 @@
 import { Api } from '@lenra/app';
 import { Game } from '../classes/Game.js';
 import { CODES, GAME, difficulties } from '../constants.js';
-import { openCell } from '../lib/minesweeper.js';
+import { initBoard, openCell } from '../lib/minesweeper.js';
 
 /**
  * @typedef {Object} CellPosition

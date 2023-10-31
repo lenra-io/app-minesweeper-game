@@ -1,6 +1,4 @@
 import { Data } from "@lenra/app";
-import { initBoard } from "../lib/minesweeper.js";
-import { GAME, difficulties } from "../constants.js";
 
 export class Game extends Data {
     /**
