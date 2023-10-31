@@ -18,7 +18,17 @@ import { openCell } from '../lib/minesweeper.js';
 export async function createGame(_props, event, api) {
     const { difficulty } = event;
     const { width, height, mineCount } = difficulties[difficulty];
-    const game = Game.create("@me", difficulty);
+    const game = new Game(
+        "@me",
+        difficulty,
+        GAME.READY,
+        width,
+        height,
+        mineCount,
+        initBoard(width, height, mineCount),
+        [],
+        []
+    );
     await api.data.coll(Game).createDoc(game);
 }
 

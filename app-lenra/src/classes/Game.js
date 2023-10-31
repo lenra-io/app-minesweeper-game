@@ -26,24 +26,4 @@ export class Game extends Data {
         this.revealedCells = revealedCells;
         this.flagedCells = flagedCells;
     }
-
-    /**
-     * Creates a new game
-     * @param {string} player The player user id
-     * @param {string} difficulty The game difficulty
-     */
-    static create(player, difficulty) {
-        const { width, height, mineCount } = difficulties[difficulty];
-        return new Game(
-            player,
-            difficulty,
-            GAME.READY,
-            width,
-            height,
-            mineCount,
-            initBoard(width, height, mineCount),
-            [],
-            []
-        );
-    }
 }
